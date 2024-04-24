@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/24 11:32:44 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:52:09 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <signal.h>
 # include <limits.h>
 
+# define ASSET_NUMBER 4
+
 typedef enum assets
 {
 	N,
@@ -42,7 +44,7 @@ typedef struct s_timeval
 	suseconds_t		tv_usec;
 }	t_timeval;
 
-typedef struct s_img
+typedef struct s_image
 {
 	void	*img;
 	char	*addr;
@@ -53,13 +55,13 @@ typedef struct s_img
 	int		h;
 	int		w;
 	int		created;
-}	t_img;
+}	t_image;
 
 typedef struct s_frame
 {
-	t_img		back;
-	t_img		hand;
-	t_img		UI;
+	t_image		back;
+	t_image		hand;
+	t_image		UI;
 }	t_frame;
 
 typedef struct s_map
@@ -81,16 +83,25 @@ typedef struct s_cub
 	void				*window;
 	t_frame				frame;
 	t_map				map;
-	t_img				*asset;
+	t_image				*asset;
 	t_timeval			time;
+	char				*arg[6];
 	int					x;
 	int					y;
 }	t_cub;
 
 //MAIN
 //main.c
+
+//initializer.c
+void	cub_initializer(t_cub *cub);
+
+//free_utils.c
+void	free_cub(t_cub *cub, int exit_code);
+void	free_split(char **split);
+
 //PARSER
 //parser.c
-t_cub   	*parser(int argc, char **argv, t_cub *cub);
+void	*parser(int argc, char **argv, t_cub *cub);
 
 #endif

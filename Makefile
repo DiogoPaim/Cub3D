@@ -1,25 +1,30 @@
-NAME= minishell
+NAME= Cub3D
 
 CC= cc
 CFLAGS= -g -Wall -Werror -Wextra
 
-SRC_BI= $(addprefix sources/main/, $(SOURCES_MAIN))
-SOURCES_MAIN=	main.c				
+SRC_MA= $(addprefix sources/main/, $(SOURCES_MAIN))
+SOURCES_MAIN=	free_utils.c	\
+				main.c			\
+				initializer.c
 
 SRC_PA= $(addprefix sources/parser/, $(SOURCES_PARSER))
-SOURCES_PARSER=		parcer.c
+SOURCES_PARSER=	parser.c
 		
 OBJ_DIR= objects
-OBJ=	$(addprefix $(OBJ_DIR)/, $(SRC_EX:sources/main/%.c=%.o)) \
+OBJ=	$(addprefix $(OBJ_DIR)/, $(SRC_MA:sources/main/%.c=%.o)) \
 		$(addprefix $(OBJ_DIR)/, $(SRC_PA:sources/parser/%.c=%.o))
+
+MLX_DIR= ./mlx
+MLX= $(MLX_DIR)/libmlx_Linux.a -lXext -lX11 -lm -lz
 
 LIBFT_DIR= ./libft
 LIBFT= $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) -lreadline -o $@ $(LIBFT)
+$(NAME): $(OBJ) $(MLX) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) -o $@ $(MLX) $(LIBFT)
 
 $(OBJ_DIR)/%.o: sources/main/%.c
 	mkdir -p $(OBJ_DIR)
@@ -29,11 +34,15 @@ $(OBJ_DIR)/%.o: sources/parser/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
+
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 clean:
 	rm -rf $(OBJ_DIR)
+	$(MAKE) -C $(MLX_DIR) clean
 	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
@@ -43,6 +52,6 @@ fclean: clean
 re: fclean all
 
 run: re
-	clear && ./minishell
+	clear && ./Cub3D
 
 .PHONY: all fclean clean re run
