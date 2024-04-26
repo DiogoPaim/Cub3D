@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/24 17:52:09 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:47:56 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,17 @@
 # include <signal.h>
 # include <limits.h>
 
-# define ASSET_NUMBER 4
+# define ASSET_NUMBER 7
 
 typedef enum assets
 {
 	N,
     S,
     W,
-    E
+    E,
+	FLOOR_TOP,
+	WALL_TOP,
+	PLAYER_TOP
 }	t_assets;
 
 typedef struct s_timeval
@@ -64,9 +67,18 @@ typedef struct s_frame
 	t_image		UI;
 }	t_frame;
 
+typedef struct s_player
+{
+	float			player_x;
+	float			player_y;
+	float			player_vison_angle;
+	float			height;
+}	t_player;
+
 typedef struct s_map
 {
 	char	**map;
+	char	*pre_map;
 	char	*path;
 	int		collect_nb;
 	int		h;
@@ -85,20 +97,11 @@ typedef struct s_cub
 	t_map				map;
 	t_image				*asset;
 	t_timeval			time;
+	t_player			player;
 	char				*arg[6];
 	int					x;
 	int					y;
 }	t_cub;
-
-typedef struct s_mlx
-{
-	void		*mlx;
-	void		*window;
-	char		**map;
-	void		**asset;
-	int			loop;
-	int			n_collectables;
-}	t_mlx;
 
 //MAIN
 //main.c
@@ -118,11 +121,12 @@ void	*parser(int argc, char **argv, t_cub *cub);
 void	print_map(char **map);
 
 //JUGGLE
-//hard_map
-char	**hard_map(void);
+
 
 //mlx_window
-int		open_window_from_map_size(char **map, t_mlx *mlx);
-int		game_close(t_mlx *mlx);
+int		open_window_from_map_size(char **map, t_cub *mlx);
+int		game_close(t_cub *mlx);
+int		load_assets(t_cub *cub);
+void	draw_map(t_cub *cub);
 
 #endif

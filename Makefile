@@ -13,8 +13,8 @@ SRC_PA= $(addprefix sources/parser/, $(SOURCES_PARSER))
 SOURCES_PARSER=	parser.c
 
 SRC_JU= $(addprefix sources/juggle/, $(SOURCES_JUGGLE))
-SOURCES_JUGGLE=	hard_map.c		\
-				mlx_window.c
+SOURCES_JUGGLE= mlx_window.c	\
+				draw_2d_map.c
 		
 OBJ_DIR= objects
 OBJ=	$(addprefix $(OBJ_DIR)/, $(SRC_MA:sources/main/%.c=%.o)) \

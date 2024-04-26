@@ -6,32 +6,39 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:10 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/24 13:10:43 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:39:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	game_loop(t_mlx *mlx)
+int		set_up_player(t_cub *cub)
+{
+	cub->player.player_x = cub->map.player_x;
+	cub->player.player_y = cub->map.player_y; 
+}
+
+void	game_loop(t_cub *cub)
 {
 	
-	mlx_hook(mlx->window, 17, 0, &game_close, mlx);
-	mlx_loop(mlx -> mlx);
+	mlx_hook(cub-> window, 17, 0, &game_close, cub);
+	draw_map(cub);
+	mlx_loop(cub -> mlx);
 
 }
 int	main(int argc, char **argv)
 {
 	(void) argc;
 	(void) argv; 
-	//static t_cub cub;
-
-	//cub.mlx = mlx_init();
+	static t_cub cub;
 	//cub_initializer(&cub);
 	//parser(argc, argv, &cub);
-	t_mlx mlx;
-	mlx.map = hard_map();
-	print_map(mlx.map);
-	mlx.mlx = mlx_init();
-	open_window_from_map_size(mlx.map, &mlx);
-	game_loop(&mlx);
+	
+	cub.mlx = mlx_init();
+	cub_initializer(&cub);
+	parser(argc, argv, &cub);
+	open_window_from_map_size(cub.map.map, &cub);
+	load_assets(&cub);
+	set_up_player(&cub);
+	game_loop(&cub);
 }
