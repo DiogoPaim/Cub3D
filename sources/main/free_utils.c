@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:23 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/26 13:04:03 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:36:29 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ void	free_split(char **split)
 	free(split);
 }
 
-static void	free_elements(t_cub *cub)
+static void	free_args_n_assets(t_cub *cub)
 {
     int i;
 
     i = -1;
+	while (++i <= 5)
+		free(cub->arg[i]);
+	i = -1;
     while (++i < ASSET_NUMBER)
     {
 		if (cub->asset[i].created)
@@ -39,8 +42,6 @@ static void	free_elements(t_cub *cub)
 			if (i <= 4)
 				free(cub->asset[i].path - 3); 
 		}
-		if (i <= 5 && cub->arg[i])
-			free(cub->arg[i]);
 	}
 }
 
@@ -54,7 +55,7 @@ static void free_map(t_cub *cub)
 
 void	free_cub(t_cub *cub, int exit_code)
 {
-	free_elements(cub);
+	free_args_n_assets(cub);
 	free_map(cub);
 	exit(exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/26 15:07:19 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:02:56 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,11 +167,13 @@ void *add_map_row(t_cub *cub, char *row, char **split, int fd)
 	return (NULL);
 }
 
-void	*get_cub_map(t_cub *cub, int fd)
+void	*get_cub_map(t_cub *cub)
 {
+	int		fd;
 	char	*line;
 	char	**split;
 
+	fd = open(cub->map.path, O_RDONLY);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -179,9 +181,9 @@ void	*get_cub_map(t_cub *cub, int fd)
 		if (!split)
 			return (printf("Error\nThe function ft_split failed\n"), \
 				close(fd), free(line), free_cub(cub, 2), NULL);
-		if (split[0] && split[0][0] != '1' && split[0][0])
+		if (split[0] && split[0][0] != '1' && !cub->map.pre_map)
 			;
-		else if (split[0] && split[0][0] != '1' && cub->map.pre_map)
+		else if (split[0] && split[0][0] != '1')
 			return (printf("Error\nInvalid map\n"), \
 				close(fd), free(line), free_cub(cub, 2), NULL);
 		else
@@ -190,9 +192,7 @@ void	*get_cub_map(t_cub *cub, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(fd);
-	create_map(cub);
-	return (NULL);
+	return (close(fd), create_map(cub), NULL);
 }
 
 static void	print_map(t_cub *cub)
@@ -200,10 +200,82 @@ static void	print_map(t_cub *cub)
 	int	i;
 
 	i = -1;
+	printf("\n========= ELEMENTS =========\n\n");
+	printf("NO:	%s\n", cub->arg[0]);
+	printf("SO:	%s\n", cub->arg[1]);
+	printf("WE:	%s\n", cub->arg[2]);
+	printf("EA:	%s\n", cub->arg[3]);
+	printf("F:	%s\n", cub->arg[4]);
+	printf("C:	%s\n", cub->arg[5]);
+	printf("\n=========== MAP ============\n\n");
 	while (cub->map.map[++i])
 	{
 		printf("%s\n", cub->map.map[i]);
 	}
+	printf("\n========== PLAYER ==========\n\n");
+	printf("Player x:		%i", cub->map.player_x);
+	printf("Player y:		%i", cub->map.player_y);
+	printf("Player facing:	%c", cub->map.player_dir);
+	printf("\n============================\n\n");
+}
+
+static void	*find_player_coords(t_cub *cub)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (cub->map.map[++y])
+	{
+		x = -1;
+		while (cub->map.map[y][++x])
+		{
+			if (cub->map.map[y][x] == 'N' || cub->map.map[y][x] == 'S' \
+			|| cub->map.map[y][x] == 'W' || cub->map.map[y][x] == 'E')
+			{
+				if (cub->map.player_dir)
+					return (printf("Error\nToo many player spawns\n"), \
+						free_cub(cub, 2), NULL);
+				else
+				{
+					cub->map.player_dir = cub->map.map[y][x];
+					cub->map.player_x = x;
+					cub->map.player_y = y;
+				}
+			}
+		}
+	}
+	return (NULL);
+}
+
+void	cub_fill(t_cub *cub)
+{
+	
+}
+
+static void	check_borders(t_cub *cub, int x, int y, char new_char)
+{
+	if (cub->map.map[y][x] == cub->map.player_dir)
+		cub->map.map[y][x] = '0';
+	cub->map.map[y][x] = new_char;
+	if (cub->map.map[y][x + 1] == '1')
+		collect_to_player(cub, y, x + 1, new_char);
+	if (cub->map.map[y + 1][x] == '1')
+		collect_to_player(cub, y + 1, x, new_char);
+	if (cub->map.map[y][x - 1] == '1')
+		collect_to_player(cub, y, x - 1, new_char);
+	if (cub->map.map[y - 1][x] == '1')
+		collect_to_player(cub, y - 1, x, new_char);
+}
+
+void	*cub_map_validator(t_cub *cub)
+{
+	find_player_coords(cub);
+	if (!cub->map.player_dir)
+		return (printf("Error\nThere is no player spawn\n"), \
+			free_cub(cub, 2), NULL);
+	
+	return (NULL);
 }
 
 void	*parser(int argc, char **argv, t_cub *cub)
@@ -221,27 +293,9 @@ void	*parser(int argc, char **argv, t_cub *cub)
 			free_cub(cub, 2), NULL);
 	get_map_elements(cub, fd);
 	elements_validator(cub);
-	printf("NO: %s\n", cub->arg[0]);
-	printf("SO: %s\n", cub->arg[1]);
-	printf("WE: %s\n", cub->arg[2]);
-	printf("EA: %s\n", cub->arg[3]);
-	printf("F: %s\n", cub->arg[4]);
-	printf("C: %s\n", cub->arg[5]);
-	fd = open(cub->map.path, O_RDONLY);
-	get_cub_map(cub, fd);
+	get_cub_map(cub);
+	cub_map_validator(cub);
 	print_map(cub);
-	/*if (map->height == 0)
-	{
-		write (2, "Error\n", 6);
-		ft_printf("Do you expect me to read an empty intel Snake?\n");
-		exit(0);
-	}
-	map->collisions = malloc(sizeof(char *) * (map->height + 1));
-	if (!map->collisions)
-		exit(0);
-	map->collisions[map->height] = NULL;
-	row_creator(map, file);
-	map_checker(map);
-	map_transformer(map);*/
+	free_cub(cub, 0);
 	return (NULL);
 }
