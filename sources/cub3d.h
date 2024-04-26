@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/26 16:11:34 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:24:51 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ typedef struct s_map
 	int		player_y;
 	int		player_x;
 	char	player_dir;
-	int		exit_y;
-	int		exit_x;
 }	t_map;
 
 typedef struct s_cub

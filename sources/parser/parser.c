@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/26 17:02:56 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:10:59 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static void	*get_map_elements(t_cub *cub, int fd)
 			process_element_information(cub, split, fd);
 		else if (!is_element(split[0]))
 			return (printf("Error\nThere is an invalid element\n"), \
-				close(fd), free_cub(cub, 2), NULL);
+				close(fd), free_split(split), free_cub(cub, 2), NULL);
 		free_split(split);
 		line = get_next_line(fd);
 	}
@@ -159,7 +159,7 @@ void *add_map_row(t_cub *cub, char *row, char **split, int fd)
 	temp = NULL;
 	temp = ft_strjoin(cub->map.pre_map, row);
 	if (!temp)
-		return(printf("Error\nThe function ft_strjoin failed"), \
+		return(printf("Error\nThe function ft_strjoin failed\n"), \
 			close(fd), free(row), free_split(split), \
 			free_cub(cub, 2), NULL);
 	free(cub->map.pre_map);
@@ -213,9 +213,9 @@ static void	print_map(t_cub *cub)
 		printf("%s\n", cub->map.map[i]);
 	}
 	printf("\n========== PLAYER ==========\n\n");
-	printf("Player x:		%i", cub->map.player_x);
-	printf("Player y:		%i", cub->map.player_y);
-	printf("Player facing:	%c", cub->map.player_dir);
+	printf("Player x:	%i\n", cub->map.player_x);
+	printf("Player y:	%i\n", cub->map.player_y);
+	printf("Player facing:	%c\n", cub->map.player_dir);
 	printf("\n============================\n\n");
 }
 
@@ -248,24 +248,40 @@ static void	*find_player_coords(t_cub *cub)
 	return (NULL);
 }
 
-void	cub_fill(t_cub *cub)
+void	*check_for_invalid_neighbour(t_cub *cub, int x, int y)
 {
-	
+	if (x == -1 || y == -1 || !cub->map.map[y] || (cub->map.map[y][x] != -42 \
+	&& cub->map.map[y][x] != '0' && cub->map.map[y][x] != '1'))
+		return (printf("Error\nMap not closed\n"), free_cub(cub, 2), NULL);
+	return (NULL);
 }
 
-static void	check_borders(t_cub *cub, int x, int y, char new_char)
+static void	*check_for_invalid_chars(t_cub *cub)
 {
-	if (cub->map.map[y][x] == cub->map.player_dir)
-		cub->map.map[y][x] = '0';
-	cub->map.map[y][x] = new_char;
-	if (cub->map.map[y][x + 1] == '1')
-		collect_to_player(cub, y, x + 1, new_char);
-	if (cub->map.map[y + 1][x] == '1')
-		collect_to_player(cub, y + 1, x, new_char);
-	if (cub->map.map[y][x - 1] == '1')
-		collect_to_player(cub, y, x - 1, new_char);
-	if (cub->map.map[y - 1][x] == '1')
-		collect_to_player(cub, y - 1, x, new_char);
+	int	y;
+	int	x;
+
+	y = -1;
+	cub->map.map[cub->map.player_y][cub->map.player_x] = '0';
+	while (cub->map.map[++y])
+	{
+		x = -1;
+		while (cub->map.map[y][++x])
+		{
+			if (cub->map.map[y][x] != '0' && cub->map.map[y][x] == '1' \
+			&& cub->map.map[y][x] != '\n' && cub->map.map[y][x] == ' ')
+				return (printf("Error\nInvalid characters in the map\n"), \
+						free_cub(cub, 2), NULL);
+			else if (cub->map.map[y][x] == '0')
+			{
+				check_for_invalid_neighbour(cub, x + 1, y);
+				check_for_invalid_neighbour(cub, x - 1, y);
+				check_for_invalid_neighbour(cub, x, y + 1);
+				check_for_invalid_neighbour(cub, x, y - 1);
+			}
+		}
+	}
+	return (NULL);
 }
 
 void	*cub_map_validator(t_cub *cub)
@@ -274,7 +290,7 @@ void	*cub_map_validator(t_cub *cub)
 	if (!cub->map.player_dir)
 		return (printf("Error\nThere is no player spawn\n"), \
 			free_cub(cub, 2), NULL);
-	
+	check_for_invalid_chars(cub);
 	return (NULL);
 }
 
@@ -284,7 +300,7 @@ void	*parser(int argc, char **argv, t_cub *cub)
 
 	fd = 0;
 	if (argc != 2)
-		return (printf("Error\nThere are more or less than 2 arguments"), \
+		return (printf("Error\nThere are more or less than 2 arguments\n"), \
 			free_cub(cub, 2), NULL);
 	cub->map.path = map_name_validator(cub, argv[1]);
 	fd = open(cub->map.path, O_RDONLY);
