@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/24 17:52:09 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:47:56 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_frame
 typedef struct s_map
 {
 	char	**map;
+	char	*pre_map;
 	char	*path;
 	int		collect_nb;
 	int		h;

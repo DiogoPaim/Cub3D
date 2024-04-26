@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:27:13 by tjorge-d          #+#    #+#             */
-/*   Updated: 2023/10/17 10:44:02 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 11:36:47 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	**ft_stralloc(char **split, char const *s, char c, int n)
 		while (s[i] == c)
 			i++;
 		counter = 0;
-		while (s[i] != c && s[i++])
+		while (s[i] && s[i] != c && s[i++])
 			counter++;
 		split[j] = (char *)malloc(sizeof(char) * (counter + 1));
 		if (!split[j])

@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:10 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/24 13:10:43 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:39:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	static t_cub cub;
 
-	cub.mlx = mlx_init();
 	cub_initializer(&cub);
 	parser(argc, argv, &cub);
 }
