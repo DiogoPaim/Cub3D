@@ -28,14 +28,17 @@
 # include <signal.h>
 # include <limits.h>
 
-# define ASSET_NUMBER 4
+# define ASSET_NUMBER 7
 
 typedef enum assets
 {
 	N,
     S,
     W,
-    E
+    E,
+	FLOOR_TOP,
+	WALL_TOP,
+	PLAYER_TOP
 }	t_assets;
 
 typedef struct s_timeval
@@ -64,6 +67,14 @@ typedef struct s_frame
 	t_image		UI;
 }	t_frame;
 
+typedef struct s_player
+{
+	float			player_x;
+	float			player_y;
+	float			player_vison_angle;
+	float			height;
+}	t_player;
+
 typedef struct s_map
 {
 	char	**map;
@@ -85,6 +96,7 @@ typedef struct s_cub
 	t_map				map;
 	t_image				*asset;
 	t_timeval			time;
+	t_player			player;
 	char				*arg[6];
 	int					x;
 	int					y;
@@ -103,5 +115,17 @@ void	free_split(char **split);
 //PARSER
 //parser.c
 void	*parser(int argc, char **argv, t_cub *cub);
+
+//UTILS
+void	print_map(char **map);
+
+//JUGGLE
+
+
+//mlx_window
+int		open_window_from_map_size(char **map, t_cub *mlx);
+int		game_close(t_cub *mlx);
+int		load_assets(t_cub *cub);
+void	draw_map(t_cub *cub);
 
 #endif
