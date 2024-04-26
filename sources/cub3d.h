@@ -90,6 +90,16 @@ typedef struct s_cub
 	int					y;
 }	t_cub;
 
+typedef struct s_mlx
+{
+	void		*mlx;
+	void		*window;
+	char		**map;
+	void		**asset;
+	int			loop;
+	int			n_collectables;
+}	t_mlx;
+
 //MAIN
 //main.c
 
@@ -103,5 +113,16 @@ void	free_split(char **split);
 //PARSER
 //parser.c
 void	*parser(int argc, char **argv, t_cub *cub);
+
+//UTILS
+void	print_map(char **map);
+
+//JUGGLE
+//hard_map
+char	**hard_map(void);
+
+//mlx_window
+int		open_window_from_map_size(char **map, t_mlx *mlx);
+int		game_close(t_mlx *mlx);
 
 #endif
