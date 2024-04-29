@@ -113,12 +113,14 @@ void	free_cub(t_cub *cub, int exit_code);
 void	free_split(char **split);
 
 //PARSER
-//parser.c
 void	*parser(int argc, char **argv, t_cub *cub);
+void	*get_map_elements(t_cub *cub, int fd);
+void	*elements_validator(t_cub *cub);
+void	*get_cub_map(t_cub *cub);
+void	*cub_map_validator(t_cub *cub);
+void	print_map(t_cub *cub);
 
 //JUGGLE
-
-
 //mlx_window
 int		open_window_from_map_size(char **map, t_cub *mlx);
 int		game_close(t_cub *mlx);
