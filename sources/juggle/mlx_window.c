@@ -55,7 +55,6 @@ int	game_close(t_cub *cub)
 {
 	mlx_destroy_window(cub->mlx, cub->window);
 	mlx_destroy_display(cub->mlx);
-	free(cub->mlx);
-	cub->mlx = NULL;
+	free_cub(cub, 0);
 	exit(0);
 }

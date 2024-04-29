@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-int		set_up_player(t_cub *cub)
+void	set_up_player(t_cub *cub)
 {
 	cub->player.player_x = cub->map.player_x;
 	cub->player.player_y = cub->map.player_y; 
@@ -37,8 +37,8 @@ int	main(int argc, char **argv)
 	cub.mlx = mlx_init();
 	cub_initializer(&cub);
 	parser(argc, argv, &cub);
-	open_window_from_map_size(cub.map.map, &cub);
-	load_assets(&cub);
-	set_up_player(&cub);
-	game_loop(&cub);
+	//open_window_from_map_size(cub.map.map, &cub);
+	//load_assets(&cub);
+	//set_up_player(&cub);
+	//game_loop(&cub);
 }

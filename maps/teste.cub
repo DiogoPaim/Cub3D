@@ -1,16 +1,18 @@
 
-   F   fds
-NO    ./textures/NO.xpm   
-   WE       textures/WE.xpm
-SO   ./textures/SO.xpm  
-
-C fffff
-
-   EA ./textures/EA.xpm
 
 
+F 255,255,255
+     NO     ./textures/NO.xpm    
+WE textures/WE.xpm
 
- 11111  1111 11111
+
+SO      ./textures/SO.xpm
+     C  255,255,255
+SOUTH ./textures/SO.xpm
+
+EA ./textures/EA.xpm
+
+11111    11  11111
 100001  1001 10001
 100001111001 11111
 100N00000001

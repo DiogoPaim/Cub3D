@@ -116,9 +116,6 @@ void	free_split(char **split);
 //parser.c
 void	*parser(int argc, char **argv, t_cub *cub);
 
-//UTILS
-void	print_map(char **map);
-
 //JUGGLE
 
 

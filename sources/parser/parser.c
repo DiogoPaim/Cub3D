@@ -81,8 +81,8 @@ int	is_element(char *line)
 	|| ft_strncmp(line, "SO", 3) == 0 \
 	|| ft_strncmp(line, "WE", 3) == 0 \
 	|| ft_strncmp(line, "EA", 3) == 0 \
-	|| ft_strncmp(line, "F", 3) == 0 \
-	|| ft_strncmp(line, "C", 3) == 0)
+	|| ft_strncmp(line, "F", 2) == 0 \
+	|| ft_strncmp(line, "C", 2) == 0)
 		return (1);
 	else
 		return (0);
@@ -116,7 +116,31 @@ static void	*get_map_elements(t_cub *cub, int fd)
 	return (close(fd), NULL);
 }
 
-static void	elements_validator(t_cub *cub)
+static void *check_for_valid_color(t_cub *cub, int i)
+{
+	char	**split;
+
+	split = ft_split(cub->arg[i], ',');
+	if (!split)
+		return (printf("Error\nThe function ft_split failed\n"), \
+			free_cub(cub, 2), NULL);
+	if (!split[0] || !split[1] || !split[2])
+		return (printf("Error\nToo few color values\n"), \
+			free_split(split), free_cub(cub, 2), NULL);
+	if (split[3] != NULL)
+		return (printf("Error\nToo many color values\n"), \
+			free_split(split), free_cub(cub, 2), NULL);
+	i = -1;
+	while (++i < 3)
+	{
+		if (ft_atoi(split[i]) > 255)
+			return (printf("Error\nInvalid color value\n"), \
+				free_split(split), free_cub(cub, 2), NULL);
+	}
+	return (free_split(split), NULL);
+}
+
+static void	*elements_validator(t_cub *cub)
 {
 	int	i;
 	int	fd;
@@ -126,21 +150,20 @@ static void	elements_validator(t_cub *cub)
 	while (++i <= 5)
 	{
 		if (cub->arg[i] == NULL)
-		{
-			printf("Error\nThere is elements missing\n");
-			free_cub(cub, 2);
-		}
+			return (printf("Error\nThere is elements missing\n"), \
+				free_cub(cub, 2), NULL);
 		if (i <= 3)
 		{
 			fd = open(cub->arg[i], O_RDONLY);
 			if (fd == -1)
-			{
-				printf("Error\nThere is no texture in the path given.\n"), \
-				free_cub(cub, 2);
-			}
+				return (printf("Error\nNo texture in the path given.\n"), \
+					free_cub(cub, 2), NULL);
 			close(fd);
 		}
+		else
+			check_for_valid_color(cub, i);
 	}
+	return (NULL);
 }
 
 void	*create_map(t_cub *cub)
@@ -312,6 +335,6 @@ void	*parser(int argc, char **argv, t_cub *cub)
 	get_cub_map(cub);
 	cub_map_validator(cub);
 	print_map(cub);
-	free_cub(cub, 0);
+	free_cub(cub, 2);
 	return (NULL);
 }
