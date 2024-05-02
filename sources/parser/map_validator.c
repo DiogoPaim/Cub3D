@@ -32,8 +32,8 @@ static void	*find_player_coords(t_cub *cub)
 				else
 				{
 					cub->map.player_dir = cub->map.map[y][x];
-					cub->map.player_x = x;
-					cub->map.player_y = y;
+					cub->map.player_x = x + 0.5;
+					cub->map.player_y = y + 0.5;
 				}
 			}
 		}

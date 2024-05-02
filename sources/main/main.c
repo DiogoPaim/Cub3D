@@ -14,8 +14,8 @@
 
 void	set_up_player(t_cub *cub)
 {
-	cub->player.player_x = cub->map.player_x;
-	cub->player.player_y = cub->map.player_y; 
+	cub->player.player_x = (cub->map.player_x + 0.5);
+	cub->player.player_y = (cub->map.player_y + 0.5); 
 	if(cub->map.player_dir == 'N')
 		cub->player.player_vison_angle = 90.0;
 	else if(cub->map.player_dir == 'S')

@@ -4,7 +4,7 @@ void	draw_player(t_cub *cub)
 {
 	mlx_put_image_to_window(cub->mlx ,cub->window,					\
 		cub->asset[PLAYER_TOP].img,									\
-		64.0 * cub->player.player_x, 64.0 * cub->player.player_y);
+		(64.0 * cub->player.player_x) - 32, (64.0 * cub->player.player_y) - 32);
 }
 
 void	draw_map(t_cub *cub)
