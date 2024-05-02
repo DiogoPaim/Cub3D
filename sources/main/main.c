@@ -27,11 +27,11 @@ void	set_up_player(t_cub *cub)
 	cub->player.height = 1;
 }
 
-void	game_loop(t_cub *cub)
+int	game_loop(t_cub *cub)
 {
-	mlx_hook(cub-> window, 17, 0, &game_close, cub);
 	draw_map(cub);
-	mlx_loop(cub -> mlx);
+	update_player_mouse_angle(cub);
+	return (1);
 }
 int	main(int argc, char **argv)
 {
@@ -44,6 +44,8 @@ int	main(int argc, char **argv)
 	load_assets(&cub);
 	open_window_from_map_size(cub.map.map, &cub);
 	set_up_player(&cub);
-	game_loop(&cub);
+	mlx_hook(cub.window, 17, 0, &game_close, &cub);
+	mlx_loop_hook(cub.mlx, game_loop, &cub);
+	mlx_loop(cub.mlx);
 	free_cub(&cub, 0);
 }
