@@ -13,7 +13,7 @@ SOURCES_PARSER=	parser.c		\
 				map_creator.c	\
 				map_elements.c	\
 				map_validator.c	\
-				load_assets.c
+				load_cub.c
 
 SRC_JU= $(addprefix sources/juggle/, $(SOURCES_JUGGLE))
 SOURCES_JUGGLE= mlx_window.c	\

@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 12:42:46 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:57:01 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <time.h>
+# include <math.h>
 # include <sys/time.h>
 # include <sys/types.h> 
 # include <sys/wait.h>
@@ -28,6 +29,8 @@
 # include <signal.h>
 # include <limits.h>
 
+# define SIZE 64
+# define SPEED 0.5
 # define ASSET_NUMBER 7
 
 typedef enum assets
@@ -119,7 +122,7 @@ void	*elements_validator(t_cub *cub);
 void	*get_cub_map(t_cub *cub);
 void	*cub_map_validator(t_cub *cub);
 void	print_map(t_cub *cub);
-void    load_assets(t_cub *cub);
+void    load_cub(t_cub *cub);
 
 //JUGGLE
 //mlx_window

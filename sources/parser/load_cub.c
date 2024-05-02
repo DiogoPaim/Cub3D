@@ -6,11 +6,26 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 12:45:20 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:38:11 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void	set_up_player(t_cub *cub)
+{
+	cub->player.player_x = (cub->map.player_x + 0.5) * SIZE;
+	cub->player.player_y = (cub->map.player_y + 0.5) * SIZE; 
+	if(cub->map.player_dir == 'N')
+		cub->player.player_vison_angle = 90.0;
+	else if(cub->map.player_dir == 'S')
+		cub->player.player_vison_angle = 270.0;
+	else if(cub->map.player_dir == 'E')
+		cub->player.player_vison_angle = 0.0;
+	else if(cub->map.player_dir == 'W')
+		cub->player.player_vison_angle = 180.0;
+	cub->player.height = 1;
+}
 
 static void	set_asset_paths(t_cub *cub)
 {
@@ -24,10 +39,11 @@ static void	set_asset_paths(t_cub *cub)
     (void)cub;
 }
 
-void	load_assets(t_cub *cub)
+void	load_cub(t_cub *cub)
 {
 	int	i;
 
+	set_up_player(cub);
 	set_asset_paths(cub);
 	i = -1;
 	while (++i < ASSET_NUMBER)
