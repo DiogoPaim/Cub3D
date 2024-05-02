@@ -6,13 +6,13 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:10 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/26 12:39:42 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:10:34 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		set_up_player(t_cub *cub)
+void	set_up_player(t_cub *cub)
 {
 	cub->player.player_x = cub->map.player_x;
 	cub->player.player_y = cub->map.player_y; 
@@ -25,7 +25,6 @@ int		set_up_player(t_cub *cub)
 	else if(cub->map.player_dir == 'W')
 		cub->player.player_vison_angle = 180.0;
 	cub->player.height = 1;
-	return (1);
 }
 
 void	game_loop(t_cub *cub)
@@ -45,8 +44,8 @@ int	main(int argc, char **argv)
 	cub.mlx = mlx_init();
 	cub_initializer(&cub);
 	parser(argc, argv, &cub);
-	open_window_from_map_size(cub.map.map, &cub);
-	load_assets(&cub);
-	set_up_player(&cub);
-	game_loop(&cub);
+	//open_window_from_map_size(cub.map.map, &cub);
+	//load_assets(&cub);
+	//set_up_player(&cub);
+	//game_loop(&cub);
 }

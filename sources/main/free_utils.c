@@ -57,5 +57,6 @@ void	free_cub(t_cub *cub, int exit_code)
 {
 	free_args_n_assets(cub);
 	free_map(cub);
+	free(cub->mlx);
 	exit(exit_code);
 }
