@@ -51,6 +51,18 @@ int	open_window_from_map_size(char **map, t_cub *cub)
 	return (1);
 }
 
+void update_player_mouse_angle(t_cub *cub)
+{
+	int x;
+	
+	mlx_mouse_get_pos(cub->mlx, cub->window, &x, NULL);
+	cub->player.player_vison_angle += x;
+	while (cub->player.player_vison_angle >= 360)
+		cub->player.player_vison_angle -= 360;
+	while (cub->player.player_vison_angle < 360)
+		cub->player.player_vison_angle += 360;
+}
+
 int	game_close(t_cub *cub)
 {
 	mlx_destroy_window(cub->mlx, cub->window);

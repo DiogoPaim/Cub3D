@@ -77,6 +77,5 @@ void	*parser(int argc, char **argv, t_cub *cub)
 	get_cub_map(cub);
 	cub_map_validator(cub);
 	print_map(cub);
-	free_cub(cub, 2);
 	return (NULL);
 }

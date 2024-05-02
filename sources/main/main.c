@@ -42,8 +42,8 @@ int	main(int argc, char **argv)
 	cub_initializer(&cub);
 	parser(argc, argv, &cub);
 	load_assets(&cub);
-	//open_window_from_map_size(cub.map.map, &cub);
-	//set_up_player(&cub);
-	//game_loop(&cub);
+	open_window_from_map_size(cub.map.map, &cub);
+	set_up_player(&cub);
+	game_loop(&cub);
 	free_cub(&cub, 0);
 }

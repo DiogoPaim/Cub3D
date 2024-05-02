@@ -27,4 +27,5 @@ void	draw_map(t_cub *cub)
 		}
 	}
 	draw_player(cub);
+	draw_horizontal_line(cub, 0, cub->player.player_y);
 }
