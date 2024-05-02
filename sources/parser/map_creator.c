@@ -6,11 +6,26 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:35 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 12:16:36 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:15:17 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void	get_map_information(t_cub *cub)
+{
+	int		width;
+	int		i;
+
+	i = -1;
+	while (cub->map.map[++i])
+	{
+		width = ft_strlen(cub->map.map[i]);
+		if (width > cub->map.w)
+			cub->map.w = width;
+	}
+	cub->map.h = i;
+}
 
 static void	*create_map(t_cub *cub)
 {
@@ -18,6 +33,7 @@ static void	*create_map(t_cub *cub)
 	if (!cub->map.map)
 		return (printf("Error\nThe function ft_split failed\n"), \
 				free_cub(cub, 2), NULL);
+	get_map_information(cub);
 	return (NULL);
 }
 
@@ -52,8 +68,8 @@ void	*get_cub_map(t_cub *cub)
 				close(fd), free(line), free_cub(cub, 2), NULL);
 		if (split[0] && split[0][0] != '1' && !cub->map.pre_map)
 			;
-		else if (split[0] && split[0][0] != '1')
-			return (printf("Error\nInvalid map\n"), \
+		else if (split[0] && (split[0][0] != '1' && split[0][0] != '\n'))
+			return (printf("Error\nInvalid map\n"), free_split(split), \
 				close(fd), free(line), free_cub(cub, 2), NULL);
 		else
 			add_map_row(cub, line, split, fd);
