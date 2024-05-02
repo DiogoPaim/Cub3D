@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:23 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/26 16:36:29 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:55:39 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ static void	free_args_n_assets(t_cub *cub)
     while (++i < ASSET_NUMBER)
     {
 		if (cub->asset[i].created)
-		{
-        	mlx_destroy_image(cub->mlx, cub->asset[i].img);
-			if (i <= 4)
-				free(cub->asset[i].path - 3); 
-		}
+        	mlx_destroy_image(cub->mlx, cub->asset[i].img); 
 	}
 }
 

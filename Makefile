@@ -1,4 +1,4 @@
-NAME= Cub3D
+NAME= cub3D
 
 CC= cc
 CFLAGS= -g -Wall -Werror -Wextra
@@ -12,7 +12,8 @@ SRC_PA= $(addprefix sources/parser/, $(SOURCES_PARSER))
 SOURCES_PARSER=	parser.c		\
 				map_creator.c	\
 				map_elements.c	\
-				map_validator.c
+				map_validator.c	\
+				load_assets.c
 
 SRC_JU= $(addprefix sources/juggle/, $(SOURCES_JUGGLE))
 SOURCES_JUGGLE= mlx_window.c	\

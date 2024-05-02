@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/26 17:24:51 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:42:46 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_cub
 	t_image				*asset;
 	t_timeval			time;
 	t_player			player;
-	char				*arg[6];
+	char				**arg;
 	int					x;
 	int					y;
 }	t_cub;
@@ -119,12 +119,12 @@ void	*elements_validator(t_cub *cub);
 void	*get_cub_map(t_cub *cub);
 void	*cub_map_validator(t_cub *cub);
 void	print_map(t_cub *cub);
+void    load_assets(t_cub *cub);
 
 //JUGGLE
 //mlx_window
 int		open_window_from_map_size(char **map, t_cub *mlx);
 int		game_close(t_cub *mlx);
-int		load_assets(t_cub *cub);
 void	draw_map(t_cub *cub);
 
 #endif

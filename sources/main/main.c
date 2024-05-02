@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:10 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/04/26 19:10:34 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:59:00 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,12 @@ int	main(int argc, char **argv)
 	(void) argc;
 	(void) argv; 
 	static t_cub cub;
-	//cub_initializer(&cub);
-	//parser(argc, argv, &cub);
 	
-	cub.mlx = mlx_init();
 	cub_initializer(&cub);
 	parser(argc, argv, &cub);
+	load_assets(&cub);
 	//open_window_from_map_size(cub.map.map, &cub);
-	//load_assets(&cub);
 	//set_up_player(&cub);
 	//game_loop(&cub);
+	free_cub(&cub, 0);
 }

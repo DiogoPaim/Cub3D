@@ -1,15 +1,9 @@
 
-
-
 F 255,255,255
-     NO     ./textures/NO.xpm    
+NO ./textures/NO.xpm    
 WE textures/WE.xpm
-
-
-SO      ./textures/SO.xpm
-     C  255,255,255
-SOUTH ./textures/SO.xpm
-
+C 255,255,255
+SO ./textures/SO.xpm
 EA ./textures/EA.xpm
 
 11111    11  11111

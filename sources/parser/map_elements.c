@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_elements.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/02 12:17:02 by tjorge-d          #+#    #+#             */
+/*   Updated: 2024/05/02 12:17:03 by tjorge-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 static int	get_element(char *argument)
@@ -81,9 +93,9 @@ void	*get_map_elements(t_cub *cub, int fd)
 			return (free_split(split), close(fd), NULL);
 		if (split[0][0] == '\n')
 			;
-		else if (get_element(split[0]) > 0)
+		else if (get_element(split[0]) >= 0)
 			process_element_information(cub, split, fd);
-		else
+		else 
 			return (printf("Error\nThere is an invalid element\n"), \
 				close(fd), free_split(split), free_cub(cub, 2), NULL);
 		free_split(split);
