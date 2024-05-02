@@ -54,12 +54,15 @@ int	open_window_from_map_size(char **map, t_cub *cub)
 void update_player_mouse_angle(t_cub *cub)
 {
 	int x;
+	int y;
 	
-	mlx_mouse_get_pos(cub->mlx, cub->window, &x, NULL);
-	cub->player.player_vison_angle += x;
-	while (cub->player.player_vison_angle >= 360)
-		cub->player.player_vison_angle -= 360;
-	while (cub->player.player_vison_angle < 360)
+	mlx_mouse_get_pos(cub->mlx, cub->window, &x, &y);
+	cub->player.player_vison_angle += x-250;
+	printf("x = %d\n", x);
+	printf("angle = %f\n\n", cub->player.player_vison_angle);
+	if (cub->player.player_vison_angle >=  360.0)
+	{cub->player.player_vison_angle = cub->player.player_vison_angle - (360.0/cub->player.player_vison_angle)*360.0;}
+	if(cub->player.player_vison_angle < 0.0)
 		cub->player.player_vison_angle += 360;
 }
 

@@ -6,17 +6,17 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:10 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 16:39:47 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:28:23 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	game_loop(t_cub *cub)
+int	game_loop(t_cub *cub)
 {
-	mlx_hook(cub-> window, 17, 0, &game_close, cub);
 	draw_map(cub);
-	mlx_loop(cub -> mlx);
+	update_player_mouse_angle(cub);
+	return (1);
 }
 int	main(int argc, char **argv)
 {
@@ -28,6 +28,8 @@ int	main(int argc, char **argv)
 	parser(argc, argv, &cub);
 	load_cub(&cub);
 	open_window_from_map_size(cub.map.map, &cub);
-	game_loop(&cub);
+	mlx_hook(cub.window, 17, 0, &game_close, &cub);
+	mlx_loop_hook(cub.mlx, game_loop, &cub);
+	mlx_loop(cub.mlx);
 	free_cub(&cub, 0);
 }
