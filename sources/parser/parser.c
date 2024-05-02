@@ -248,25 +248,6 @@ static void	*find_player_coords(t_cub *cub)
 	return (NULL);
 }
 
-void	cub_fill(t_cub *cub)
-{
-	
-}
-
-static void	check_borders(t_cub *cub, int x, int y, char new_char)
-{
-	if (cub->map.map[y][x] == cub->map.player_dir)
-		cub->map.map[y][x] = '0';
-	cub->map.map[y][x] = new_char;
-	if (cub->map.map[y][x + 1] == '1')
-		collect_to_player(cub, y, x + 1, new_char);
-	if (cub->map.map[y + 1][x] == '1')
-		collect_to_player(cub, y + 1, x, new_char);
-	if (cub->map.map[y][x - 1] == '1')
-		collect_to_player(cub, y, x - 1, new_char);
-	if (cub->map.map[y - 1][x] == '1')
-		collect_to_player(cub, y - 1, x, new_char);
-}
 
 void	*cub_map_validator(t_cub *cub)
 {
@@ -296,6 +277,5 @@ void	*parser(int argc, char **argv, t_cub *cub)
 	get_cub_map(cub);
 	cub_map_validator(cub);
 	print_map(cub);
-	free_cub(cub, 0);
 	return (NULL);
 }

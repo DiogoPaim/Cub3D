@@ -16,15 +16,23 @@ int		set_up_player(t_cub *cub)
 {
 	cub->player.player_x = cub->map.player_x;
 	cub->player.player_y = cub->map.player_y; 
+	if(cub->map.player_dir == 'N')
+		cub->player.player_vison_angle = 90.0;
+	else if(cub->map.player_dir == 'S')
+		cub->player.player_vison_angle = 270.0;
+	else if(cub->map.player_dir == 'E')
+		cub->player.player_vison_angle = 0.0;
+	else if(cub->map.player_dir == 'W')
+		cub->player.player_vison_angle = 180.0;
+	cub->player.height = 1;
+	return (1);
 }
 
 void	game_loop(t_cub *cub)
 {
-	
 	mlx_hook(cub-> window, 17, 0, &game_close, cub);
 	draw_map(cub);
 	mlx_loop(cub -> mlx);
-
 }
 int	main(int argc, char **argv)
 {
