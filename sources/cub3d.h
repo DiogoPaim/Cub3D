@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 16:57:01 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:30:47 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ typedef enum assets
 	PLAYER_TOP
 }	t_assets;
 
+typedef enum type
+{
+	FORE = 119,
+	LEFT = 97,
+	BACK = 115,
+	RIGHT = 100
+}	t_type;
+
 typedef struct s_timeval
 {
 	time_t			tv_sec;
@@ -72,9 +80,12 @@ typedef struct s_frame
 
 typedef struct s_player
 {
-	float			player_x;
-	float			player_y;
-	float			player_vison_angle;
+	int				front_mov;
+	int				side_mov;
+	float			x;
+	float			y;
+	float			vis_angle;
+	float			mov_angle;
 	float			height;
 }	t_player;
 
