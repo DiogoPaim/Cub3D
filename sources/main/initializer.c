@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 12:43:34 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:12:06 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	cub_initializer(t_cub *cub)
 	static t_frame	frame;
 	static char		*arg[6];
 	
-	cub->mlx = mlx_init();
 	cub->asset = asset;
 	cub->map = map;
 	cub->frame = frame;

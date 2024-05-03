@@ -7,6 +7,8 @@ void	draw_player(t_cub *cub)
 		(64.0 * cub->player.x) - 32, (64.0 * cub->player.y) - 32);
 }
 
+
+
 void	 draw_map(t_cub *cub)
 {
 	int	i;
@@ -27,9 +29,13 @@ void	 draw_map(t_cub *cub)
 		}
 	}
 	draw_player(cub);
-	if((cub->player.vis_angle >= 45 && cub->player.vis_angle < 135)
-		|| (cub->player.vis_angle >= 225 && cub->player.vis_angle < 315))
-		draw_vertical_line(cub, cub->player.x , 0 );
-	else
-		draw_horizontal_line(cub, 0 , cub->player.y);
+	// if(cub->player.vis_angle >= 45 && cub->player.vis_angle < 135)
+	// 	draw_vertical_line(cub, cub->player.x , 0 );
+	// else if (cub->player.vis_angle >= 225 && cub->player.vis_angle < 315)
+	// 	draw_vertical_line(cub, cub->player.x , cub->map.h*64);
+	// else if(cub->player.vis_angle <= 45 || cub->player.vis_angle > 315)
+	// 	draw_horizontal_line(cub, cub->map.w*64 , cub->player.y);
+	// else 
+	// 	draw_horizontal_line(cub, 0 , cub->player.y);
+	draw_line_sight_based_on_angle(cub);
 }

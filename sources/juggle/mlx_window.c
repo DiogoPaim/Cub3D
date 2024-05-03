@@ -52,10 +52,11 @@ void update_player_mouse_angle(t_cub *cub)
 	int y;
 	
 	mlx_mouse_get_pos(cub->mlx, cub->window, &x, &y);
-	cub->player.vis_angle += x - 1920;
-	printf("x = %d\n", x);
-	printf("angle = %f\n\n", cub->player.vis_angle);
+	cub->player.vis_angle += (x - 1920)/SENSITIVITY;
+	// printf("x = %d\n", x);
+	// printf("angle = %f\n\n", cub->player.vis_angle);
 	mlx_mouse_move(cub->mlx, cub->window, 1920, 1080);
+
 	if (cub->player.vis_angle >=  360.0)
 	{cub->player.vis_angle = cub->player.vis_angle - (360.0/cub->player.vis_angle)*360.0;}
 	else if(cub->player.vis_angle < 0.0)
@@ -64,8 +65,10 @@ void update_player_mouse_angle(t_cub *cub)
 
 int	game_close(t_cub *cub)
 {
+	mlx_do_key_autorepeaton(cub->mlx);
 	mlx_destroy_window(cub->mlx, cub->window);
-	mlx_destroy_display(cub->mlx);
 	free_cub(cub, 0);
+	mlx_destroy_display(cub->mlx);
+	free(cub->mlx);
 	exit(0);
 }

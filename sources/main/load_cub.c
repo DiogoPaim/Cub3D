@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 18:37:19 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:39:33 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	load_cub(t_cub *cub)
 {
 	int	i;
 
+	cub->mlx = mlx_init();
+	mlx_do_key_autorepeatoff(cub->mlx);
 	set_up_player(cub);
 	set_asset_paths(cub);
 	i = -1;

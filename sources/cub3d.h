@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 18:30:47 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:20:31 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@
 # include <errno.h>
 # include <signal.h>
 # include <limits.h>
+# include <math.h>
 
 # define SIZE 64
 # define SPEED 0.5
 # define ASSET_NUMBER 7
+# define SENSITIVITY 50
+# define M_PI 3.14159265358979323846
 
 typedef enum assets
 {
@@ -118,6 +121,9 @@ typedef struct s_cub
 
 //MAIN
 //main.c
+//hooks.c
+int	key_release(int keycode, t_cub *cub);
+int	key_press(int keycode, t_cub *cub);
 
 //initializer.c
 void	cub_initializer(t_cub *cub);
@@ -145,5 +151,6 @@ void	update_player_mouse_angle(t_cub *cub);
 //draw_sight_line
 void draw_horizontal_line(t_cub *cub, float x2, float y2);
 void draw_vertical_line(t_cub *cub, float x2, float y2);
+void	draw_line_sight_based_on_angle(t_cub *cub);
 
 #endif
