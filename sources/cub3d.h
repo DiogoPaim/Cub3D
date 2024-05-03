@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/03 14:16:11 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:15:10 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <math.h>
 
 # define SIZE 64
-# define SPEED 0.5
+# define SPEED 0.005
 # define ASSET_NUMBER 7
 # define SENSITIVITY 50
 # define M_PI 3.14159265358979323846

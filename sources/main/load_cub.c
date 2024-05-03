@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/03 14:51:32 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:57:02 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	set_up_player(t_cub *cub)
 	cub->player.y = (cub->map.player_y + 0.5); 
 	cub->player.mov_angle = -1;
 	if(cub->map.player_dir == 'N')
-		cub->player.vis_angle = 90.0;
-	else if(cub->map.player_dir == 'S')
 		cub->player.vis_angle = 270.0;
+	else if(cub->map.player_dir == 'S')
+		cub->player.vis_angle = 90.0;
 	else if(cub->map.player_dir == 'E')
 		cub->player.vis_angle = 0.0;
 	else if(cub->map.player_dir == 'W')

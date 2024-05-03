@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/03 14:29:43 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:09:35 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	set_mov_tool(t_cub *cub)
 {
-	cub->player.mov_tool[0][0] = 315;
 	cub->player.mov_tool[0][1] = 0;
 	cub->player.mov_tool[0][2] = 45;
-	cub->player.mov_tool[1][0] = 270;
-	cub->player.mov_tool[1][1] = -1;
 	cub->player.mov_tool[1][2] = 90;
-	cub->player.mov_tool[2][0] = 225;
-	cub->player.mov_tool[2][1] = 180;
 	cub->player.mov_tool[2][2] = 135;
+	cub->player.mov_tool[2][1] = 180;
+	cub->player.mov_tool[2][0] = 225;
+	cub->player.mov_tool[1][0] = 270;
+	cub->player.mov_tool[0][0] = 315;
+	cub->player.mov_tool[1][1] = -1;
 }
 
 void	cub_initializer(t_cub *cub)

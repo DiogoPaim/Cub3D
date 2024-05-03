@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:10 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/03 14:47:57 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:54:32 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	game_loop(t_cub *cub)
 {
 	player_movement(cub);
 	draw_map(cub);
-	//update_player_mouse_angle(cub);
+	update_player_mouse_angle(cub);
 	return (1);
 }
 int	main(int argc, char **argv)
@@ -28,10 +28,6 @@ int	main(int argc, char **argv)
 	cub_initializer(&cub);
 	parser(argc, argv, &cub);
 	load_cub(&cub);
-	open_window_4k(&cub);
-	mlx_hook(cub.window, 17, 0, &game_close, &cub);
-	//mlx_hook(cub.window, KeyPress, KeyPressMask, &key_press, &mlx);
-
 	open_window_4k(&cub);
 	mlx_hook(cub.window, 17, StructureNotifyMask, &game_close, &cub.mlx);
 	mlx_hook(cub.window, KeyPress, KeyPressMask, &key_press, &cub.mlx);

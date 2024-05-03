@@ -43,6 +43,7 @@ int	get_max_width(char **map)
 int	open_window_4k(t_cub *cub)
 {
 	cub->window = mlx_new_window(cub->mlx, 3840, 2160, "Window");
+	mlx_mouse_move(cub->mlx, cub->window, 1920, 1080);
 	return (1);
 }
 
