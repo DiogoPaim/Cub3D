@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:23 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 13:48:51 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:37:58 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	free_cub(t_cub *cub, int exit_code)
 {
 	free_args_n_assets(cub);
 	free_map(cub);
-	mlx_destroy_display(cub->mlx);
-	free(cub->mlx);
-	exit(exit_code);
+	if (exit_code == 2)
+		exit(exit_code);
 }

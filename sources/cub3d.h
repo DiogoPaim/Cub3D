@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 18:30:47 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:20:31 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ typedef struct s_cub
 
 //MAIN
 //main.c
+//hooks.c
+int	key_release(int keycode, t_cub *cub);
+int	key_press(int keycode, t_cub *cub);
 
 //initializer.c
 void	cub_initializer(t_cub *cub);

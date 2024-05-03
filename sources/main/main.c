@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:10 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 18:36:52 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:19:46 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	main(int argc, char **argv)
 	parser(argc, argv, &cub);
 	load_cub(&cub);
 	open_window_from_map_size(cub.map.map, &cub);
-	mlx_hook(cub.window, 17, 0, &game_close, &cub);
-	//mlx_hook(cub.window, KeyPress, KeyPressMask, &key_press, &mlx);
+	mlx_hook(cub.window, 17, StructureNotifyMask, &game_close, &cub.mlx);
+	mlx_hook(cub.window, KeyPress, KeyPressMask, &key_press, &cub.mlx);
+	mlx_hook(cub.window, KeyRelease, KeyReleaseMask, &key_release, &cub.mlx);
 	mlx_loop_hook(cub.mlx, game_loop, &cub);
 	mlx_loop(cub.mlx);
 	free_cub(&cub, 0);
