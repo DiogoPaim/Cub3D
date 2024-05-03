@@ -14,8 +14,8 @@
 
 static void	set_up_player(t_cub *cub)
 {
-	cub->player.x = (cub->map.player_x + 0.5) * SIZE;
-	cub->player.y = (cub->map.player_y + 0.5) * SIZE; 
+	cub->player.x = (cub->map.player_x + 0.5);
+	cub->player.y = (cub->map.player_y + 0.5); 
 	if(cub->map.player_dir == 'N')
 		cub->player.vis_angle = 90.0;
 	else if(cub->map.player_dir == 'S')

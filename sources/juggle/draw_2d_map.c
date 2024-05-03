@@ -4,7 +4,7 @@ void	draw_player(t_cub *cub)
 {
 	mlx_put_image_to_window(cub->mlx ,cub->window,					\
 		cub->asset[PLAYER_TOP].img,									\
-		(64.0 * cub->player.player_x) - 32, (64.0 * cub->player.player_y) - 32);
+		(64.0 * cub->player.x) - 32, (64.0 * cub->player.y) - 32);
 }
 
 void	 draw_map(t_cub *cub)
@@ -27,9 +27,9 @@ void	 draw_map(t_cub *cub)
 		}
 	}
 	draw_player(cub);
-	if((cub->player.player_vison_angle >= 45 && cub->player.player_vison_angle < 135)
-		|| (cub->player.player_vison_angle >= 225 && cub->player.player_vison_angle < 315))
-		draw_vertical_line(cub, cub->player.player_x , 0 );
+	if((cub->player.vis_angle >= 45 && cub->player.vis_angle < 135)
+		|| (cub->player.vis_angle >= 225 && cub->player.vis_angle < 315))
+		draw_vertical_line(cub, cub->player.x , 0 );
 	else
-		draw_horizontal_line(cub, 0 , cub->player.player_y);
+		draw_horizontal_line(cub, 0 , cub->player.y);
 }

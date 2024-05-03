@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	cub_initializer(&cub);
 	parser(argc, argv, &cub);
 	load_cub(&cub);
-	open_window_from_map_size(cub.map.map, &cub);
+	open_window_4k(&cub);
 	mlx_hook(cub.window, 17, 0, &game_close, &cub);
 	//mlx_hook(cub.window, KeyPress, KeyPressMask, &key_press, &mlx);
 	mlx_loop_hook(cub.mlx, game_loop, &cub);

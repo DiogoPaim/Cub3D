@@ -137,7 +137,7 @@ void    load_cub(t_cub *cub);
 
 //JUGGLE
 //mlx_window
-int		open_window_from_map_size(char **map, t_cub *mlx);
+int		open_window_4k(t_cub *mlx);
 int		game_close(t_cub *mlx);
 void	draw_map(t_cub *cub);
 void	update_player_mouse_angle(t_cub *cub);
