@@ -9,7 +9,7 @@ void	draw_player(t_cub *cub)
 
 
 
-void	 draw_map(t_cub *cub)
+void	draw_map(t_cub *cub)
 {
 	int	i;
 	int	j;

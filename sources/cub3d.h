@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/03 15:15:10 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:17:29 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@
 # include <math.h>
 
 # define SIZE 64
-# define SPEED 0.005
+# define SPEED 0.05
 # define ASSET_NUMBER 7
 # define SENSITIVITY 50
 # define M_PI 3.14159265358979323846
+# define FRAME_RATE 60
 
 typedef enum assets
 {
@@ -56,12 +57,6 @@ typedef enum type
 	ESC = 65307
 }	t_type;
 
-typedef struct s_timeval
-{
-	time_t			tv_sec;
-	suseconds_t		tv_usec;
-}	t_timeval;
-
 typedef struct s_image
 {
 	void	*img;
@@ -80,6 +75,7 @@ typedef struct s_frame
 	t_image		back;
 	t_image		hand;
 	t_image		UI;
+	long		last_frame;
 }	t_frame;
 
 typedef struct s_player
@@ -114,7 +110,7 @@ typedef struct s_cub
 	t_frame				frame;
 	t_map				map;
 	t_image				*asset;
-	t_timeval			time;
+	struct timeval		time;
 	t_player			player;
 	char				**arg;
 	int					x;

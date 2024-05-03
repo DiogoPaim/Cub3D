@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:50:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/03 15:33:04 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:43:00 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int player_movement(t_cub *cub)
 {
+	float	old_x;
+	float	old_y;
+	
+	old_x = cub->player.x;
+	old_y = cub->player.y;
 	if (cub->player.x_mov == 0 && cub->player.y_mov == 0)
 		cub->player.mov_angle = -1;
 	else
@@ -29,6 +34,10 @@ int player_movement(t_cub *cub)
 			sin((cub->player.mov_angle * 2 * 3.141592) / 360) * SPEED;	
 		cub->player.x = cub->player.x + \
 			cos((cub->player.mov_angle * 2 * 3.141592) / 360) * SPEED;
+		if (cub->map.map[(int)cub->player.y][(int)old_x] == '1')
+			cub->player.y = old_y;
+		if (cub->map.map[(int)old_y][(int)cub->player.x] == '1')
+			cub->player.x = old_x;
 	}
 	return(1);
 }

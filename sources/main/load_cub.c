@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/03 14:57:02 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:10:17 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	load_cub(t_cub *cub)
 	mlx_do_key_autorepeatoff(cub->mlx);
 	set_up_player(cub);
 	set_asset_paths(cub);
+	gettimeofday(&cub->time, NULL);
+	cub->frame.last_frame = cub->time.tv_sec * 1000000 \
+		+ cub->time.tv_usec;
 	i = -1;
 	while (++i < ASSET_NUMBER)
 	{
