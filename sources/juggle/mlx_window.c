@@ -40,14 +40,9 @@ int	get_max_width(char **map)
 	return (max_width);
 }
 
-int	open_window_from_map_size(char **map, t_cub *cub)
+int	open_window_4k(t_cub *cub)
 {
-	int	width;
-	int	height;
-
-	height = map_height(map);
-	width = get_max_width(map);
-	cub->window = mlx_new_window(cub->mlx, width * 64, height * 64, "Window");
+	cub->window = mlx_new_window(cub->mlx, 3840, 2160, "Window");
 	return (1);
 }
 
@@ -57,12 +52,12 @@ void update_player_mouse_angle(t_cub *cub)
 	int y;
 	
 	mlx_mouse_get_pos(cub->mlx, cub->window, &x, &y);
-//	printf("x = %d\n", x);
-//	printf("angle = %f\n\n", cub->player.vis_angle);
+	cub->player.vis_angle += (x - 1920)/SENSITIVITY;
+	mlx_mouse_move(cub->mlx, cub->window, 1920, 1080);
 	if (cub->player.vis_angle >=  360.0)
 	{cub->player.vis_angle = cub->player.vis_angle - (360.0/cub->player.vis_angle)*360.0;}
-	if(cub->player.vis_angle < 0.0)
-		cub->player.vis_angle += 360;
+	else if(cub->player.vis_angle < 0.0)
+	cub->player.vis_angle += 360;
 }
 
 int	game_close(t_cub *cub)

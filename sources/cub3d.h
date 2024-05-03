@@ -28,10 +28,13 @@
 # include <errno.h>
 # include <signal.h>
 # include <limits.h>
+# include <math.h>
 
 # define SIZE 64
 # define SPEED 0.5
 # define ASSET_NUMBER 7
+# define SENSITIVITY 50
+# define M_PI 3.14159265358979323846
 
 typedef enum assets
 {
@@ -145,7 +148,7 @@ void    load_cub(t_cub *cub);
 
 //JUGGLE
 //mlx_window
-int		open_window_from_map_size(char **map, t_cub *mlx);
+int		open_window_4k(t_cub *mlx);
 int		game_close(t_cub *mlx);
 void	draw_map(t_cub *cub);
 void	update_player_mouse_angle(t_cub *cub);
@@ -153,5 +156,6 @@ void	update_player_mouse_angle(t_cub *cub);
 //draw_sight_line
 void draw_horizontal_line(t_cub *cub, float x2, float y2);
 void draw_vertical_line(t_cub *cub, float x2, float y2);
+void	draw_line_sight_based_on_angle(t_cub *cub);
 
 #endif
