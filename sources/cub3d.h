@@ -92,6 +92,7 @@ typedef struct s_player
 	float			vis_angle;
 	float			mov_angle;
 	float			height;
+	float			dir_v[2];
 }	t_player;
 
 typedef struct s_map
@@ -154,8 +155,6 @@ void	draw_map(t_cub *cub);
 void	update_player_mouse_angle(t_cub *cub);
 
 //draw_sight_line
-void draw_horizontal_line(t_cub *cub, float x2, float y2);
-void draw_vertical_line(t_cub *cub, float x2, float y2);
 void	draw_line_sight_based_on_angle(t_cub *cub);
 
 #endif
