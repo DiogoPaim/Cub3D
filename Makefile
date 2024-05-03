@@ -8,6 +8,7 @@ SOURCES_MAIN=	free_utils.c	\
 				main.c			\
 				initializer.c	\
 				load_cub.c		\
+				movement.c		\
 				hooks.c
 
 SRC_PA= $(addprefix sources/parser/, $(SOURCES_PARSER))

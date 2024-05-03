@@ -57,7 +57,6 @@ void update_player_mouse_angle(t_cub *cub)
 	int y;
 	
 	mlx_mouse_get_pos(cub->mlx, cub->window, &x, &y);
-	cub->player.vis_angle += x-250;
 //	printf("x = %d\n", x);
 //	printf("angle = %f\n\n", cub->player.vis_angle);
 	if (cub->player.vis_angle >=  360.0)

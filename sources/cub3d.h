@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/03 11:20:31 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:16:11 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ typedef enum type
 	FORE = 119,
 	LEFT = 97,
 	BACK = 115,
-	RIGHT = 100
+	RIGHT = 100,
+	ESC = 65307
 }	t_type;
 
 typedef struct s_timeval
@@ -80,8 +81,9 @@ typedef struct s_frame
 
 typedef struct s_player
 {
-	int				front_mov;
-	int				side_mov;
+	int				y_mov;
+	int				x_mov;
+	int				mov_tool[3][3];
 	float			x;
 	float			y;
 	float			vis_angle;
@@ -119,8 +121,11 @@ typedef struct s_cub
 //MAIN
 //main.c
 //hooks.c
-int	key_release(int keycode, t_cub *cub);
-int	key_press(int keycode, t_cub *cub);
+int		key_release(int keycode, t_cub *cub);
+int		key_press(int keycode, t_cub *cub);
+
+//movement.c
+int		player_movement(t_cub *cub);
 
 //initializer.c
 void	cub_initializer(t_cub *cub);
