@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/07 16:30:48 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/07 18:10:02 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,21 @@ void	load_cub(t_cub *cub)
 	mlx_do_key_autorepeatoff(cub->mlx);
 	set_up_player(cub);
 	set_asset_paths(cub);
+	cub->frame.w = X_RES;
+	cub->frame.h = Y_RES;
+	cub->frame.img = mlx_new_image(cub->mlx, cub->frame.w, cub->frame.h);
+	cub->frame.addr = mlx_get_data_addr(cub->frame.img, \
+		&cub->frame.bpp, &cub->frame.line_length, &cub->frame.endian);
 	gettimeofday(&cub->time, NULL);
-	cub->frame.last_frame = cub->time.tv_sec * 1000000 \
+	cub->last_frame = cub->time.tv_sec * 1000000 \
 		+ cub->time.tv_usec;
 	i = -1;
 	while (++i < ASSET_NUMBER)
 	{
 		cub->asset[i].img = mlx_xpm_file_to_image(cub->mlx, \
 			cub->asset[i].path, &cub->asset[i].w, &cub->asset[i].h);
+		cub->asset[i].addr = mlx_get_data_addr(cub->asset[i].img, \
+			&cub->asset[i].bpp, &cub->asset[i].line_length, &cub->asset[i].endian);
 		cub->asset[i].created = 1;
 	}
 }
