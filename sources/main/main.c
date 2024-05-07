@@ -24,6 +24,7 @@ int	game_loop(t_cub *cub)
 		gettimeofday(&cub->time, NULL);
 		cub->frame.last_frame = cub->time.tv_sec * 1000000 \
 		+ cub->time.tv_usec + (1000000 / FRAME_RATE);
+		barrage_of_rays(cub);
 	}
 	return (1);
 }

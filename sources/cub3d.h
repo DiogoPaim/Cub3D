@@ -28,6 +28,7 @@
 # include <errno.h>
 # include <signal.h>
 # include <limits.h>
+# include <float.h>
 # include <math.h>
 
 # define SIZE 64
@@ -36,6 +37,7 @@
 # define SENSITIVITY 50
 # define M_PI 3.14159265358979323846
 # define FRAME_RATE 60
+# define WALL_HEIGHT 200
 
 typedef enum assets
 {
@@ -47,6 +49,12 @@ typedef enum assets
 	WALL_TOP,
 	PLAYER_TOP
 }	t_assets;
+
+typedef enum side
+{
+	NORTHSOUTH,
+    WESTEAST
+}	t_side;
 
 typedef enum type
 {
@@ -85,6 +93,7 @@ typedef struct s_player
 	int				mov_tool[3][3];
 	float			x;
 	float			y;
+	float			pos_v[2];	
 	float			vis_angle;
 	float			mov_angle;
 	float			height;
@@ -116,6 +125,9 @@ typedef struct s_cub
 	char				**arg;
 	int					x;
 	int					y;
+	int					ray_side_hit;
+	double 				planeX;
+	double				planeY;
 }	t_cub;
 
 //MAIN
@@ -152,5 +164,16 @@ void	update_player_mouse_angle(t_cub *cub);
 
 //draw_sight_line
 void	draw_line_sight_based_on_angle(t_cub *cub);
+
+//dda_basic 
+double get_distance_vector_wall(float pos_v[2], float dir_v[2], t_cub *cub,\
+	int camera_x);
+
+//dda_combo
+void barrage_of_rays(t_cub *cub);
+
+//drawer
+void draw_vertical_line(t_cub *cub, int x, int y_start, int y_end);
+
 
 #endif

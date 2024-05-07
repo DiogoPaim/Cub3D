@@ -1,6 +1,6 @@
 # include "../cub3d.h"
 
-void draw_all_positive_vector(t_cub *cub, int pix_x2, int pix_y2, float angle)
+void draw_all_positive_vector(t_cub *cub, int pix_x2, int pix_y2, double angle)
 {
 	float i;
 	float j;
@@ -21,7 +21,7 @@ void draw_all_positive_vector(t_cub *cub, int pix_x2, int pix_y2, float angle)
 			break;
 	}
 }
-void draw_all_negative_vector(t_cub *cub, int pix_x2, int pix_y2, float angle)
+void draw_all_negative_vector(t_cub *cub, int pix_x2, int pix_y2, double angle)
 {
 	float i;
 	float j;
@@ -42,7 +42,7 @@ void draw_all_negative_vector(t_cub *cub, int pix_x2, int pix_y2, float angle)
 			break;
 	}
 }
-void draw_negative_positive_vector(t_cub *cub, int pix_x2, int pix_y2, float angle)
+void draw_negative_positive_vector(t_cub *cub, int pix_x2, int pix_y2, double angle)
 {
 	float i;
 	float j;
@@ -63,7 +63,7 @@ void draw_negative_positive_vector(t_cub *cub, int pix_x2, int pix_y2, float ang
 			break;
 	}
 }
-void draw_positive_negative_vector(t_cub *cub, int pix_x2, int pix_y2, float angle)
+void draw_positive_negative_vector(t_cub *cub, int pix_x2, int pix_y2, double angle)
 {
 	float i;
 	float j;
@@ -86,13 +86,13 @@ void draw_positive_negative_vector(t_cub *cub, int pix_x2, int pix_y2, float ang
 	}
 }
 
-void	draw_vector_until(t_cub *cub,int pix_x2,int pix_y2, float angle)
+void	draw_vector_until(t_cub *cub,int pix_x2,int pix_y2, double angle)
 {
-	if(pix_x2 > cub->player.x * SIZE && pix_y2 > cub->player.y * SIZE)
+	if(pix_x2 >= cub->player.x * SIZE && pix_y2 >= cub->player.y * SIZE)
 		draw_all_positive_vector(cub, pix_x2, pix_y2, angle);
-	else if(pix_x2 < cub->player.x * SIZE && pix_y2 < cub->player.y * SIZE)
+	else if(pix_x2 <= cub->player.x * SIZE && pix_y2 <= cub->player.y * SIZE)
 		draw_all_negative_vector(cub, pix_x2, pix_y2, angle);
-	else if(pix_x2 < cub->player.x * SIZE && pix_y2 > cub->player.y * SIZE)
+	else if(pix_x2 <= cub->player.x * SIZE && pix_y2 >= cub->player.y * SIZE)
 		draw_negative_positive_vector(cub, pix_x2, pix_y2, angle);
 	else 
 		draw_positive_negative_vector(cub, pix_x2, pix_y2, angle);
@@ -100,14 +100,13 @@ void	draw_vector_until(t_cub *cub,int pix_x2,int pix_y2, float angle)
 
 void	draw_line_sight_based_on_angle(t_cub *cub)
 {
-	float	angle_rad;
+	double	angle_rad;
 	int		pix_x2;
 	int		pix_y2;
 	
-
-	
 	angle_rad = (M_PI * cub->player.vis_angle)/180;
-
+	cub->player.pos_v[0] = cub->player.x;
+	cub->player.pos_v[1] = cub->player.y;
 	cub->player.dir_v[0] = cos(angle_rad);
 	cub->player.dir_v[1] = sin(angle_rad);
 	pix_x2 = (cub->player.x * SIZE) + (300 * cos(angle_rad));

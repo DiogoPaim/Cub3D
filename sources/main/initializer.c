@@ -40,6 +40,8 @@ void	cub_initializer(t_cub *cub)
 	cub->frame = frame;
 	cub->time = time;
 	cub->arg = arg;
+	cub->planeX = 0;
+	cub->planeY = 0.66;
 	set_mov_tool(cub);
     (void)cub;
 }
