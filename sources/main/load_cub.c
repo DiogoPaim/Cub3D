@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/03 16:10:17 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:30:48 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ static void	set_asset_paths(t_cub *cub)
 	cub->asset[FLOOR_TOP].path = "./Assets/2d_floor.xpm";
 	cub->asset[WALL_TOP].path = "./Assets/2d_wall.xpm";
 	cub->asset[PLAYER_TOP].path = "./Assets/2d_player.xpm";
+	cub->asset[MAP].path = "./Assets/minimap.xpm";
+	cub->asset[M_LAYER].path = "./Assets/mini_layer.xpm";
+	cub->asset[M_WALL].path = "./Assets/mini_wall.xpm";
+	cub->asset[M_MARIO].path = "./Assets/mini_mario.xpm";
+	cub->asset[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
+	cub->asset[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
     (void)cub;
 }
 
