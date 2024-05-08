@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/07 18:26:45 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:47:07 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@
 # include <float.h>
 # include <math.h>
 
+# define UI_SCALE 2
 # define TRANSPARENT 16777215
 # define SIZE 64
-# define MAP_SIZE 640
-# define MAP_OFFSET 64
 # define X_RES 1920
 # define Y_RES 1080
 # define SPEED 0.05
@@ -58,8 +57,12 @@ typedef enum assets
 	M_WALL,
 	M_MARIO,
 	M_GOOMBA,
-	M_MUSHROOM
+	M_MUSHROOM,
+	M_MAP,
+	FRAME,
+	BACK
 }	t_assets;
+
 
 typedef enum side
 {
@@ -67,14 +70,25 @@ typedef enum side
     WESTEAST
 }	t_side;
 
+
 typedef enum type
 {
 	FORE = 119,
 	LEFT = 97,
-	BACK = 115,
+	AFT = 115,
 	RIGHT = 100,
 	ESC = 65307
 }	t_type;
+
+typedef struct s_layout
+{
+	float	map_size;
+	float	border_size;
+	int		map_x;
+	int		map_y;
+	int		mario_x;
+	int		mario_y;
+}	t_layout;
 
 typedef struct s_image
 {
@@ -86,6 +100,7 @@ typedef struct s_image
 	int		endian;
 	int		h;
 	int		w;
+	float	scale;
 	int		created;
 }	t_image;
 
@@ -105,25 +120,25 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char	**map;
-	char	*pre_map;
-	char	*path;
-	int		collect_nb;
-	int		h;
-	int		w;
-	int		player_y;
-	int		player_x;
-	char	player_dir;
+	char		**map;
+	char		*pre_map;
+	char		*path;
+	int			collect_nb;
+	int			h;
+	int			w;
+	int			player_y;
+	int			player_x;
+	char		player_dir;
 }	t_map;
 
 typedef struct s_cub
 {
 	void				*mlx;
 	void				*window;
-	t_image				frame;
 	long				last_frame;
 	t_map				map;
-	t_image				*asset;
+	t_image				*img;
+	t_layout			layout;
 	struct timeval		time;
 	t_player			player;
 	char				**arg;

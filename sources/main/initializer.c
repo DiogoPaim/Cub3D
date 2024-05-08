@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/07 17:33:22 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/08 16:01:47 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,30 @@ void	set_mov_tool(t_cub *cub)
 	cub->player.mov_tool[1][1] = -1;
 }
 
+void	set_layout(t_cub *cub)
+{
+	cub->layout.border_size = (X_RES + Y_RES) / 2 / 30;
+	cub->layout.map_size = 128 * cub->img[MAP].scale;
+	cub->layout.map_x = X_RES - cub->layout.border_size - cub->layout.map_size;
+	cub->layout.map_y = cub->layout.border_size;
+	cub->layout.mario_x = 128 / 2 - (16/2);
+	cub->layout.mario_y = 128 / 2 - (16/2);
+}
+
 void	cub_initializer(t_cub *cub)
 {
-	static t_image			asset[ASSET_NUMBER];
+	static t_image			img[ASSET_NUMBER + 3];
 	static t_map			map;
 	static t_player			player;
-	static t_image			frame;
-	static struct timeval	time;
 	static char				*arg[6];
 	
-	cub->asset = asset;
+	cub->img = img;
 	cub->map = map;
 	cub->player = player;
-	cub->frame = frame;
-	cub->time = time;
 	cub->arg = arg;
 	cub->planeX = 0;
 	cub->planeY = 0.66;
 	set_mov_tool(cub);
+	set_layout(cub);
     (void)cub;
 }

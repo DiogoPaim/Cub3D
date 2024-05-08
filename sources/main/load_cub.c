@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/07 18:10:02 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:53:45 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ static void	set_up_player(t_cub *cub)
 
 static void	set_asset_paths(t_cub *cub)
 {
-	cub->asset[N].path = cub->arg[N];
-	cub->asset[S].path = cub->arg[S];
-	cub->asset[W].path = cub->arg[W];
-	cub->asset[E].path = cub->arg[E];
-	cub->asset[FLOOR_TOP].path = "./Assets/2d_floor.xpm";
-	cub->asset[WALL_TOP].path = "./Assets/2d_wall.xpm";
-	cub->asset[PLAYER_TOP].path = "./Assets/2d_player.xpm";
-	cub->asset[MAP].path = "./Assets/minimap.xpm";
-	cub->asset[M_LAYER].path = "./Assets/mini_layer.xpm";
-	cub->asset[M_WALL].path = "./Assets/mini_wall.xpm";
-	cub->asset[M_MARIO].path = "./Assets/mini_mario.xpm";
-	cub->asset[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
-	cub->asset[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
+	cub->img[N].path = cub->arg[N];
+	cub->img[S].path = cub->arg[S];
+	cub->img[W].path = cub->arg[W];
+	cub->img[E].path = cub->arg[E];
+	cub->img[FLOOR_TOP].path = "./Assets/2d_floor.xpm";
+	cub->img[WALL_TOP].path = "./Assets/2d_wall.xpm";
+	cub->img[PLAYER_TOP].path = "./Assets/2d_player.xpm";
+	cub->img[MAP].path = "./Assets/minimap2.xpm";
+	cub->img[M_LAYER].path = "./Assets/mini_layer2.xpm";
+	cub->img[M_WALL].path = "./Assets/mini_wall.xpm";
+	cub->img[M_MARIO].path = "./Assets/mini_mario.xpm";
+	cub->img[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
+	cub->img[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
     (void)cub;
 }
 
@@ -54,21 +54,22 @@ void	load_cub(t_cub *cub)
 	mlx_do_key_autorepeatoff(cub->mlx);
 	set_up_player(cub);
 	set_asset_paths(cub);
-	cub->frame.w = X_RES;
-	cub->frame.h = Y_RES;
-	cub->frame.img = mlx_new_image(cub->mlx, cub->frame.w, cub->frame.h);
-	cub->frame.addr = mlx_get_data_addr(cub->frame.img, \
-		&cub->frame.bpp, &cub->frame.line_length, &cub->frame.endian);
+	cub->img[FRAME].w = X_RES;
+	cub->img[FRAME].h = Y_RES;
 	gettimeofday(&cub->time, NULL);
 	cub->last_frame = cub->time.tv_sec * 1000000 \
 		+ cub->time.tv_usec;
 	i = -1;
-	while (++i < ASSET_NUMBER)
+	while (++i < ASSET_NUMBER + 3)
 	{
-		cub->asset[i].img = mlx_xpm_file_to_image(cub->mlx, \
-			cub->asset[i].path, &cub->asset[i].w, &cub->asset[i].h);
-		cub->asset[i].addr = mlx_get_data_addr(cub->asset[i].img, \
-			&cub->asset[i].bpp, &cub->asset[i].line_length, &cub->asset[i].endian);
-		cub->asset[i].created = 1;
+		if (i >= ASSET_NUMBER)
+			cub->img[i].img = mlx_new_image(cub->mlx, cub->img[i].w, cub->img[i].h);
+		else
+			cub->img[i].img = mlx_xpm_file_to_image(cub->mlx, \
+				cub->img[i].path, &cub->img[i].w, &cub->img[i].h);
+		cub->img[i].addr = mlx_get_data_addr(cub->img[i].img, \
+			&cub->img[i].bpp, &cub->img[i].line_length, &cub->img[i].endian);
+		cub->img[i].created = 1;
 	}
+	
 }
