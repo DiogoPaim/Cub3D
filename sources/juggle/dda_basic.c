@@ -3,7 +3,7 @@
 void	step_side_pos(int *step, double *step_dist, double pos, double delta)
 {
 	*step = 1;
-	*step_dist = (((int) pos + 1 ) - pos) * delta;
+	*step_dist = (((int) pos + 1) - pos) * delta;
 }
 void	step_side_neg(int *step, double *step_dist, double pos, double delta)
 {
@@ -48,24 +48,33 @@ double	dda_main(double s_dist_xy[2], double delta_xy[2], int step_xy[2] , t_cub 
 	return calc_dist(cub, s_dist_xy, delta_xy);
 }
 
-double get_distance_vector_wall(float pos_v[2], float dir_v[2], t_cub *cub, \
-	int camera_ray)
+double get_distance_vector_wall(float pos_v[2], float dir_v[2], \
+	t_cub *cub, int i)
 {
 	double	side_dist_xy[2];
 	double	delta_dist_xy[2];
 	int		step_xy[2];
-	(void) camera_ray;
-	double camera_x = 2 * camera_ray / (1900 - 1);
-	dir_v[0] = dir_v[0] + cub->planeX * camera_x;
-	dir_v[1] = dir_v[1] + cub->planeY * camera_x;
+
+	cub->camera.x = (2 * i) / (double) X_RES - 1;
+	draw_line_sight_based_on_angle(cub);
+	// printf("before ray_dir_x == %lf \n",dir_v[0]);
+	// printf("before ray_dir_y == %lf \n/n",dir_v[1]);
+	dir_v[0] = dir_v[0] + (cub->camera.plane_x * cub->camera.x);
+	dir_v[1] = dir_v[1] + (cub->camera.plane_y * cub->camera.x);
+	// printf("after ray_dir_x == %lf \n",dir_v[0]);
+	// printf("after ray_dir_y == %lf \n/n",dir_v[1]);
+	// printf("plane_x == %lf \n", cub->camera.plane_x);
+	// printf("plane_y == %lf \n", cub->camera.plane_y);
+	// printf("i == %d \n", i);
+	// printf("camera_x == %lf \n", cub->camera.x);
 	if (dir_v[0] != 0)
-		delta_dist_xy[0] = sqrt(1 + (dir_v[1] * dir_v[1]) / (dir_v[0] * dir_v[0]));
+		delta_dist_xy[0] = fabs(1 / dir_v[0]);
 	else 
-		delta_dist_xy[0] = DBL_MAX;
+		delta_dist_xy[0] = INT_MAX;
 	if (dir_v[1] != 0)
-		delta_dist_xy[1] = sqrt(1 + (dir_v[0] * dir_v[0]) / (dir_v[1] * dir_v[1]));
+		delta_dist_xy[1] = fabs(1 / dir_v[1]);
 	else
-		delta_dist_xy[1] = DBL_MAX;
+		delta_dist_xy[1] = INT_MAX;
 	if( dir_v[0] < 0)
 		step_side_neg(&step_xy[0],&side_dist_xy[0],pos_v[0], delta_dist_xy[0]);
 	else

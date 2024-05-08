@@ -43,24 +43,37 @@ int	get_max_width(char **map)
 int	open_window_4k(t_cub *cub)
 {
 	cub->window = mlx_new_window(cub->mlx, X_RES, Y_RES, "Window");
-	mlx_mouse_move(cub->mlx, cub->window, 1920, 1080);
+	mlx_mouse_move(cub->mlx, cub->window, X_RES/2, Y_RES/2);
 	return (1);
+}
+
+void paint_screen_black(t_cub *cub)
+{
+	mlx_put_image_to_window(cub->mlx,cub->window,cub->asset[BLACKGROUND].img,0,0);
+}
+
+void update_camera(t_cub *cub, t_camera camera)
+{
+	camera.dir_x = cos(cub->player.angle);
+	camera.dir_y = sin(cub->player.angle);
+	camera.plane_x = -camera.dir_y * tan(camera.fov_rad / 2);
+	camera.plane_y = camera.dir_x * tan(camera.fov_rad / 2);
 }
 
 void update_player_mouse_angle(t_cub *cub)
 {
 	int x;
 	int y;
-	//float angle;
 	
 	mlx_mouse_get_pos(cub->mlx, cub->window, &x, &y);
 	cub->player.vis_angle += (x - X_RES/2)/SENSITIVITY;
 	mlx_mouse_move(cub->mlx, cub->window, X_RES/2, Y_RES/2);
 	if (cub->player.vis_angle >=  360.0)
-	{cub->player.vis_angle = cub->player.vis_angle - (360.0/cub->player.vis_angle)*360.0;}
+		cub->player.vis_angle = cub->player.vis_angle - \
+		(360.0 / cub->player.vis_angle) * 360.0;
 	else if(cub->player.vis_angle < 0.0)
-	cub->player.vis_angle += 360;
-	// angle = ((x - (X_RES/2))/SENSITIVITY) * 0.0174533;
+		cub->player.vis_angle += 360;
+	cub->player.angle = cub->player.vis_angle * (M_PI / 180);
 	// cub->planeX = cub->planeX * cos(angle) - cub->planeY * sin(angle);
     // cub->planeY = cub->planeX * sin(angle) + cub->planeY * cos(angle);
 }

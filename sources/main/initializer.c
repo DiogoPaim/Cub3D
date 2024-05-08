@@ -25,23 +25,31 @@ void	set_mov_tool(t_cub *cub)
 	cub->player.mov_tool[1][1] = -1;
 }
 
+void	init_camera(t_cub *cub)
+{
+	static t_camera			camera;
+	
+	camera.fov_rad = FOV;
+	camera.dir_x = cos(cub->player.angle);
+	camera.dir_y = sin(cub->player.angle);
+	camera.plane_x = -camera.dir_y * tan(camera.fov_rad / 2);
+	camera.plane_y = camera.dir_x * tan(camera.fov_rad / 2);
+	cub->camera = camera;
+}
+
 void	cub_initializer(t_cub *cub)
 {
 	static t_image			asset[ASSET_NUMBER];
 	static t_map			map;
 	static t_player			player;
 	static t_frame			frame;
-	static struct timeval	time;
 	static char				*arg[6];
 	
 	cub->asset = asset;
 	cub->map = map;
 	cub->player = player;
 	cub->frame = frame;
-	cub->time = time;
 	cub->arg = arg;
-	cub->planeX = 0;
-	cub->planeY = 0.66;
 	set_mov_tool(cub);
     (void)cub;
 }

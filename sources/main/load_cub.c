@@ -26,6 +26,7 @@ static void	set_up_player(t_cub *cub)
 	else if(cub->map.player_dir == 'W')
 		cub->player.vis_angle = 180.0;
 	cub->player.height = 1;
+	cub->player.angle = cub->player.vis_angle * (M_PI/180);
 }
 
 static void	set_asset_paths(t_cub *cub)
@@ -43,6 +44,7 @@ static void	set_asset_paths(t_cub *cub)
 	cub->asset[M_MARIO].path = "./Assets/mini_mario.xpm";
 	cub->asset[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
 	cub->asset[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
+	cub->asset[BLACKGROUND].path = "./Assets/blackscreen.xpm";
     (void)cub;
 }
 
@@ -53,6 +55,7 @@ void	load_cub(t_cub *cub)
 	cub->mlx = mlx_init();
 	mlx_do_key_autorepeatoff(cub->mlx);
 	set_up_player(cub);
+	init_camera(cub);
 	set_asset_paths(cub);
 	gettimeofday(&cub->time, NULL);
 	cub->frame.last_frame = cub->time.tv_sec * 1000000 \

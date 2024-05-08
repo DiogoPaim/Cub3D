@@ -18,13 +18,14 @@ int	game_loop(t_cub *cub)
 	if ((cub->time.tv_sec * 1000000 + \
 	cub->time.tv_usec) > cub->frame.last_frame)
 	{
+		paint_screen_black(cub);
 		player_movement(cub);
 		update_player_mouse_angle(cub);
 		draw_map(cub);
 		gettimeofday(&cub->time, NULL);
 		cub->frame.last_frame = cub->time.tv_sec * 1000000 \
 		+ cub->time.tv_usec + (1000000 / FRAME_RATE);
-		//barrage_of_rays(cub);
+		barrage_of_rays(cub);
 	}
 	return (1);
 }
@@ -38,6 +39,7 @@ int	main(int argc, char **argv)
 	parser(argc, argv, &cub);
 	load_cub(&cub);
 	open_window_4k(&cub);
+	mlx_mouse_move(cub.mlx, cub.window, X_RES/2, Y_RES/2);
 	mlx_hook(cub.window, 17, StructureNotifyMask, &game_close, &cub.mlx);
 	mlx_hook(cub.window, KeyPress, KeyPressMask, &key_press, &cub.mlx);
 	mlx_hook(cub.window, KeyRelease, KeyReleaseMask, &key_release, &cub.mlx);

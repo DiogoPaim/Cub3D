@@ -40,9 +40,10 @@
 # define SENSITIVITY 50
 # define M_PI 3.14159265358979323846
 # define FRAME_RATE 60
-# define WALL_HEIGHT 200
+# define WALL_HEIGHT 600
+# define FOV 0.66
 
-# define ASSET_NUMBER 13
+# define ASSET_NUMBER 14
 typedef enum assets
 {
 	N,
@@ -57,7 +58,8 @@ typedef enum assets
 	M_WALL,
 	M_MARIO,
 	M_GOOMBA,
-	M_MUSHROOM
+	M_MUSHROOM,
+	BLACKGROUND
 }	t_assets;
 
 typedef enum side
@@ -104,6 +106,7 @@ typedef struct s_player
 	float			pos_v[2];	
 	float			vis_angle;
 	float			mov_angle;
+	float			angle;
 	float			height;
 	float			dir_v[2];
 }	t_player;
@@ -121,6 +124,17 @@ typedef struct s_map
 	char	player_dir;
 }	t_map;
 
+typedef struct s_camera
+{
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	fov_rad;
+	double	x;
+}	t_camera;
+
+
 typedef struct s_cub
 {
 	void				*mlx;
@@ -134,6 +148,7 @@ typedef struct s_cub
 	int					ray_side_hit;
 	double 				planeX;
 	double				planeY;
+	t_camera			camera;
 }	t_cub;
 
 //MAIN
@@ -147,6 +162,7 @@ int		player_movement(t_cub *cub);
 
 //initializer.c
 void	cub_initializer(t_cub *cub);
+void	init_camera(t_cub *cub);
 
 //free_utils.c
 void	free_cub(t_cub *cub, int exit_code);
@@ -167,19 +183,21 @@ int		open_window_4k(t_cub *mlx);
 int		game_close(t_cub *mlx);
 void	draw_map(t_cub *cub);
 void	update_player_mouse_angle(t_cub *cub);
+void	update_camera(t_cub *cub, t_camera camera);
+void	paint_screen_black(t_cub *cub);
 
 //draw_sight_line
 void	draw_line_sight_based_on_angle(t_cub *cub);
 
 //dda_basic 
 double get_distance_vector_wall(float pos_v[2], float dir_v[2], t_cub *cub,\
-	int camera_x);
+	int ray_n);
 
 //dda_combo
 void barrage_of_rays(t_cub *cub);
 
 //drawer
-void draw_vertical_line(t_cub *cub, int x, int y_start, int y_end);
+void draw_vertical_line(t_cub *cub, int x, int line_range[2], int color);
 
 
 #endif
