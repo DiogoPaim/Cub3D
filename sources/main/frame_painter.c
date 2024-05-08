@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:48:46 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/08 15:57:42 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/08 19:12:25 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	render_image(t_cub *cub, int asset, int x, int y)
 	x_pos = x;
 	y_pos = y;
 	scale = cub->img[asset].scale;
-	while (y < y_pos + (cub->img[asset].w * scale))
+	if(!scale)
+		scale = 1;
+	while (y < y_pos + (cub->img[asset].h * scale))
 	{
 		x = x_pos;
 		while (x < x_pos + (cub->img[asset].w * scale))

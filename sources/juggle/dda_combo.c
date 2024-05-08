@@ -4,22 +4,27 @@ void barrage_of_rays(t_cub *cub)
 {
 	int		ray_n;
 	int		height;
-	int		start_line;
-	int		end_line;
-	// float	dir_ray[2];
+	int		line_range[2];
+	double	distance;
 
 	ray_n = 0;
-	while (ray_n <= X_RES)
+	update_camera(cub, cub->camera);
+	while (ray_n <= 1980)
 	{
-		height = WALL_HEIGHT / get_distance_vector_wall(cub->player.pos_v, \
+		
+		distance = get_distance_vector_wall(cub->player.pos_v, \
 			cub->player.dir_v, cub, ray_n);
-		start_line = (-height) / 2 + Y_RES / 2;
-		if (start_line < 0)
-			start_line = 0;
-		end_line = height / 2 + Y_RES / 2;
-		if (end_line > Y_RES)
-			end_line = Y_RES - 1;
-		draw_vertical_line(cub, ray_n, start_line, end_line);
+		height = WALL_HEIGHT / distance;
+		line_range[0] = (-height) / 2 + Y_RES / 2;
+		if (line_range[0] < 0)
+			line_range[0] = 0;
+		line_range[1] = height / 2 + Y_RES / 2;
+		if (line_range[1] > Y_RES)
+			line_range[1] = Y_RES - 1;
+		if(cub->ray_side_hit == NORTHSOUTH)
+			draw_vertical_line(cub, ray_n, line_range, 16711680);
+		else
+			draw_vertical_line(cub, ray_n, line_range, 65280);
 		ray_n ++;
 	}
 }

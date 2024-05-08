@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/08 15:53:45 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/08 18:33:53 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	set_up_player(t_cub *cub)
 	else if(cub->map.player_dir == 'W')
 		cub->player.vis_angle = 180.0;
 	cub->player.height = 1;
+	cub->player.angle = cub->player.vis_angle * (M_PI/180);
 }
 
 static void	set_asset_paths(t_cub *cub)
@@ -43,6 +44,7 @@ static void	set_asset_paths(t_cub *cub)
 	cub->img[M_MARIO].path = "./Assets/mini_mario.xpm";
 	cub->img[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
 	cub->img[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
+	cub->img[BLACKGROUND].path = "./Assets/blackscreen.xpm";
     (void)cub;
 }
 
@@ -53,9 +55,14 @@ void	load_cub(t_cub *cub)
 	cub->mlx = mlx_init();
 	mlx_do_key_autorepeatoff(cub->mlx);
 	set_up_player(cub);
+	init_camera(cub);
 	set_asset_paths(cub);
 	cub->img[FRAME].w = X_RES;
 	cub->img[FRAME].h = Y_RES;
+	cub->img[BACK].w = X_RES;
+	cub->img[BACK].h = Y_RES;
+	cub->img[M_MAP].w = 128;
+	cub->img[M_MAP].h = 128;
 	gettimeofday(&cub->time, NULL);
 	cub->last_frame = cub->time.tv_sec * 1000000 \
 		+ cub->time.tv_usec;

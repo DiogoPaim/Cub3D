@@ -111,5 +111,5 @@ void	draw_line_sight_based_on_angle(t_cub *cub)
 	cub->player.dir_v[1] = sin(angle_rad);
 	pix_x2 = (cub->player.x * SIZE) + (300 * cos(angle_rad));
 	pix_y2 = (cub->player.y * SIZE) + (300 * sin(angle_rad));
-	draw_vector_until(cub, pix_x2, pix_y2, angle_rad);
+	//draw_vector_until(cub, pix_x2, pix_y2, angle_rad);
 }
