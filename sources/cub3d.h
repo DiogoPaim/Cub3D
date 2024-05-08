@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/07 16:46:53 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/07 18:26:45 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <float.h>
 # include <math.h>
 
+# define TRANSPARENT 16777215
 # define SIZE 64
 # define MAP_SIZE 640
 # define MAP_OFFSET 64
@@ -90,12 +91,6 @@ typedef struct s_image
 	int		created;
 }	t_image;
 
-typedef struct s_frame
-{
-	t_image		frame;
-	long		last_frame;
-}	t_frame;
-
 typedef struct s_player
 {
 	int				y_mov;
@@ -139,7 +134,8 @@ typedef struct s_cub
 {
 	void				*mlx;
 	void				*window;
-	t_frame				frame;
+	t_image				frame;
+	long				last_frame;
 	t_map				map;
 	t_image				*asset;
 	struct timeval		time;
@@ -152,6 +148,8 @@ typedef struct s_cub
 }	t_cub;
 
 //MAIN
+//frame_painter.c
+void	render_frame(t_cub *cub);
 //main.c
 //hooks.c
 int		key_release(int keycode, t_cub *cub);

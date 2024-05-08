@@ -15,7 +15,8 @@ SRC_PA= $(addprefix sources/parser/, $(SOURCES_PARSER))
 SOURCES_PARSER=	parser.c		\
 				map_creator.c	\
 				map_elements.c	\
-				map_validator.c
+				map_validator.c	\
+				frame_painter.c
 
 SRC_JU= $(addprefix sources/juggle/, $(SOURCES_JUGGLE))
 SOURCES_JUGGLE= mlx_window.c	\

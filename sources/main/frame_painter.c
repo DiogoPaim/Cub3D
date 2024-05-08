@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:48:46 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/07 16:53:59 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/07 18:28:14 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,10 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if (color == 0)
+	if (color == TRANSPARENT)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
-}
-
-void	render_frame(t_cub *cub)
-{
-	//mlx_put_image_to_window(cub->mlx, cub->window, frame->frame.img, 0, 0);
-	return ;
 }
 
 void	render_image(t_cub *cub, int asset, int x, int y)
@@ -43,13 +37,24 @@ void	render_image(t_cub *cub, int asset, int x, int y)
 
 	x_pos = x;
 	y_pos = y;
-	while (y < y + cub->asset[asset].h)
+	while (y < y_pos + cub->asset[asset].h)
 	{
-		x = x_pos - 1;
-		while (++x <= x + cub->asset[asset].h)
-			my_mlx_pixel_put(&cub->frame.frame, x, y, \
+		x = x_pos;
+		while (x < x_pos + cub->asset[asset].h)
+		{
+			my_mlx_pixel_put(&cub->frame, x, y, \
 			get_color(&cub->asset[asset], x - x_pos, y - y_pos));
+			x++;
+		}
 		y++;
 	}
 }
 
+void	render_frame(t_cub *cub)
+{
+	render_image(cub, M_MARIO, cub->player.x, cub->player.y);
+	render_image(cub, MAP, X_RES - MAP_OFFSET - MAP_SIZE, MAP_OFFSET);
+	render_image(cub, M_GOOMBA, X_RES - MAP_OFFSET - MAP_SIZE + 50, MAP_OFFSET + 50);
+	mlx_put_image_to_window(cub->mlx, cub->window, cub->frame.img, 0, 0);
+	return ;
+}
