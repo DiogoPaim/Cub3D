@@ -21,7 +21,8 @@ int	game_loop(t_cub *cub)
 		paint_back(cub);
 		player_movement(cub);
 		update_player_mouse_angle(cub);
-		barrage_of_rays(cub);
+		//barrage_of_rays(cub);
+		alternate_barrage(cub);
 		render_map(cub);
 		mlx_put_image_to_window(cub->mlx, cub->window, cub->img[FRAME].img, 0, 0);
 		//mlx_put_image_to_window(cub->mlx, cub->window, cub->img[MAP].img, 0, 0);

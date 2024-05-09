@@ -64,11 +64,13 @@ void	cub_initializer(t_cub *cub)
 	static t_map			map;
 	static t_player			player;
 	static char				*arg[6];
+	static t_ray			ray;
 	
 	cub->img = img;
 	cub->map = map;
 	cub->player = player;
 	cub->arg = arg;
+	cub->ray = ray;
 	set_mov_tool(cub);
 	set_layout(cub);
     (void)cub;

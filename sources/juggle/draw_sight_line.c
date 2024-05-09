@@ -105,8 +105,7 @@ void	draw_line_sight_based_on_angle(t_cub *cub)
 	int		pix_y2;
 	
 	angle_rad = (M_PI * cub->player.vis_angle)/180;
-	cub->player.pos_v[0] = cub->player.x;
-	cub->player.pos_v[1] = cub->player.y;
+	
 	cub->player.dir_v[0] = cos(angle_rad);
 	cub->player.dir_v[1] = sin(angle_rad);
 	pix_x2 = (cub->player.x * SIZE) + (300 * cos(angle_rad));
