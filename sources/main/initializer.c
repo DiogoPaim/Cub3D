@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/08 18:35:53 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:22:18 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@ void	set_mov_tool(t_cub *cub)
 void	set_layout(t_cub *cub)
 {
 	cub->layout.border_size = (X_RES + Y_RES) / 2 / 30;
-	cub->layout.map_size = 128 * cub->img[MAP].scale;
+	cub->layout.map_size = 128 * UI_SCALE;
 	cub->layout.map_x = X_RES - cub->layout.border_size - cub->layout.map_size;
 	cub->layout.map_y = cub->layout.border_size;
-	cub->layout.mario_x = 128 / 2 - (16/2);
-	cub->layout.mario_y = 128 / 2 - (16/2);
+	cub->layout.mario_x = (128 * UI_SCALE) / 2 - (32/2);
+	cub->layout.mario_y = (128 * UI_SCALE) / 2 - (32/2);
+	cub->img[FRAME].w = X_RES;
+	cub->img[FRAME].h = Y_RES;
+	cub->img[MAP].w = cub->layout.map_size;
+	cub->img[MAP].h = cub->layout.map_size;
+	cub->img[M_LAYER].scale = UI_SCALE;
+	cub->img[M_MAP].scale = UI_SCALE;
 }
 
 void	init_camera(t_cub *cub)
@@ -49,7 +55,7 @@ void	init_camera(t_cub *cub)
 
 void	cub_initializer(t_cub *cub)
 {
-	static t_image			img[ASSET_NUMBER + 3];
+	static t_image			img[ASSET_NUMBER + IMG_NUMBER];
 	static t_map			map;
 	static t_player			player;
 	static char				*arg[6];

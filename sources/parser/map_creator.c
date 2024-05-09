@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:35 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 14:15:17 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/09 10:21:19 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*get_cub_map(t_cub *cub)
 				close(fd), free(line), free_cub(cub, 2), NULL);
 		if (split[0] && split[0][0] != '1' && !cub->map.pre_map)
 			;
-		else if (split[0] && (split[0][0] != '1' && split[0][0] != '\n'))
+		else if (split[0] && split[0][0] != '1')
 			return (printf("Error\nInvalid map\n"), free_split(split), \
 				close(fd), free(line), free_cub(cub, 2), NULL);
 		else

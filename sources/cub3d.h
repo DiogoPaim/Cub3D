@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/08 19:01:35 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:44:19 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@
 # define X_RES 1920
 # define Y_RES 1080
 # define SPEED 0.05
-# define SENSITIVITY 50
+# define SENSITIVITY 200
 # define M_PI 3.14159265358979323846
 # define FRAME_RATE 60
 # define WALL_HEIGHT 600
 # define FOV 0.66
+# define MAP_RANGE 4
 
-# define ASSET_NUMBER 14
+# define ASSET_NUMBER 13
+# define IMG_NUMBER 2
 typedef enum assets
 {
 	N,
@@ -53,16 +55,14 @@ typedef enum assets
 	FLOOR_TOP,
 	WALL_TOP,
 	PLAYER_TOP,
-	MAP,
+	M_MAP,
 	M_LAYER,
 	M_WALL,
 	M_MARIO,
 	M_GOOMBA,
 	M_MUSHROOM,
-	BLACKGROUND,
-	M_MAP,
+	MAP,
 	FRAME,
-	BACK
 }	t_assets;
 
 
@@ -164,9 +164,10 @@ typedef struct s_cub
 
 //MAIN
 //frame_painter.c
-void	render_frame(t_cub *cub);
+void	render_map(t_cub *cub);
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	render_image(t_cub *cub, int asset, int x, int y);
+void	 paint_map_background(t_cub *cub);
 //main.c
 //hooks.c
 int		key_release(int keycode, t_cub *cub);
@@ -199,7 +200,7 @@ int		game_close(t_cub *mlx);
 void	draw_map(t_cub *cub);
 void	update_player_mouse_angle(t_cub *cub);
 void	update_camera(t_cub *cub, t_camera camera);
-void	paint_screen_black(t_cub *cub);
+void	paint_back(t_cub *cub);
 
 //draw_sight_line
 void	draw_line_sight_based_on_angle(t_cub *cub);

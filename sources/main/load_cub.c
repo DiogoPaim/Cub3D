@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/08 18:33:53 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:20:43 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,12 @@ static void	set_asset_paths(t_cub *cub)
 	cub->img[FLOOR_TOP].path = "./Assets/2d_floor.xpm";
 	cub->img[WALL_TOP].path = "./Assets/2d_wall.xpm";
 	cub->img[PLAYER_TOP].path = "./Assets/2d_player.xpm";
-	cub->img[MAP].path = "./Assets/minimap2.xpm";
+	cub->img[M_MAP].path = "./Assets/minimap2.xpm";
 	cub->img[M_LAYER].path = "./Assets/mini_layer2.xpm";
 	cub->img[M_WALL].path = "./Assets/mini_wall.xpm";
 	cub->img[M_MARIO].path = "./Assets/mini_mario.xpm";
 	cub->img[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
 	cub->img[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
-	cub->img[BLACKGROUND].path = "./Assets/blackscreen.xpm";
     (void)cub;
 }
 
@@ -57,17 +56,11 @@ void	load_cub(t_cub *cub)
 	set_up_player(cub);
 	init_camera(cub);
 	set_asset_paths(cub);
-	cub->img[FRAME].w = X_RES;
-	cub->img[FRAME].h = Y_RES;
-	cub->img[BACK].w = X_RES;
-	cub->img[BACK].h = Y_RES;
-	cub->img[M_MAP].w = 128;
-	cub->img[M_MAP].h = 128;
 	gettimeofday(&cub->time, NULL);
 	cub->last_frame = cub->time.tv_sec * 1000000 \
 		+ cub->time.tv_usec;
 	i = -1;
-	while (++i < ASSET_NUMBER + 3)
+	while (++i < ASSET_NUMBER + IMG_NUMBER)
 	{
 		if (i >= ASSET_NUMBER)
 			cub->img[i].img = mlx_new_image(cub->mlx, cub->img[i].w, cub->img[i].h);
@@ -78,5 +71,6 @@ void	load_cub(t_cub *cub)
 			&cub->img[i].bpp, &cub->img[i].line_length, &cub->img[i].endian);
 		cub->img[i].created = 1;
 	}
+	paint_map_background(cub);
 	
 }

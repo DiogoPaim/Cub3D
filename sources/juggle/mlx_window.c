@@ -46,10 +46,27 @@ int	open_window_4k(t_cub *cub)
 	return (1);
 }
 
-void paint_screen_black(t_cub *cub)
+void paint_back(t_cub *cub)
 {
-	render_image(cub, BLACKGROUND, 0, 0);
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < Y_RES / 2)
+	{
+		x = -1;
+		while (++x < X_RES)
+			my_mlx_pixel_put(&cub->img[FRAME], x, y, 0);
+	}
+	y--;
+	while (++y < Y_RES)
+	{
+		x = -1;
+		while (++x < X_RES)
+			my_mlx_pixel_put(&cub->img[FRAME], x, y, 16777214);
+	}
 }
+
 
 void update_camera(t_cub *cub, t_camera camera)
 {
