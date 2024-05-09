@@ -37,11 +37,11 @@
 # define X_RES 1920
 # define Y_RES 1080
 # define SPEED 0.05
-# define SENSITIVITY 200
+# define SENSITIVITY 50
 # define M_PI 3.14159265358979323846
 # define FRAME_RATE 60
-# define WALL_HEIGHT 600
-# define FOV 0.66
+# define WALL_HEIGHT 50
+# define FOV 72
 # define MAP_RANGE 4
 
 # define ASSET_NUMBER 13
@@ -144,6 +144,21 @@ typedef struct s_camera
 	double	x;
 }	t_camera;
 
+typedef struct s_ray
+{
+	int					x;
+	int					y;
+	double				side_d_x;
+	double				side_d_y;
+	double				delta_d_x;
+	double				delta_d_y;
+	int					step_x;
+	int					step_y;
+	double				dir_x;
+	double				dir_y;
+	int					side_hit;
+	double				perp_wall_dist;
+}	t_ray;
 
 typedef struct s_cub
 {
@@ -156,9 +171,7 @@ typedef struct s_cub
 	struct timeval		time;
 	t_player			player;
 	char				**arg;
-	int					ray_side_hit;
-	double 				planeX;
-	double				planeY;
+	t_ray				ray;
 	t_camera			camera;
 }	t_cub;
 
@@ -206,11 +219,13 @@ void	paint_back(t_cub *cub);
 void	draw_line_sight_based_on_angle(t_cub *cub);
 
 //dda_basic 
+double	raycast_based_on_camera(t_cub *cub, int ray_n , t_ray *ray);
 double get_distance_vector_wall(float pos_v[2], float dir_v[2], t_cub *cub,\
 	int ray_n);
 
 //dda_combo
 void barrage_of_rays(t_cub *cub);
+void	alternate_barrage(t_cub *cub);
 
 //drawer
 void draw_vertical_line(t_cub *cub, int x, int line_range[2], int color);

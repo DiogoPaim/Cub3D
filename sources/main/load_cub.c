@@ -52,7 +52,8 @@ void	load_cub(t_cub *cub)
 	int	i;
 
 	cub->mlx = mlx_init();
-	mlx_do_key_autorepeatoff(cub->mlx);
+	// mlx_do_key_autorepeatoff(cub->mlx);
+	mlx_do_key_autorepeaton(cub->mlx);
 	set_up_player(cub);
 	init_camera(cub);
 	set_asset_paths(cub);
