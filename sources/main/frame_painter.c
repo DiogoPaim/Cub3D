@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:48:46 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/09 11:40:58 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:21:52 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ unsigned int	get_color(t_image *img, int x, int y)
 {
 	char	*dst;
 
-	//printf("x: %i\n", x);
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	return (*(unsigned int *)dst);
 }
@@ -41,17 +40,17 @@ void	put_transparent_pixel(t_image *img, int x, int y)
 	*(unsigned int *)dst = color;
 }
 
-void paint_map_background(t_cub *cub)
+void paint_map_background(t_cub *cub, int asset, int width, int height)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-	while (++y < cub->layout.map_size)
+	while (++y < height)
 	{
 		x = -1;
-		while (++x < cub->layout.map_size)
-			put_transparent_pixel(&cub->img[MAP], x, y);
+		while (++x < width)
+			put_transparent_pixel(&cub->img[asset], x, y);
 	}
 }
 
@@ -84,40 +83,53 @@ void	render_image_to_map(t_cub *cub, int asset, int x, int y)
 {
 	int		x_pos;
 	int		y_pos;
+	int		b;
 
 	x_pos = x;
+	b = x_pos;
 	y_pos = y;
-	while (y < y_pos + (cub->img[asset].h * 2))
+	if (y_pos < 0)
+		y = 0;
+	if (x_pos < 0)
+		b = 0;
+	while (y < y_pos + (cub->img[asset].h) && y < cub->img[M_MAP].h)
 	{
-		x = x_pos;
-		while (x < x_pos + (cub->img[asset].w * 2))
+		x = b;
+		while (x < x_pos + (cub->img[asset].w) && x < cub->img[M_MAP].w)
 		{
-			my_mlx_pixel_put(&cub->img[MAP], x, y, \
-			get_color(&cub->img[asset], (x - x_pos) / 2, \
-			(y - y_pos) / 2));
+			if(x >= 0 && y >= 0)
+				my_mlx_pixel_put(&cub->img[M_MAP], x, y, \
+				get_color(&cub->img[asset], (x - x_pos), \
+				(y - y_pos)));
 			x++;
 		}
 		y++;
 	}
 }
-void	render_map(t_cub *cub)
-{
-	int	i;
-	int	j;
 
-	render_image_to_map(cub, M_MAP, 0, 0);
-	render_image_to_map(cub, M_MARIO, cub->layout.mario_x, cub->layout.mario_y);
-	j = -1;
-	while(cub->map.map[++j])
+void	create_transparent_frame(t_cub *cub)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < 128)
 	{
-		i = -1;
-		while (cub->map.map[j][++i])
+		x = -1;
+		while (++x < 128)
 		{
-			if (cub->map.map[j][i] == '1' && i - cub->player.x > 0 && j - cub->player.y > 0)
-				render_image_to_map(cub, M_WALL, (i - cub->player.x) * 32, \
-					(j - cub->player.y) * 32);
+			if ((x < 6 || x > 122) || (y < 6 || y > 122))
+				put_transparent_pixel(&cub->img[M_MAP], x, y);
 		}
 	}
+}
+
+void	render_map(t_cub *cub)
+{
+	render_image_to_map(cub, M_BACKGROUND, 0, 0);
+	render_image_to_map(cub, MAP, cub->layout.mario_x + 8 - cub->player.x * 16, cub->layout.mario_y + 8 - cub->player.y * 16);
+	render_image_to_map(cub, M_MARIO, cub->layout.mario_x, cub->layout.mario_y);
+	create_transparent_frame(cub);
 	render_image_to_map(cub, M_LAYER, 0, 0);
-	render_image(cub, MAP, cub->layout.map_x, cub->layout.map_y);
+	render_image(cub, M_MAP, cub->layout.map_x, cub->layout.map_y);
 }

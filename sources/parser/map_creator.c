@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:35 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/09 10:21:19 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/09 13:04:52 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	get_map_information(t_cub *cub)
 			cub->map.w = width;
 	}
 	cub->map.h = i;
+	cub->img[MAP].w = cub->map.w * 16;
+	cub->img[MAP].h = cub->map.h * 16;
 }
 
 static void	*create_map(t_cub *cub)

@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/09 11:44:19 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:23:00 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <float.h>
 # include <math.h>
 
-# define UI_SCALE 2
+# define UI_SCALE 3
 # define TRANSPARENT 16777215
 # define SIZE 64
 # define X_RES 1920
@@ -45,7 +45,7 @@
 # define MAP_RANGE 4
 
 # define ASSET_NUMBER 13
-# define IMG_NUMBER 2
+# define IMG_NUMBER 3
 typedef enum assets
 {
 	N,
@@ -55,14 +55,15 @@ typedef enum assets
 	FLOOR_TOP,
 	WALL_TOP,
 	PLAYER_TOP,
-	M_MAP,
+	M_BACKGROUND,
 	M_LAYER,
 	M_WALL,
 	M_MARIO,
 	M_GOOMBA,
 	M_MUSHROOM,
+	M_MAP,
 	MAP,
-	FRAME,
+	FRAME
 }	t_assets;
 
 
@@ -164,10 +165,11 @@ typedef struct s_cub
 
 //MAIN
 //frame_painter.c
-void	render_map(t_cub *cub);
-void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
-void	render_image(t_cub *cub, int asset, int x, int y);
-void	 paint_map_background(t_cub *cub);
+unsigned int	get_color(t_image *img, int x, int y);
+void			render_map(t_cub *cub);
+void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void			render_image(t_cub *cub, int asset, int x, int y);
+void			paint_map_background(t_cub *cub, int asset, int width, int height);
 //main.c
 //hooks.c
 int		key_release(int keycode, t_cub *cub);

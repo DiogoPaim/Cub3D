@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/09 11:20:43 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/09 15:44:09 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,38 @@ static void	set_asset_paths(t_cub *cub)
 	cub->img[FLOOR_TOP].path = "./Assets/2d_floor.xpm";
 	cub->img[WALL_TOP].path = "./Assets/2d_wall.xpm";
 	cub->img[PLAYER_TOP].path = "./Assets/2d_player.xpm";
-	cub->img[M_MAP].path = "./Assets/minimap2.xpm";
+	cub->img[M_BACKGROUND].path = "./Assets/minimap2.xpm";
 	cub->img[M_LAYER].path = "./Assets/mini_layer2.xpm";
 	cub->img[M_WALL].path = "./Assets/mini_wall.xpm";
 	cub->img[M_MARIO].path = "./Assets/mini_mario.xpm";
 	cub->img[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
 	cub->img[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
     (void)cub;
+}
+
+static void create_m_map(t_cub *cub)
+{
+	int	i;
+	int j;
+	int	i_offset;
+	int	j_offset;
+	
+	j = -1;
+	paint_map_background(cub, MAP, cub->img[MAP].w, cub->img[MAP].w);
+	while (++j < cub->img[MAP].h)
+	{
+		j_offset = j / 16;
+		i = -1;
+		while (++i < cub->img[MAP].w)
+		{
+			i_offset = i / 16;
+			if (cub->map.map[j_offset][i_offset] == '1')
+				my_mlx_pixel_put(&cub->img[MAP], i, j, \
+				get_color(&cub->img[M_WALL], (i - i_offset * 16)\
+				, (j - j_offset * 16)));
+		}
+	}
+	paint_map_background(cub, M_MAP, cub->layout.map_size, cub->layout.map_size);
 }
 
 void	load_cub(t_cub *cub)
@@ -71,6 +96,5 @@ void	load_cub(t_cub *cub)
 			&cub->img[i].bpp, &cub->img[i].line_length, &cub->img[i].endian);
 		cub->img[i].created = 1;
 	}
-	paint_map_background(cub);
-	
+	create_m_map(cub);
 }
