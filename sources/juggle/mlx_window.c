@@ -1,73 +1,5 @@
 #include "../cub3d.h"
 
-int	map_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	if (!map)
-		return (0);
-	while (map[i])
-		i++;
-	return (i);
-}
-int	ft_strlen_gnl(char *s, char c)
-{
-	int	i;
-
-	i = 0;
-	while (s && s[i])
-	{
-		if (s[i] == c)
-			return (i);
-		i++;
-	}
-	return (i);
-}
-
-int	get_max_width(char **map)
-{
-	int		max_width;
-	int		i;
-
-	i = -1;
-	max_width = 0;
-	while (map[++i])
-	{
-		if (ft_strlen_gnl(map[i],'\n') > max_width)
-			max_width = ft_strlen_gnl(map[i],'\n');
-	}
-	return (max_width);
-}
-
-int	open_window_4k(t_cub *cub)
-{
-	cub->window = mlx_new_window(cub->mlx, (int)X_RES, (int)Y_RES, "Window");
-	return (1);
-}
-
-void paint_back(t_cub *cub)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < Y_RES / 2)
-	{
-		x = -1;
-		while (++x < X_RES)
-			my_mlx_pixel_put(&cub->img[FRAME], x, y, 0);
-	}
-	y--;
-	while (++y < Y_RES)
-	{
-		x = -1;
-		while (++x < X_RES)
-			my_mlx_pixel_put(&cub->img[FRAME], x, y, 16777214);
-	}
-}
-
-
 void update_camera(t_cub *cub, t_camera camera)
 {
 	camera.dir_x = cos(cub->player.angle);
@@ -92,14 +24,4 @@ void update_player_mouse_angle(t_cub *cub)
 	cub->player.angle = cub->player.vis_angle * (M_PI / 180);
 	// cub->planeX = cub->planeX * cos(angle) - cub->planeY * sin(angle);
     // cub->planeY = cub->planeX * sin(angle) + cub->planeY * cos(angle);
-}
-
-int	game_close(t_cub *cub)
-{
-	mlx_do_key_autorepeaton(cub->mlx);
-	mlx_destroy_window(cub->mlx, cub->window);
-	free_cub(cub, 0);
-	mlx_destroy_display(cub->mlx);
-	free(cub->mlx);
-	exit(0);
 }

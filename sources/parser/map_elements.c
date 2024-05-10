@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:17:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 12:17:03 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:44:52 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,23 @@ static void *process_element_information(t_cub *cub, char **split, int fd)
 {
 	int	arg_nb;
 
-	if (split[1][ft_strlen(split[1])] == '\n' || split[1] == NULL)
+	if (split[1][0] == '\n' || split[1] == NULL)
 		return (printf("Error\nEmpty element\n"), close (fd), \
 			free_split(split), free_cub(cub, 2), NULL);
+	if (get_element(split[0]) >= 4)	
+		return (proccess_color(cub, split, fd), NULL);
 	if (split[2] != NULL && split[2][0] != '\n')
 		return (printf("Error\nToo much information in an element\n"), \
-			close (fd), free_split(split), free_cub(cub, 2), NULL);
+			close(fd), free_split(split), free_cub(cub, 2), NULL);
 	arg_nb = get_element(split[0]);
 	if (cub->arg[arg_nb])
 		return (printf("Error\nToo many element calls\n"), \
-			close (fd), free_split(split), free_cub(cub, 2), NULL);
+			close(fd), free_split(split), free_cub(cub, 2), NULL);
 	cub->arg[arg_nb] = ft_strdup(split[1]);
 	if (!cub->arg[arg_nb])
 		return (printf("Error\nFailed to allocate memory\n"), \
-			close (fd), free_split(split), free_cub(cub, 2), NULL);
-	if (cub->arg[arg_nb][ft_strlen(cub->arg[arg_nb]) - 1] == '\n')		
+			close(fd), free_split(split), free_cub(cub, 2), NULL);
+	if (cub->arg[arg_nb][ft_strlen(cub->arg[arg_nb]) - 1] == '\n')	
 		cub->arg[arg_nb][ft_strlen(cub->arg[arg_nb]) - 1] = '\0';
 	return (NULL);
 }
@@ -122,6 +124,7 @@ void	*elements_validator(t_cub *cub)
 			if (fd == -1)
 				return (printf("Error\nNo texture in the path given.\n"), \
 					free_cub(cub, 2), NULL);
+			cub->img[i].path = cub->arg[i];
 			close(fd);
 		}
 		else

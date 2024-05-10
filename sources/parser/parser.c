@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/09 10:20:35 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:11:15 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void	print_map(t_cub *cub)
 	printf("SO:	%s\n", cub->arg[1]);
 	printf("WE:	%s\n", cub->arg[2]);
 	printf("EA:	%s\n", cub->arg[3]);
-	printf("F:	%s\n", cub->arg[4]);
-	printf("C:	%s\n", cub->arg[5]);
+	printf("F:\n");
+	//printf("R: %i | G: %i | B: %i\n");
+	printf("C:\n");
+	//printf("R: %i | G: %i | B: %i\n");
 	printf("\n=========== MAP ============\n\n");
 	while (cub->map.map[++i])
 	{
@@ -59,6 +61,19 @@ void	print_map(t_cub *cub)
 	printf("Player facing:	%c\n", cub->map.player_dir);
 	printf("\n============================\n\n");
 }
+
+// void	get_rgb(t_cub *cub)
+// {
+// 	int rgb;
+// 	int	red;
+// 	int	green;
+// 	int	blue;
+
+// 	red = 
+// 	rgb = red;
+// 	rgb = (rgb << 8) + green;
+// 	rgb = (rgb << 8) + blue;
+// }
 
 void	*parser(int argc, char **argv, t_cub *cub)
 {

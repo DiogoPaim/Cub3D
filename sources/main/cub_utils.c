@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:23 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/08 15:49:43 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:15:38 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,14 @@ void	free_cub(t_cub *cub, int exit_code)
 	free_map(cub);
 	if (exit_code == 2)
 		exit(exit_code);
+}
+
+int	game_close(t_cub *cub, int exit_code)
+{
+	mlx_do_key_autorepeaton(cub->mlx);
+	mlx_destroy_window(cub->mlx, cub->window);
+	free_cub(cub, 0);
+	mlx_destroy_display(cub->mlx);
+	free(cub->mlx);
+	exit(exit_code);
 }

@@ -4,31 +4,37 @@ CC= cc
 CFLAGS= -g -Wall -Werror -Wextra
 
 SRC_MA= $(addprefix sources/main/, $(SOURCES_MAIN))
-SOURCES_MAIN=	free_utils.c	\
+SOURCES_MAIN=	cub_utils.c		\
 				main.c			\
 				initializer.c	\
 				load_cub.c		\
-				movement.c		\
 				hooks.c
 
 SRC_PA= $(addprefix sources/parser/, $(SOURCES_PARSER))
 SOURCES_PARSER=	parser.c		\
+				colors.c		\
 				map_creator.c	\
 				map_elements.c	\
-				map_validator.c	\
-				frame_painter.c
+				map_validator.c
+
+SRC_DI= $(addprefix sources/display/, $(SOURCES_DISPLAY))
+SOURCES_DISPLAY=	frame.c				\
+					minimap.c			\
+					painting_tools.c
 
 SRC_JU= $(addprefix sources/juggle/, $(SOURCES_JUGGLE))
-SOURCES_JUGGLE= mlx_window.c	\
-				draw_2d_map.c	\
-				draw_sight_line.c\
-				dda_basic.c		\
-				dda_combo.c		\
-				drawer.c
+SOURCES_JUGGLE=		mlx_window.c		\
+					draw_2d_map.c		\
+					draw_sight_line.c	\
+					dda_basic.c			\
+					dda_combo.c			\
+					movement.c			\
+					drawer.c
 		
 OBJ_DIR= objects
 OBJ=	$(addprefix $(OBJ_DIR)/, $(SRC_MA:sources/main/%.c=%.o)) \
-		$(addprefix $(OBJ_DIR)/, $(SRC_PA:sources/parser/%.c=%.o))\
+		$(addprefix $(OBJ_DIR)/, $(SRC_PA:sources/parser/%.c=%.o)) \
+		$(addprefix $(OBJ_DIR)/, $(SRC_DI:sources/display/%.c=%.o)) \
 		$(addprefix $(OBJ_DIR)/, $(SRC_JU:sources/juggle/%.c=%.o))
 
 MLX_DIR= ./mlx
@@ -50,10 +56,13 @@ $(OBJ_DIR)/%.o: sources/parser/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: sources/juggle/%.c
+$(OBJ_DIR)/%.o: sources/display/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR)/%.o: sources/juggle/%.c
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)

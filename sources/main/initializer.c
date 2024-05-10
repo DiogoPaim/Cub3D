@@ -6,13 +6,13 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/09 17:22:21 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:11:40 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	set_mov_tool(t_cub *cub)
+static void	set_mov_tool(t_cub *cub)
 {
 	cub->player.mov_tool[0][1] = 0;
 	cub->player.mov_tool[0][2] = 45;
@@ -25,53 +25,55 @@ void	set_mov_tool(t_cub *cub)
 	cub->player.mov_tool[1][1] = -1;
 }
 
-void	set_layout(t_cub *cub)
+static void	set_layout(t_cub *cub)
 {
 	cub->layout.border_size = (X_RES + Y_RES) / 2 / 30;
 	cub->layout.map_size = 128;
-	cub->layout.map_x = X_RES - cub->layout.border_size - cub->layout.map_size * UI_SCALE;
+	cub->layout.map_x = X_RES - cub->layout.border_size \
+		- cub->layout.map_size * UI_SCALE;
 	cub->layout.map_y = cub->layout.border_size;
 	cub->layout.mario_x = (128) / 2 - (16/2);
 	cub->layout.mario_y = (128) / 2 - (16/2);
 	cub->img[M_BACKGROUND].scale = 1;
 	cub->img[M_LAYER].scale = 1;
-	cub->img[M_WALL].scale = UI_SCALE;
-	cub->img[M_MARIO].scale = UI_SCALE;
-	cub->img[M_GOOMBA].scale = UI_SCALE;
-	cub->img[M_MUSHROOM].scale = UI_SCALE;
-	cub->img[FRAME].w = X_RES;
-	cub->img[FRAME].h = Y_RES;
 	cub->img[M_MAP].w = cub->layout.map_size;
 	cub->img[M_MAP].h = cub->layout.map_size;
 	cub->img[M_MAP].scale = UI_SCALE;
+	cub->img[FRAME].w = X_RES;
+	cub->img[FRAME].h = Y_RES;
 }
 
-void	init_camera(t_cub *cub)
+static void	set_asset_paths(t_cub *cub)
 {
-	static t_camera			camera;
-	
-	camera.fov_rad = FOV;
-	camera.dir_x = cos(cub->player.angle);
-	camera.dir_y = sin(cub->player.angle);
-	camera.plane_x = -camera.dir_y * tan(camera.fov_rad / 2);
-	camera.plane_y = camera.dir_x * tan(camera.fov_rad / 2);
-	cub->camera = camera;
+	cub->img[FLOOR_TOP].path = "./Assets/2d_floor.xpm";
+	cub->img[WALL_TOP].path = "./Assets/2d_wall.xpm";
+	cub->img[PLAYER_TOP].path = "./Assets/2d_player.xpm";
+	cub->img[M_BACKGROUND].path = "./Assets/minimap2.xpm";
+	cub->img[M_LAYER].path = "./Assets/mini_layer2.xpm";
+	cub->img[M_WALL].path = "./Assets/mini_wall.xpm";
+	cub->img[M_MARIO].path = "./Assets/mini_mario.xpm";
+	cub->img[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
+	cub->img[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
+    (void)cub;
 }
 
 void	cub_initializer(t_cub *cub)
 {
 	static t_image			img[ASSET_NUMBER + IMG_NUMBER];
-	static t_map			map;
 	static t_player			player;
-	static char				*arg[6];
+	static t_camera			camera;
+	static t_map			map;
 	static t_ray			ray;
+	static char				*arg[4];
 	
 	cub->img = img;
-	cub->map = map;
 	cub->player = player;
-	cub->arg = arg;
+	cub->camera = camera;
+	cub->map = map;
 	cub->ray = ray;
+	cub->arg = arg;
 	set_mov_tool(cub);
 	set_layout(cub);
+	set_asset_paths(cub);
     (void)cub;
 }

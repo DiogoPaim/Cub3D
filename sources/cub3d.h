@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/09 17:23:00 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:16:12 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <float.h>
 # include <math.h>
 
-# define UI_SCALE 3
+# define UI_SCALE 2
 # define TRANSPARENT 16777215
 # define SIZE 64
 # define X_RES 1920
@@ -177,52 +177,53 @@ typedef struct s_cub
 }	t_cub;
 
 //MAIN
-//frame_painter.c
-unsigned int	get_color(t_image *img, int x, int y);
-void			render_map(t_cub *cub);
-void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
-void			render_image(t_cub *cub, int asset, int x, int y);
-void			paint_map_background(t_cub *cub, int asset, int width, int height);
-//main.c
-//hooks.c
-int		key_release(int keycode, t_cub *cub);
-int		key_press(int keycode, t_cub *cub);
-
-//movement.c
-int		player_movement(t_cub *cub);
-
 //initializer.c
-void	cub_initializer(t_cub *cub);
-void	init_camera(t_cub *cub);
+void			cub_initializer(t_cub *cub);
 
-//free_utils.c
-void	free_cub(t_cub *cub, int exit_code);
-void	free_split(char **split);
+//load_cub.c
+void   			load_cub(t_cub *cub);
+
+//hooks.c
+int				key_release(int keycode, t_cub *cub);
+int				key_press(int keycode, t_cub *cub);
+
+//cub_utils.c
+void			free_cub(t_cub *cub, int exit_code);
+void			free_split(char **split);
+int				game_close(t_cub *mlx, int exit_code);
 
 //PARSER
+//colors.c
+void	*proccess_color(t_cub *cub, char **split, int fd);
+//parser.c
 void	*parser(int argc, char **argv, t_cub *cub);
+
+//map_elements.c
 void	*get_map_elements(t_cub *cub, int fd);
 void	*elements_validator(t_cub *cub);
+
+//map_creator.c
 void	*get_cub_map(t_cub *cub);
+
+//map_validator.c
 void	*cub_map_validator(t_cub *cub);
-void	print_map(t_cub *cub);
-void    load_cub(t_cub *cub);
 
 //JUGGLE
 //mlx_window
-int		open_window_4k(t_cub *mlx);
-int		game_close(t_cub *mlx);
+int		open_window(t_cub *mlx);
 void	draw_map(t_cub *cub);
 void	update_player_mouse_angle(t_cub *cub);
 void	update_camera(t_cub *cub, t_camera camera);
-void	paint_back(t_cub *cub);
+
+//movement.c
+int		player_movement(t_cub *cub);
 
 //draw_sight_line
 void	draw_line_sight_based_on_angle(t_cub *cub);
 
 //dda_basic 
 double	raycast_based_on_camera(t_cub *cub, int ray_n , t_ray *ray);
-double get_distance_vector_wall(float pos_v[2], float dir_v[2], t_cub *cub,\
+double	get_distance_vector_wall(float pos_v[2], float dir_v[2], t_cub *cub,\
 	int ray_n);
 
 //dda_combo
@@ -233,4 +234,16 @@ void	alternate_barrage(t_cub *cub);
 void draw_vertical_line(t_cub *cub, int x, int line_range[2], int color);
 
 
+
+//DISPLAY
+//frame.c
+void			build_frame(t_cub *cub);
+//minimap.c
+void			render_minimap(t_cub *cub);
+
+//painting_tools.c
+unsigned int	get_color(t_image *img, int x, int y);
+void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void			put_transparent_pixel(t_image *img, int x, int y);
+void			image_to_frame(t_cub *cub, int asset, int x, int y);
 #endif
