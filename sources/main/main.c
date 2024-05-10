@@ -21,12 +21,9 @@ int	game_loop(t_cub *cub)
 		paint_back(cub);
 		player_movement(cub);
 		update_player_mouse_angle(cub);
-		//barrage_of_rays(cub);
-		alternate_barrage(cub);
+		barrage_of_rays(cub);
 		render_map(cub);
 		mlx_put_image_to_window(cub->mlx, cub->window, cub->img[FRAME].img, 0, 0);
-		//mlx_put_image_to_window(cub->mlx, cub->window, cub->img[MAP].img, 0, 0);
-		//draw_map(cub);
 		gettimeofday(&cub->time, NULL);
 		cub->last_frame = cub->time.tv_sec * 1000000 \
 		+ cub->time.tv_usec + (1000000 / FRAME_RATE);

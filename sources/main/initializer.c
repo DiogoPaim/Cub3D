@@ -46,31 +46,17 @@ void	set_layout(t_cub *cub)
 	cub->img[M_MAP].scale = UI_SCALE;
 }
 
-void	init_camera(t_cub *cub)
-{
-	static t_camera			camera;
-	
-	camera.fov_rad = FOV;
-	camera.dir_x = cos(cub->player.angle);
-	camera.dir_y = sin(cub->player.angle);
-	camera.plane_x = -camera.dir_y * tan(camera.fov_rad / 2);
-	camera.plane_y = camera.dir_x * tan(camera.fov_rad / 2);
-	cub->camera = camera;
-}
-
 void	cub_initializer(t_cub *cub)
 {
 	static t_image			img[ASSET_NUMBER + IMG_NUMBER];
 	static t_map			map;
 	static t_player			player;
 	static char				*arg[6];
-	static t_ray			ray;
 	
 	cub->img = img;
 	cub->map = map;
 	cub->player = player;
 	cub->arg = arg;
-	cub->ray = ray;
 	set_mov_tool(cub);
 	set_layout(cub);
     (void)cub;

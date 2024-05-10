@@ -80,7 +80,6 @@ void	load_cub(t_cub *cub)
 	// mlx_do_key_autorepeatoff(cub->mlx);
 	mlx_do_key_autorepeaton(cub->mlx);
 	set_up_player(cub);
-	init_camera(cub);
 	set_asset_paths(cub);
 	gettimeofday(&cub->time, NULL);
 	cub->last_frame = cub->time.tv_sec * 1000000 \

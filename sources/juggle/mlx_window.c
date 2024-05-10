@@ -56,24 +56,29 @@ void paint_back(t_cub *cub)
 	{
 		x = -1;
 		while (++x < X_RES)
+		{
 			my_mlx_pixel_put(&cub->img[FRAME], x, y, 0);
+		}
 	}
 	y--;
 	while (++y < Y_RES)
 	{
 		x = -1;
 		while (++x < X_RES)
+		{
 			my_mlx_pixel_put(&cub->img[FRAME], x, y, 16777214);
+		}
 	}
 }
 
 
-void update_camera(t_cub *cub, t_camera camera)
+void init_camera(t_cub *cub, t_camera *camera)
 {
-	camera.dir_x = cos(cub->player.angle);
-	camera.dir_y = sin(cub->player.angle);
-	camera.plane_x = -camera.dir_y * tan(camera.fov_rad / 2);
-	camera.plane_y = camera.dir_x * tan(camera.fov_rad / 2);
+	camera->fov_rad = FOV * (M_PI/180);
+	camera->dir_x = cos(cub->player.angle);
+	camera->dir_y = sin(cub->player.angle);
+	camera->plane_x = -camera->dir_y * tan(camera->fov_rad / 2);
+	camera->plane_y = camera->dir_x * tan(camera->fov_rad / 2);
 }
 
 void update_player_mouse_angle(t_cub *cub)
