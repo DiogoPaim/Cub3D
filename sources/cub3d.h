@@ -34,8 +34,8 @@
 # define UI_SCALE 3
 # define TRANSPARENT 16777215
 # define SIZE 64
-# define X_RES 1920
-# define Y_RES 1080
+# define X_RES 3840
+# define Y_RES 2000
 # define SPEED 0.05
 # define SENSITIVITY 50
 # define M_PI 3.14159265358979323846
@@ -43,6 +43,7 @@
 # define WALL_HEIGHT 50
 # define FOV 72
 # define MAP_RANGE 4
+# define PIXEL_SKIP 1
 
 # define ASSET_NUMBER 13
 # define IMG_NUMBER 3
@@ -63,8 +64,7 @@ typedef enum assets
 	M_MUSHROOM,
 	M_MAP,
 	MAP,
-	FRAME,
-	COVER
+	FRAME
 }	t_assets;
 
 
@@ -214,6 +214,7 @@ void	*get_cub_map(t_cub *cub);
 void	*cub_map_validator(t_cub *cub);
 void	print_map(t_cub *cub);
 void    load_cub(t_cub *cub);
+void	create_m_map(t_cub *cub);
 
 //JUGGLE
 //mlx_window
@@ -241,6 +242,8 @@ int get_wall_direction(t_ray *ray);
 
 //drawer
 void draw_vertical_line(t_cub *cub, int x, int line_range[2], int color);
+
+void	my_mlx_pixel_force(t_image *img, int x, int y, int color);
 
 
 #endif

@@ -47,7 +47,7 @@ static void	set_asset_paths(t_cub *cub)
     (void)cub;
 }
 
-static void create_m_map(t_cub *cub)
+void create_m_map(t_cub *cub)
 {
 	int	i;
 	int j;
@@ -55,7 +55,7 @@ static void create_m_map(t_cub *cub)
 	int	j_offset;
 	
 	j = -1;
-	paint_map_background(cub, MAP, cub->img[MAP].w, cub->img[MAP].w);
+	paint_map_background(cub, MAP, cub->img[MAP].w, cub->img[MAP].h);
 	while (++j < cub->img[MAP].h)
 	{
 		j_offset = j / 16;
@@ -96,5 +96,4 @@ void	load_cub(t_cub *cub)
 			&cub->img[i].bpp, &cub->img[i].line_length, &cub->img[i].endian);
 		cub->img[i].created = 1;
 	}
-	create_m_map(cub);
 }

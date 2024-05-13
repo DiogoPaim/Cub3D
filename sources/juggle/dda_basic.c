@@ -1,14 +1,5 @@
 #include "../cub3d.h"
 
-
-// double	calc_dist(t_cub *cub, double s_dist_xy[2], double delta_xy[2])
-// {
-// 	if(cub->ray_side_hit == 0) 
-// 		return (s_dist_xy[0] - delta_xy[0]);
-//     else
-// 		return (s_dist_xy[1] - delta_xy[1]);
-// }
-
 double calculate_dist(t_ray *ray)
 {
 	if (ray->side_hit == 0)
@@ -46,11 +37,11 @@ void	calc_delta_distance(t_ray *ray)
 	if (ray->dir_x != 0)
 		ray->delta_d_x = fabs(1 / ray->dir_x);
 	else 
-		ray->delta_d_x = INT_MAX;
+		ray->delta_d_x = X_RES;
 	if (ray->dir_y != 0)
 		ray->delta_d_y = fabs(1 / ray->dir_y);
 	else
-		ray->delta_d_y = INT_MAX;
+		ray->delta_d_y = Y_RES;
 }
 
 double	actual_dda(t_cub *cub, t_ray *ray)

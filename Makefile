@@ -1,7 +1,7 @@
 NAME= cub3D
 
 CC= cc
-CFLAGS= -g -Wall -Werror -Wextra
+CFLAGS= -Wall -Werror -Wextra -Ofast -fsanitize=address -g
 
 SRC_MA= $(addprefix sources/main/, $(SOURCES_MAIN))
 SOURCES_MAIN=	free_utils.c	\

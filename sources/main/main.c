@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 	mlx_hook(cub.window, 17, StructureNotifyMask, &game_close, &cub.mlx);
 	mlx_hook(cub.window, KeyPress, KeyPressMask, &key_press, &cub.mlx);
 	mlx_hook(cub.window, KeyRelease, KeyReleaseMask, &key_release, &cub.mlx);
+	create_m_map(&cub);
 	mlx_loop_hook(cub.mlx, game_loop, &cub);
 	mlx_loop(cub.mlx);
 	free_cub(&cub, 0);
