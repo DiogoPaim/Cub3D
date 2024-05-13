@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:17:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 12:17:03 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:23:00 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,47 +33,25 @@ static void *process_element_information(t_cub *cub, char **split, int fd)
 {
 	int	arg_nb;
 
-	if (split[1][ft_strlen(split[1])] == '\n' || split[1] == NULL)
+	if (split[1][0] == '\n' || split[1] == NULL)
 		return (printf("Error\nEmpty element\n"), close (fd), \
 			free_split(split), free_cub(cub, 2), NULL);
+	if (get_element(split[0]) >= 4)	
+		return (proccess_color(cub, split, fd, 0), NULL);
 	if (split[2] != NULL && split[2][0] != '\n')
 		return (printf("Error\nToo much information in an element\n"), \
-			close (fd), free_split(split), free_cub(cub, 2), NULL);
+			close(fd), free_split(split), free_cub(cub, 2), NULL);
 	arg_nb = get_element(split[0]);
 	if (cub->arg[arg_nb])
 		return (printf("Error\nToo many element calls\n"), \
-			close (fd), free_split(split), free_cub(cub, 2), NULL);
+			close(fd), free_split(split), free_cub(cub, 2), NULL);
 	cub->arg[arg_nb] = ft_strdup(split[1]);
 	if (!cub->arg[arg_nb])
 		return (printf("Error\nFailed to allocate memory\n"), \
-			close (fd), free_split(split), free_cub(cub, 2), NULL);
-	if (cub->arg[arg_nb][ft_strlen(cub->arg[arg_nb]) - 1] == '\n')		
+			close(fd), free_split(split), free_cub(cub, 2), NULL);
+	if (cub->arg[arg_nb][ft_strlen(cub->arg[arg_nb]) - 1] == '\n')	
 		cub->arg[arg_nb][ft_strlen(cub->arg[arg_nb]) - 1] = '\0';
 	return (NULL);
-}
-
-static void *check_for_valid_color(t_cub *cub, int i)
-{
-	char	**split;
-
-	split = ft_split(cub->arg[i], ',');
-	if (!split)
-		return (printf("Error\nThe function ft_split failed\n"), \
-			free_cub(cub, 2), NULL);
-	if (!split[0] || !split[1] || !split[2])
-		return (printf("Error\nToo few color values\n"), \
-			free_split(split), free_cub(cub, 2), NULL);
-	if (split[3] != NULL)
-		return (printf("Error\nToo many color values\n"), \
-			free_split(split), free_cub(cub, 2), NULL);
-	i = -1;
-	while (++i < 3)
-	{
-		if (ft_atoi(split[i]) > 255)
-			return (printf("Error\nInvalid color value\n"), \
-				free_split(split), free_cub(cub, 2), NULL);
-	}
-	return (free_split(split), NULL);
 }
 
 void	*get_map_elements(t_cub *cub, int fd)
@@ -111,7 +89,7 @@ void	*elements_validator(t_cub *cub)
 
 	i = -1;
 	fd = 0;
-	while (++i <= 5)
+	while (++i <= 3)
 	{
 		if (cub->arg[i] == NULL)
 			return (printf("Error\nThere is elements missing\n"), \
@@ -122,10 +100,9 @@ void	*elements_validator(t_cub *cub)
 			if (fd == -1)
 				return (printf("Error\nNo texture in the path given.\n"), \
 					free_cub(cub, 2), NULL);
+			cub->img[i].path = cub->arg[i];
 			close(fd);
 		}
-		else
-			check_for_valid_color(cub, i);
 	}
 	return (NULL);
 }

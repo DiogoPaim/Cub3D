@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/09 10:20:35 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:20:12 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,12 @@ void	print_map(t_cub *cub)
 	printf("SO:	%s\n", cub->arg[1]);
 	printf("WE:	%s\n", cub->arg[2]);
 	printf("EA:	%s\n", cub->arg[3]);
-	printf("F:	%s\n", cub->arg[4]);
-	printf("C:	%s\n", cub->arg[5]);
+	printf("FR:	%s\n", cub->arg[4]);
+	printf("FG:	%s\n", cub->arg[5]);
+	printf("FB:	%s\n", cub->arg[6]);
+	printf("CR:	%s\n", cub->arg[7]);
+	printf("CG:	%s\n", cub->arg[8]);
+	printf("CB:	%s\n", cub->arg[9]);
 	printf("\n=========== MAP ============\n\n");
 	while (cub->map.map[++i])
 	{
@@ -58,6 +62,29 @@ void	print_map(t_cub *cub)
 	printf("Player y:	%i\n", cub->map.player_y);
 	printf("Player facing:	%c\n", cub->map.player_dir);
 	printf("\n============================\n\n");
+}
+
+void	get_rgb(t_cub *cub)
+{
+	int	color;
+
+	cub->floor = ft_atoi(cub->arg[4]);
+//	if (cub->floor > 255)
+	color = ft_atoi(cub->arg[5]);
+//	if (color > 255)
+	cub->floor = (cub->floor << 8) + color;
+	color = ft_atoi(cub->arg[6]);
+//	if (color > 255)
+	cub->floor = (cub->floor << 8) + color;
+	printf("F: %i\n", cub->floor);
+	cub->ceiling = ft_atoi(cub->arg[7]);
+	color = ft_atoi(cub->arg[8]);
+//	if (color > 255)
+	cub->ceiling = (cub->ceiling << 8) + color;
+	color = ft_atoi(cub->arg[9]);
+//	if (color > 255)
+	cub->ceiling = (cub->ceiling << 8) + color;
+	printf("C: %i\n", cub->ceiling);
 }
 
 void	*parser(int argc, char **argv, t_cub *cub)
@@ -75,6 +102,7 @@ void	*parser(int argc, char **argv, t_cub *cub)
 			free_cub(cub, 2), NULL);
 	get_map_elements(cub, fd);
 	elements_validator(cub);
+	get_rgb(cub);
 	get_cub_map(cub);
 	cub_map_validator(cub);
 	print_map(cub);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   cub_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:23 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/08 15:49:43 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:46:35 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ static void	free_args_n_assets(t_cub *cub)
     int i;
 
     i = -1;
-	while (++i <= 5)
-		free(cub->arg[i]);
+	while (++i < 10)
+	{
+		if (cub->arg[i])
+			free(cub->arg[i]);
+	}
 	i = -1;
-    while (++i < ASSET_NUMBER + 3)
+    while (++i < ASSET_NUMBER + IMG_NUMBER)
     {
 		if (cub->img[i].created)
         	mlx_destroy_image(cub->mlx, cub->img[i].img); 
@@ -55,4 +58,14 @@ void	free_cub(t_cub *cub, int exit_code)
 	free_map(cub);
 	if (exit_code == 2)
 		exit(exit_code);
+}
+
+int	game_close(t_cub *cub, int exit_code)
+{
+	mlx_do_key_autorepeaton(cub->mlx);
+	mlx_destroy_window(cub->mlx, cub->window);
+	free_cub(cub, 0);
+	mlx_destroy_display(cub->mlx);
+	free(cub->mlx);
+	exit(exit_code);
 }

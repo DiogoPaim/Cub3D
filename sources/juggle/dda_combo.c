@@ -87,18 +87,7 @@ void	render_lines(t_ray *ray, t_cub *cub, int ray_n)
 		draw_textured_line(ray, cub,xy_text_pos,line_range);
 	}
 }
-
-
-//  double step = 1.0 * texHeight / lineHeight;
-//       // Starting texture coordinate                                                                     
-//       double texPos = (drawStart - pitch - h / 2 + lineHeight / 2) * step;
-//       for(int y = drawStart; y < drawEnd; y++)
-//       {
-//         // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow     
-//         int texY = (int)texPos & (texHeight - 1);
-//         texPos += step;
-//         Uint32 color = texture[texNum][texHeight * texY + texX];
-        
+      
 
 void	barrage_of_rays(t_cub *cub)
 {

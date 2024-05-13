@@ -99,16 +99,4 @@ void update_player_mouse_angle(t_cub *cub)
 	else if(cub->player.vis_angle < 0.0)
 		cub->player.vis_angle += 360;
 	cub->player.angle = cub->player.vis_angle * (M_PI / 180);
-	// cub->planeX = cub->planeX * cos(angle) - cub->planeY * sin(angle);
-    // cub->planeY = cub->planeX * sin(angle) + cub->planeY * cos(angle);
-}
-
-int	game_close(t_cub *cub)
-{
-	mlx_do_key_autorepeaton(cub->mlx);
-	mlx_destroy_window(cub->mlx, cub->window);
-	free_cub(cub, 0);
-	mlx_destroy_display(cub->mlx);
-	free(cub->mlx);
-	exit(0);
 }
