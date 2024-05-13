@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/10 17:11:40 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:45:55 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	cub_initializer(t_cub *cub)
 	static t_camera			camera;
 	static t_map			map;
 	static t_ray			ray;
-	static char				*arg[4];
+	static char				*arg[10];
 	
 	cub->img = img;
 	cub->player = player;

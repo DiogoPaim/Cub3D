@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/10 17:16:12 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:09:57 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,8 @@ typedef struct s_cub
 	struct timeval		time;
 	t_player			player;
 	char				**arg;
+	int 				floor;
+	int					ceiling;
 	t_ray				ray;
 	t_camera			camera;
 }	t_cub;
@@ -194,7 +196,8 @@ int				game_close(t_cub *mlx, int exit_code);
 
 //PARSER
 //colors.c
-void	*proccess_color(t_cub *cub, char **split, int fd);
+void	*proccess_color(t_cub *cub, char **split, int fd, int i);
+
 //parser.c
 void	*parser(int argc, char **argv, t_cub *cub);
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   cub_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:23 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/10 15:15:38 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:46:35 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ static void	free_args_n_assets(t_cub *cub)
     int i;
 
     i = -1;
-	while (++i <= 5)
-		free(cub->arg[i]);
+	while (++i < 10)
+	{
+		if (cub->arg[i])
+			free(cub->arg[i]);
+	}
 	i = -1;
-    while (++i < ASSET_NUMBER + 3)
+    while (++i < ASSET_NUMBER + IMG_NUMBER)
     {
 		if (cub->img[i].created)
         	mlx_destroy_image(cub->mlx, cub->img[i].img); 
