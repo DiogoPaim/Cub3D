@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:48:46 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/10 15:58:33 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:44:44 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	put_transparent_pixel(t_image *img, int x, int y)
 	*(unsigned int *)dst = color;
 }
 
-void	image_to_frame(t_cub *cub, int asset, int x, int y)
+void	image_to_frame(t_cub *cub, t_image image, int x, int y)
 {
 	int		x_pos;
 	int		y_pos;
@@ -56,16 +56,16 @@ void	image_to_frame(t_cub *cub, int asset, int x, int y)
 
 	x_pos = x;
 	y_pos = y;
-	scale = cub->img[asset].scale;
+	scale = image.scale;
 	if(!scale)
 		scale = 1;
-	while (y < y_pos + (cub->img[asset].h * scale) && y < Y_RES)
+	while (y < y_pos + (image.h * scale) && y < Y_RES)
 	{
 		x = x_pos;
-		while (x < x_pos + (cub->img[asset].w * scale) && y < X_RES)
+		while (x < x_pos + (image.w * scale) && y < X_RES)
 		{
 			my_mlx_pixel_put(&cub->img[FRAME], x, y, \
-			get_color(&cub->img[asset], (x - x_pos) / scale, \
+			get_color(&image, (x - x_pos) / scale, \
 			(y - y_pos) / scale));
 			x++;
 		}

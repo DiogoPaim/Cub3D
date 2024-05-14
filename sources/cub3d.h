@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/13 17:09:57 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:37:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,22 @@
 # include <float.h>
 # include <math.h>
 
-# define UI_SCALE 2
+# define UI_SCALE 3
 # define TRANSPARENT 16777215
 # define SIZE 64
-# define X_RES 3840
-# define Y_RES 2000
+# define X_RES 1920
+# define Y_RES 1080
 # define SPEED 0.05
 # define SENSITIVITY 50
 # define M_PI 3.14159265358979323846
-# define FRAME_RATE 160
+# define FRAME_RATE 60
 # define WALL_HEIGHT 50
 # define FOV 72
 # define MAP_RANGE 4
-# define PIXEL_SKIP 1
+# define PIXEL_SKIP 0
+# define HAND_SIZE 14
 
-# define ASSET_NUMBER 13
+# define ASSET_NUMBER 18
 # define IMG_NUMBER 3
 typedef enum assets
 {
@@ -62,6 +63,11 @@ typedef enum assets
 	M_MARIO,
 	M_GOOMBA,
 	M_MUSHROOM,
+	HAND1,
+	HAND2,
+	HAND3,
+	HAND4,
+	HAND5,
 	M_MAP,
 	MAP,
 	FRAME
@@ -99,6 +105,8 @@ typedef struct s_layout
 	int		map_y;
 	int		mario_x;
 	int		mario_y;
+	int		hand_x;
+	int		hand_y;
 }	t_layout;
 
 typedef struct s_image
@@ -115,8 +123,11 @@ typedef struct s_image
 	int		created;
 }	t_image;
 
+
 typedef struct s_player
 {
+	int				shooting;
+	t_image			hand;
 	int				y_mov;
 	int				x_mov;
 	int				mov_tool[3][3];
@@ -191,11 +202,13 @@ typedef struct s_cub
 void			cub_initializer(t_cub *cub);
 
 //load_cub.c
-void   			load_cub(t_cub *cub);
+void			create_mini_map(t_cub *cub);
+void			load_cub(t_cub *cub);
 
 //hooks.c
 int				key_release(int keycode, t_cub *cub);
 int				key_press(int keycode, t_cub *cub);
+int				mouse_press(int keycode, int x, int y, t_cub *cub);
 
 //cub_utils.c
 void			free_cub(t_cub *cub, int exit_code);
@@ -229,7 +242,6 @@ int		open_window(t_cub *mlx);
 void	draw_map(t_cub *cub);
 void	update_player_mouse_angle(t_cub *cub);
 void	init_camera(t_cub *cub, t_camera *camera);
-void	paint_back(t_cub *cub);
 
 //movement.c
 int		player_movement(t_cub *cub);
@@ -265,5 +277,5 @@ void			render_minimap(t_cub *cub);
 unsigned int	get_color(t_image *img, int x, int y);
 void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void			put_transparent_pixel(t_image *img, int x, int y);
-void			image_to_frame(t_cub *cub, int asset, int x, int y);
+void			image_to_frame(t_cub *cub, t_image image, int x, int y);
 #endif

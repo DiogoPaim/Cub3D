@@ -35,6 +35,24 @@ int coordinate_x_text(t_cub *cub, t_ray *ray, double wall_x)
 		tex_x = cub->img[ray->dir_wall].w - tex_x - 1;
 	return tex_x;
 }
+void	render_limits(t_cub *cub, int x, int c_pos, int f_pos)
+{
+	int	i;
+
+	i = 0;
+	while (i <= c_pos)
+	{
+		my_mlx_pixel_force(&cub->img[FRAME], x, i, cub->ceiling);
+		i += 1 + 1 * PIXEL_SKIP;
+	}
+	i = f_pos;
+	while (i < Y_RES)
+	{
+		my_mlx_pixel_force(&cub->img[FRAME], x, i, cub->floor);
+		i += 1 + 1 * PIXEL_SKIP;
+	}
+}
+
 void	draw_textured_line(t_ray *ray, t_cub *cub, double xy_pos_arr[3], int l_r[2])
 {
 	
@@ -44,6 +62,7 @@ void	draw_textured_line(t_ray *ray, t_cub *cub, double xy_pos_arr[3], int l_r[2]
 	int				y;
 	double			step;
 
+	render_limits(cub, xy_pos_arr[2], l_r[0], l_r[1]);
 	normalized = ((int) l_r[0] / (1 + PIXEL_SKIP)) * (1 + PIXEL_SKIP);
 	i = 0;
 	step = 1.0 * cub->img[ray->dir_wall].h / (l_r[1] - l_r[0]);
@@ -62,6 +81,7 @@ void	draw_textured_line(t_ray *ray, t_cub *cub, double xy_pos_arr[3], int l_r[2]
 		i += (1);
 	}
 }
+
 
 void	render_lines(t_ray *ray, t_cub *cub, int ray_n)
 {

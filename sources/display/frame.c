@@ -6,37 +6,36 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 16:19:08 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/10 16:28:08 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/14 14:01:19 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../cub3d.h"
 
-static void paint_back(t_cub *cub)
+void	render_weapon(t_cub *cub)
 {
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < Y_RES / 2)
+	if (cub->player.shooting)
+		cub->player.shooting++;
+	if (cub->player.shooting == (FRAME_RATE / 20))
+		cub->player.hand = cub->img[HAND2];
+	else if (cub->player.shooting == (FRAME_RATE / 20) * 2)
+		cub->player.hand = cub->img[HAND3];
+	else if (cub->player.shooting == (FRAME_RATE / 20) * 3)
+		cub->player.hand = cub->img[HAND4];
+	else if (cub->player.shooting == (FRAME_RATE / 20) * 4)
+		cub->player.hand = cub->img[HAND5];
+	else if (cub->player.shooting == (FRAME_RATE / 20) * 6)
 	{
-		x = -1;
-		while (++x < X_RES)
-			my_mlx_pixel_put(&cub->img[FRAME], x, y, 0);
+		cub->player.hand = cub->img[HAND1];
+		cub->player.shooting = 0;
 	}
-	y--;
-	while (++y < Y_RES)
-	{
-		x = -1;
-		while (++x < X_RES)
-			my_mlx_pixel_put(&cub->img[FRAME], x, y, 16777214);
-	}
+	image_to_frame(cub, cub->player.hand, cub->layout.hand_x, cub->layout.hand_y);
 }
 
 void	build_frame(t_cub *cub)
 {
-	paint_back(cub);
 	barrage_of_rays(cub);
 	render_minimap(cub);
+	render_weapon(cub);
 	mlx_put_image_to_window(cub->mlx, cub->window, cub->img[FRAME].img, 0, 0);
 }

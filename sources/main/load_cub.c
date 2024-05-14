@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/10 15:45:29 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:42:51 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	paint_map_background(t_cub *cub, int asset, int width, int height)
 	}
 }
 
-static void create_mini_map(t_cub *cub)
+void create_mini_map(t_cub *cub)
 {
 	int	i;
 	int j;
@@ -77,8 +77,6 @@ void	load_cub(t_cub *cub)
 	int	i;
 
 	cub->mlx = mlx_init();
-	set_up_player(cub);
-	set_asset_paths(cub);
 	gettimeofday(&cub->time, NULL);
 	cub->last_frame = cub->time.tv_sec * 1000000 \
 		+ cub->time.tv_usec;

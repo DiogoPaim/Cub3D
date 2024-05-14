@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/13 15:45:55 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:27:37 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	set_layout(t_cub *cub)
 	cub->layout.map_y = cub->layout.border_size;
 	cub->layout.mario_x = (128) / 2 - (16/2);
 	cub->layout.mario_y = (128) / 2 - (16/2);
+	cub->layout.hand_x = X_RES / 2 - (32 * HAND_SIZE) / 2; 
+	cub->layout.hand_y = Y_RES - (32 * HAND_SIZE);
 	cub->img[M_BACKGROUND].scale = 1;
 	cub->img[M_LAYER].scale = 1;
 	cub->img[M_MAP].w = cub->layout.map_size;
@@ -41,6 +43,11 @@ static void	set_layout(t_cub *cub)
 	cub->img[M_MAP].scale = UI_SCALE;
 	cub->img[FRAME].w = X_RES;
 	cub->img[FRAME].h = Y_RES;
+	cub->img[HAND1].scale = HAND_SIZE;
+	cub->img[HAND2].scale = HAND_SIZE;
+	cub->img[HAND3].scale = HAND_SIZE;
+	cub->img[HAND4].scale = HAND_SIZE;
+	cub->img[HAND5].scale = HAND_SIZE;
 }
 
 static void	set_asset_paths(t_cub *cub)
@@ -54,6 +61,11 @@ static void	set_asset_paths(t_cub *cub)
 	cub->img[M_MARIO].path = "./Assets/mini_mario.xpm";
 	cub->img[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
 	cub->img[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
+	cub->img[HAND1].path = "./Assets/hand1.xpm";
+	cub->img[HAND2].path = "./Assets/hand2.xpm";
+	cub->img[HAND3].path = "./Assets/hand3.xpm";
+	cub->img[HAND4].path = "./Assets/hand4.xpm";
+	cub->img[HAND5].path = "./Assets/hand5.xpm";
     (void)cub;
 }
 
