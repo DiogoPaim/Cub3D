@@ -45,6 +45,7 @@
 # define MAP_RANGE 4
 # define PIXEL_SKIP 1
 # define HAND_SIZE 14
+# define FAT 0.3
 
 # define ASSET_NUMBER 18
 # define IMG_NUMBER 3
