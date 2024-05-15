@@ -12,14 +12,14 @@ int get_wall_direction(t_ray *ray)
 		return (WEST);
 }
 
-double get_wallX(t_ray *ray)
+double get_wallX(t_cub *cub, t_ray *ray)
 {
     double ans;
 
 	if (ray->side_hit == 0)
-		ans = ray->y + ray->perp_wall_dist * ray->dir_y;
+		ans = cub->player.y + ray->perp_wall_dist * ray->dir_y;
 	else
-		ans = ray->x + ray->perp_wall_dist * ray->dir_x;
+		ans = cub->player.x + ray->perp_wall_dist * ray->dir_x;
 	ans -= floor((ans));
 	return (ans);
 }
@@ -43,13 +43,13 @@ void	render_limits(t_cub *cub, int x, int c_pos, int f_pos)
 	while (i <= c_pos)
 	{
 		my_mlx_pixel_force(&cub->img[FRAME], x, i, cub->ceiling);
-		i += 1 + 1 * PIXEL_SKIP;
+		i += 1 + (1 * PIXEL_SKIP);
 	}
-	i = f_pos;
+	i = (f_pos / (1 + PIXEL_SKIP) * (1 + PIXEL_SKIP));
 	while (i < Y_RES)
 	{
 		my_mlx_pixel_force(&cub->img[FRAME], x, i, cub->floor);
-		i += 1 + 1 * PIXEL_SKIP;
+		i += 1 + (1 * PIXEL_SKIP);
 	}
 }
 
@@ -97,11 +97,7 @@ void	render_lines(t_ray *ray, t_cub *cub, int ray_n)
 		step = 1.0 * (cub->img[ray->dir_wall].h / height);
 		line_range[0] = -height / 2 + Y_RES / (2);
 		line_range[1] = height / 2 + Y_RES / (2);
-		if (line_range[0] < 0)
-			line_range[0] = 0;
-		if (line_range[1] >= Y_RES)
-			line_range[1] = Y_RES - 1;
-		xy_text_pos[0] = coordinate_x_text(cub,ray,get_wallX(ray));
+		xy_text_pos[0] = coordinate_x_text(cub,ray,get_wallX(cub, ray));
 		xy_text_pos[1] = (line_range[0] - Y_RES / 2 + height / 2) * step;
 		xy_text_pos[2] = ray_n;
 		draw_textured_line(ray, cub,xy_text_pos,line_range);
@@ -113,6 +109,7 @@ void	barrage_of_rays(t_cub *cub)
 {
 	t_camera	camera;
 	t_ray		ray;
+	t_ray		door_ray;
 	int			ray_n;
 
 	init_camera(cub, &camera);
@@ -124,6 +121,13 @@ void	barrage_of_rays(t_cub *cub)
 		calculate_ray_steps(&ray, cub);
 		ray.perp_wall_dist = actual_dda(cub, &ray);
 		render_lines(&ray, cub, ray_n);
+		if(ray.door_hit)
+		{
+			initialize_ray(cub, &door_ray, ray_n, &camera);
+			calc_delta_distance(&door_ray);
+			calculate_ray_steps(&door_ray, cub);
+			door_ray.perp_wall_dist = actual_dda(cub, &door_ray);
+		}
 		ray_n += 1 + PIXEL_SKIP;
 	}
 }

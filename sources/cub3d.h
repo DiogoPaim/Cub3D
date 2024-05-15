@@ -34,8 +34,8 @@
 # define UI_SCALE 3
 # define TRANSPARENT 16777215
 # define SIZE 64
-# define X_RES 1920
-# define Y_RES 1080
+# define X_RES 3820
+# define Y_RES 2000
 # define SPEED 0.05
 # define SENSITIVITY 50
 # define M_PI 3.14159265358979323846
@@ -43,7 +43,7 @@
 # define WALL_HEIGHT 50
 # define FOV 72
 # define MAP_RANGE 4
-# define PIXEL_SKIP 0
+# define PIXEL_SKIP 1
 # define HAND_SIZE 14
 
 # define ASSET_NUMBER 18
@@ -179,6 +179,7 @@ typedef struct s_ray
 	int					side_hit;
 	double				perp_wall_dist;
 	int					dir_wall;
+	int					door_hit;
 }	t_ray;
 
 typedef struct s_cub

@@ -49,6 +49,7 @@ double	actual_dda(t_cub *cub, t_ray *ray)
 	int hit;
 
 	hit = 0;
+	ray->door_hit = 0;
 	while (!hit)
 	{
 		if(ray->side_d_x < ray->side_d_y)
@@ -63,8 +64,35 @@ double	actual_dda(t_cub *cub, t_ray *ray)
 			ray->y += ray->step_y;
 			ray->side_hit = WESTEAST;
 		}
-		if (cub->map.map[ray->y][ray->x] \
-		&& cub->map.map[ray->y][ray->x] == '1')
+		if(cub->map.map[ray->y][ray->x] == '2')
+			ray->door_hit = 1;
+		if (cub->map.map[ray->y][ray->x] == '1')
+			hit = 1;
+	}
+	ray->dir_wall = get_wall_direction(ray);
+	return calculate_dist(ray);
+}
+
+double	actual_dda(t_cub *cub, t_ray *ray)
+{
+	int hit;
+
+	hit = 0;
+	while (!hit)
+	{
+		if(ray->side_d_x < ray->side_d_y)
+		{
+			ray->side_d_x += ray->delta_d_x;
+			ray->x +=  ray->step_x;
+			ray->side_hit = NORTHSOUTH;
+		}
+		else
+		{
+			ray->side_d_y += ray->delta_d_y;
+			ray->y += ray->step_y;
+			ray->side_hit = WESTEAST;
+		}
+		if(cub->map.map[ray->y][ray->x] == '2')
 			hit = 1;
 	}
 	ray->dir_wall = get_wall_direction(ray);
