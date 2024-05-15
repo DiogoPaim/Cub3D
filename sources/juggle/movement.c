@@ -34,9 +34,9 @@ int player_movement(t_cub *cub)
 			sin((cub->player.mov_angle * 2 * 3.141592) / 360) * SPEED;	
 		cub->player.x = cub->player.x + \
 			cos((cub->player.mov_angle * 2 * 3.141592) / 360) * SPEED;
-		if (cub->map.map[(int)cub->player.y][(int)old_x] == '1')
+		if (cub->map.map[(int)(cub->player.y + FAT)][(int)old_x] == '1')
 			cub->player.y = old_y;
-		if (cub->map.map[(int)old_y][(int)cub->player.x] == '1')
+		if (cub->map.map[(int)old_y][(int)(cub->player.x + FAT)] == '1')
 			cub->player.x = old_x;
 	}
 	return(1);

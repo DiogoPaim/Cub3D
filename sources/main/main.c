@@ -35,15 +35,15 @@ int	main(int argc, char **argv)
 	
 	cub_initializer(&cub);
 	parser(argc, argv, &cub);
-	load_cub(&cub);
-	mlx_mouse_move(cub.mlx, cub.window, X_RES / 2, Y_RES / 2);
-	mlx_hook(cub.window, 17, StructureNotifyMask, &game_close, &cub);
-	mlx_hook(cub.window, KeyPress, KeyPressMask, &key_press, &cub);
-	mlx_hook(cub.window, KeyRelease, KeyReleaseMask, &key_release, &cub);
-	mlx_hook(cub.window, ButtonPress, ButtonPressMask, &mouse_press, &cub);
-	create_mini_map(&cub);
-	cub.player.hand = cub.img[HAND1];
-	mlx_loop_hook(cub.mlx, game_loop, &cub);
-	mlx_loop(cub.mlx);
+//	load_cub(&cub);
+//	mlx_mouse_move(cub.mlx, cub.window, X_RES / 2, Y_RES / 2);
+//	mlx_hook(cub.window, 17, StructureNotifyMask, &game_close, &cub);
+//	mlx_hook(cub.window, KeyPress, KeyPressMask, &key_press, &cub);
+//	mlx_hook(cub.window, KeyRelease, KeyReleaseMask, &key_release, &cub);
+//	mlx_hook(cub.window, ButtonPress, ButtonPressMask, &mouse_press, &cub);
+//	create_mini_map(&cub);
+//	cub.player.hand = cub.img[HAND1];
+//	mlx_loop_hook(cub.mlx, game_loop, &cub);
+//	mlx_loop(cub.mlx);
 	free_cub(&cub, 0);
 }
