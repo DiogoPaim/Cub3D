@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:39:41 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/16 17:59:57 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:22:06 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,11 @@ void	refresh_door(t_cub *cub)
 			return ;
 		else if (cub->map.map[(int)y][(int)x] == '2')
 		{
-			printf("(2)%i\n",i);
 			cub->map.map[(int)y][(int)x] = '3';
 			return ;	
 		}
 		else if (cub->map.map[(int)y][(int)x] == '3')
 		{
-			printf("(3)%i\n",i);
 			cub->map.map[(int)y][(int)x] = '2';
 			return ;
 		}
