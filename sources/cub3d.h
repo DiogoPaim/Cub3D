@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/14 17:37:42 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:09:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define UI_SCALE 3
 # define TRANSPARENT 16777215
 # define SIZE 64
-# define X_RES 3840
-# define Y_RES 2000
+# define X_RES 1920
+# define Y_RES 1080
 # define SPEED 0.05
 # define SENSITIVITY 50
 # define M_PI 3.14159265358979323846
@@ -43,7 +43,7 @@
 # define WALL_HEIGHT 50
 # define FOV 72
 # define MAP_RANGE 4
-# define PIXEL_SKIP 1
+# define PIXEL_SKIP 0
 # define HAND_SIZE 14
 # define FAT 0.25
 

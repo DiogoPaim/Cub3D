@@ -6,11 +6,42 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:39:41 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/14 12:58:07 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:11:17 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	refresh_door(t_cub *cub)
+{
+	float	x;
+	float	y;
+	int		i;
+
+	i = 0;
+	x = cub->player.x;
+	y = cub->player.y;
+	while (i <= 20)
+	{
+		y = y + sin((cub->player.vis_angle * 2 * M_PI) / 360) * 0.1;	
+		x = x + cos((cub->player.vis_angle * 2 * M_PI) / 360) * 0.1;
+		if (cub->map.map[(int)y][(int)x] == '1')
+			return ;
+		else if (cub->map.map[(int)y][(int)x] == '2')
+		{
+			printf("(2)%i\n",i);
+			cub->map.map[(int)y][(int)x] = '3';
+			return ;	
+		}
+		else if (cub->map.map[(int)y][(int)x] == '3')
+		{
+			printf("(3)%i\n",i);
+			cub->map.map[(int)y][(int)x] = '2';
+			return ;
+		}
+		i++;
+	}
+}
 
 int	key_press(int keycode, t_cub *cub)
 {
@@ -22,6 +53,8 @@ int	key_press(int keycode, t_cub *cub)
 		cub->player.y_mov++;
 	else if (keycode == RIGHT)
 		cub->player.x_mov++;
+	else if (keycode == 101)
+		refresh_door(cub);
 	return (0);
 }
 
