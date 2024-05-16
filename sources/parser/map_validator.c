@@ -49,7 +49,7 @@ static void	*check_for_invalid_neighbour(t_cub *cub, int x, int y)
 	return (NULL);
 }
 
-static void	*check_for_invalid_chars(t_cub *cub)
+void	*check_for_invalid_chars(t_cub *cub)
 {
 	int	y;
 	int	x;
@@ -83,6 +83,6 @@ void	*cub_map_validator(t_cub *cub)
 	if (!cub->map.player_dir)
 		return (printf("Error\nThere is no player spawn\n"), \
 			free_cub(cub, 2), NULL);
-	check_for_invalid_chars(cub);
+	//check_for_invalid_chars(cub);
 	return (NULL);
 }

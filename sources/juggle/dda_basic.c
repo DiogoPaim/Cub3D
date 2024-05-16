@@ -73,7 +73,7 @@ double	actual_dda(t_cub *cub, t_ray *ray)
 	return calculate_dist(ray);
 }
 
-double	actual_dda(t_cub *cub, t_ray *ray)
+double	actual_dda_door(t_cub *cub, t_ray *ray)
 {
 	int hit;
 
@@ -93,10 +93,12 @@ double	actual_dda(t_cub *cub, t_ray *ray)
 			ray->side_hit = WESTEAST;
 		}
 		if(cub->map.map[ray->y][ray->x] == '2')
+		{
 			hit = 1;
+		}
 	}
 	ray->dir_wall = get_wall_direction(ray);
-	return calculate_dist(ray);
+	return (calculate_dist(ray));
 }
 
 void	initialize_ray(t_cub *cub, t_ray *ray, int ray_n, t_camera *camera)

@@ -82,7 +82,6 @@ void	draw_textured_line(t_ray *ray, t_cub *cub, double xy_pos_arr[3], int l_r[2]
 	}
 }
 
-
 void	render_lines(t_ray *ray, t_cub *cub, int ray_n)
 {
 	int			height;
@@ -103,7 +102,55 @@ void	render_lines(t_ray *ray, t_cub *cub, int ray_n)
 		draw_textured_line(ray, cub,xy_text_pos,line_range);
 	}
 }
-      
+void	draw_textured_door(t_ray *ray, t_cub *cub, double xy_pos_arr[3], int l_r[2])
+{
+	
+	int				y_pos;
+	int				i;
+	int				normalized;
+	int				y;
+	double			step;
+
+	render_limits(cub, xy_pos_arr[2], l_r[0], l_r[1]);
+	normalized = ((int) l_r[0] / (1 + PIXEL_SKIP)) * (1 + PIXEL_SKIP);
+	i = 0;
+	step = 1.0 * cub->img[ray->dir_wall].h / (l_r[1] - l_r[0]);
+	while (normalized + i <= l_r[1])
+	{
+		y_pos = (int)xy_pos_arr[1] & (cub->img[ray->dir_wall].h - 1);
+        xy_pos_arr[1] += step;
+		if (i % (PIXEL_SKIP + 1) != 0)
+		{
+			i ++;
+			continue;
+		}
+		y = normalized + i;
+		my_mlx_pixel_put(&cub->img[FRAME], xy_pos_arr[2], y, \
+		get_color(&cub->img[DOOR], xy_pos_arr[0], y_pos));
+		i += (1);
+	}
+}
+
+ void	render_door(t_ray *ray, t_cub *cub, int ray_n)
+{
+	int			height;
+	int			line_range[2];
+	double		step;
+	double		xy_text_pos[3];
+
+	
+	if (ray->perp_wall_dist > 0)
+	{
+		height = (int)(Y_RES / ray->perp_wall_dist);
+		step = 1.0 * (cub->img[ray->dir_wall].h / height);
+		line_range[0] = -height / 2 + Y_RES / (2);
+		line_range[1] = height / 2 + Y_RES / (2);
+		xy_text_pos[0] = coordinate_x_text(cub,ray,get_wallX(cub, ray));
+		xy_text_pos[1] = (line_range[0] - Y_RES / 2 + height / 2) * step;
+		xy_text_pos[2] = ray_n;
+		draw_textured_door(ray, cub,xy_text_pos,line_range);
+	}
+}     
 
 void	barrage_of_rays(t_cub *cub)
 {
@@ -126,7 +173,8 @@ void	barrage_of_rays(t_cub *cub)
 			initialize_ray(cub, &door_ray, ray_n, &camera);
 			calc_delta_distance(&door_ray);
 			calculate_ray_steps(&door_ray, cub);
-			door_ray.perp_wall_dist = actual_dda(cub, &door_ray);
+			door_ray.perp_wall_dist = actual_dda_door(cub, &door_ray);
+			render_door(&door_ray, cub, ray_n);
 		}
 		ray_n += 1 + PIXEL_SKIP;
 	}

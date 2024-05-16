@@ -1,8 +1,8 @@
 /* XPM */
 static char * 2d_wall_xpm[] = {
 "64 64 2 1",
-" 	c #000000",
-".	c #FFFFFF",
+" 	c #0000FF",
+".	c #FFFF00",
 "                                                                ",
 "                                                                ",
 "                                                                ",

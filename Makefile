@@ -24,7 +24,6 @@ SOURCES_DISPLAY=	frame.c				\
 
 SRC_JU= $(addprefix sources/juggle/, $(SOURCES_JUGGLE))
 SOURCES_JUGGLE=		mlx_window.c		\
-					draw_2d_map.c		\
 					draw_sight_line.c	\
 					dda_basic.c			\
 					dda_combo.c			\

@@ -34,7 +34,7 @@
 # define UI_SCALE 3
 # define TRANSPARENT 16777215
 # define SIZE 64
-# define X_RES 3820
+# define X_RES 3840
 # define Y_RES 2000
 # define SPEED 0.05
 # define SENSITIVITY 50
@@ -45,7 +45,7 @@
 # define MAP_RANGE 4
 # define PIXEL_SKIP 1
 # define HAND_SIZE 14
-# define FAT 0.3
+# define FAT 0.25
 
 # define ASSET_NUMBER 18
 # define IMG_NUMBER 3
@@ -56,7 +56,6 @@ typedef enum assets
     W,
     E,
 	FLOOR_TOP,
-	WALL_TOP,
 	PLAYER_TOP,
 	M_BACKGROUND,
 	M_LAYER,
@@ -69,6 +68,7 @@ typedef enum assets
 	HAND3,
 	HAND4,
 	HAND5,
+	DOOR,
 	M_MAP,
 	MAP,
 	FRAME
@@ -257,6 +257,7 @@ void	calc_delta_distance(t_ray *ray);
 void	calculate_ray_steps(t_ray *ray, t_cub *cub);
 double	calculate_dist(t_ray *ray);
 void	initialize_ray(t_cub *cub, t_ray *ray, int ray_n, t_camera *camera);
+double	actual_dda_door(t_cub *cub, t_ray *ray);
 
 //dda_combo
 void	barrage_of_rays(t_cub *cub);
