@@ -27,6 +27,7 @@ SOURCES_JUGGLE=		mlx_window.c		\
 					draw_sight_line.c	\
 					dda_basic.c			\
 					dda_combo.c			\
+					dda_utils.c			\
 					movement.c			\
 					drawer.c
 		
