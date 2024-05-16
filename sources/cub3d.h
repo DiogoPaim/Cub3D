@@ -47,6 +47,7 @@
 # define HAND_SIZE 14
 # define FAT 0.25
 
+
 # define ASSET_NUMBER 18
 # define IMG_NUMBER 3
 typedef enum assets
@@ -124,7 +125,6 @@ typedef struct s_image
 	int		created;
 }	t_image;
 
-
 typedef struct s_player
 {
 	int				shooting;
@@ -199,6 +199,15 @@ typedef struct s_cub
 	t_ray				ray;
 }	t_cub;
 
+typedef struct s_line
+{
+	int					start;
+	int					end;
+	double				x_in_texture;
+	double				y_stepper;
+	double				x_coordinate;
+}	t_line;
+
 //MAIN
 //initializer.c
 void			cub_initializer(t_cub *cub);
@@ -219,56 +228,62 @@ int				game_close(t_cub *mlx, int exit_code);
 
 //PARSER
 //colors.c
-void	*proccess_color(t_cub *cub, char **split, int fd, int i);
+void			*proccess_color(t_cub *cub, char **split, int fd, int i);
 
 //parser.c
-void	*parser(int argc, char **argv, t_cub *cub);
+void			*parser(int argc, char **argv, t_cub *cub);
 
 //map_elements.c
-void	*get_map_elements(t_cub *cub, int fd);
-void	*elements_validator(t_cub *cub);
+void			*get_map_elements(t_cub *cub, int fd);
+void			*elements_validator(t_cub *cub);
 
 //map_creator.c
-void	*get_cub_map(t_cub *cub);
+void			*get_cub_map(t_cub *cub);
 
 //map_validator.c
-void	*cub_map_validator(t_cub *cub);
+void			*cub_map_validator(t_cub *cub);
 
-void	print_map(t_cub *cub);
-void    load_cub(t_cub *cub);
-void	create_m_map(t_cub *cub);
+void			print_map(t_cub *cub);
+void    		load_cub(t_cub *cub);
+void			create_m_map(t_cub *cub);
 
 //JUGGLE
 //mlx_window
-int		open_window(t_cub *mlx);
-void	draw_map(t_cub *cub);
-void	update_player_mouse_angle(t_cub *cub);
-void	init_camera(t_cub *cub, t_camera *camera);
+int				open_window(t_cub *mlx);
+void			draw_map(t_cub *cub);
+void			update_player_mouse_angle(t_cub *cub);
+void			init_camera(t_cub *cub, t_camera *camera);
+void paint_back(t_cub *cub);
 
 //movement.c
-void		player_movement(t_cub *cub);
+void			player_movement(t_cub *cub);
 
 //draw_sight_line
-void	draw_line_sight_based_on_angle(t_cub *cub);
+void			draw_line_sight_based_on_angle(t_cub *cub);
 
 //dda_basic 
-double	actual_dda(t_cub *cub, t_ray *ray);
-void	calc_delta_distance(t_ray *ray);
-void	calculate_ray_steps(t_ray *ray, t_cub *cub);
-double	calculate_dist(t_ray *ray);
-void	initialize_ray(t_cub *cub, t_ray *ray, int ray_n, t_camera *camera);
-double	actual_dda_door(t_cub *cub, t_ray *ray);
+double			actual_dda(t_cub *cub, t_ray *ray);
+void			calc_delta_distance(t_ray *ray);
+void			calculate_ray_steps(t_ray *ray, t_cub *cub);
+double			calculate_dist(t_ray *ray);
+void			initialize_ray(t_cub *cub, t_ray *ray, int ray_n, t_camera *camera);
 
 //dda_combo
-void	barrage_of_rays(t_cub *cub);
-int get_wall_direction(t_ray *ray);
+void			barrage_of_rays(t_cub *cub);
+int				get_wall_direction(t_ray *ray);
+double			actual_dda_door(t_cub *cub, t_ray *ray);
 
-//drawer
-void draw_vertical_line(t_cub *cub, int x, int line_range[2], int color);
+//dda_utils.c
 
-void	my_mlx_pixel_force(t_image *img, int x, int y, int color);
+double			get_wallx(t_cub *cub, t_ray *ray);
+int				coordinate_x_text(t_cub *cub, t_ray *ray, double wall_x);
+int				get_wall_direction(t_ray *ray);
 
-
+//drawer.c
+void			render_limits(t_cub *cub, int x, int c_pos, int f_pos);
+void			render_lines(t_ray *ray, t_cub *cub, int ray_n);
+void			render_door(t_ray *ray, t_cub *cub, int ray_n);
+void			draw_textured_line(t_ray *, t_cub *, t_line *, int);
 
 //DISPLAY
 //frame.c
@@ -282,4 +297,5 @@ void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void			put_transparent_pixel(t_image *img, int x, int y);
 void			image_to_frame(t_cub *cub, t_image image, int x, int y);
 void			image_to_frame_ui(t_cub *cub, t_image image, int x, int y);
+void			my_mlx_pixel_force(t_image *img, int x, int y, int color);
 #endif

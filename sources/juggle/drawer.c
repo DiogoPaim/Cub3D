@@ -1,30 +1,90 @@
 #include "../cub3d.h"
 
-void draw_vertical_line(t_cub *cub, int x, int y_range[2],int color)
+void	render_limits(t_cub *cub, int x, int c_pos, int f_pos)
 {
-	int i;
-	int y;
-	int normalized;
+	int	i;
+
+	i = 0;
+	while (i <= c_pos)
+	{
+		my_mlx_pixel_force(&cub->img[FRAME], x, i, cub->ceiling);
+		i += 1 + (1 * PIXEL_SKIP);
+	}
+	i = (f_pos / (1 + PIXEL_SKIP) * (1 + PIXEL_SKIP));
+	while (i < Y_RES)
+	{
+		my_mlx_pixel_force(&cub->img[FRAME], x, i, cub->floor);
+		i += 1 + (1 * PIXEL_SKIP);
+	}
+}
+
+void	render_lines(t_ray *ray, t_cub *cub, int ray_n)
+{
+	int			height;
+	double		step;
+	t_line		d_line;
+
 	
-	i = 0;
-	normalized = ((int) y_range[0] / (1 + PIXEL_SKIP)) * (1 + PIXEL_SKIP);
-	while (i <= normalized)
+	if (ray->perp_wall_dist > 0)
 	{
-		y = i;
-		my_mlx_pixel_force(&cub->img[FRAME], x, y, 0);
-		i += (1 + PIXEL_SKIP);
+		height = (int)(Y_RES / ray->perp_wall_dist);
+		step = 1.0 * (cub->img[ray->dir_wall].h / height);
+		d_line.start = -height / 2 + Y_RES / (2);
+		d_line.end = height / 2 + Y_RES / (2);
+		d_line.x_in_texture = coordinate_x_text(cub, ray, get_wallx(cub, ray));
+		d_line.y_stepper = (d_line.start - Y_RES / 2 + height / 2) * step;
+		d_line.x_coordinate = ray_n;
+		draw_textured_line(ray, cub, &d_line, ray->dir_wall);
 	}
-	i = 0;
-	while (normalized + i <= y_range[1])
+}
+
+void	render_door(t_ray *ray, t_cub *cub, int ray_n)
+{
+	int			height;
+	double		step;
+	t_line		d_line;
+
+	
+	if (ray->perp_wall_dist > 0)
 	{
+		height = (int)(Y_RES / ray->perp_wall_dist);
+		step = 1.0 * (cub->img[ray->dir_wall].h / height);
+		d_line.start = -height / 2 + Y_RES / (2);
+		d_line.end = height / 2 + Y_RES / (2);
+		d_line.x_in_texture = coordinate_x_text(cub, ray, get_wallx(cub, ray));
+		d_line.y_stepper = (d_line.start - Y_RES / 2 + height / 2) * step;
+		d_line.x_coordinate = ray_n;
+		draw_textured_line(ray, cub, &d_line, DOOR);
+	}
+}
+
+void	draw_textured_line(t_ray *ray, t_cub *cub, t_line *d_line, \
+	int asset_n)
+{
+	
+	int				y_in_tex;
+	int				i;
+	int				normalized;
+	int				y;
+	double			step;
+
+	render_limits(cub, d_line->x_coordinate, d_line->start, d_line->end);
+	normalized = ((int) d_line->start / (1 + PIXEL_SKIP)) * (1 + PIXEL_SKIP);
+	i = 0;
+	step = 1.0 * cub->img[ray->dir_wall].h / (d_line->end - d_line->start);
+	while (normalized + i <= d_line->end)
+	{
+		y_in_tex = (int)d_line->y_stepper & (cub->img[ray->dir_wall].h - 1);
+        d_line->y_stepper += step;
+		if (i % (PIXEL_SKIP + 1) != 0)
+		{
+			i ++;
+			continue;
+		}
 		y = normalized + i;
-		my_mlx_pixel_force(&cub->img[FRAME], x, y, color);
-		i += (1 + PIXEL_SKIP);
+		my_mlx_pixel_put(&cub->img[FRAME], d_line->x_coordinate, y, \
+		get_color(&cub->img[asset_n], d_line->x_in_texture, y_in_tex));
+		i ++;
 	}
-	while (y < Y_RES)
-	{
-		y = normalized+ i;
-		my_mlx_pixel_force(&cub->img[FRAME], x, y, 16777214);
-		i += (1 + PIXEL_SKIP);
-	}
-} 
+}
+

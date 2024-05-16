@@ -1,6 +1,6 @@
 #include "../cub3d.h"
 
-double calculate_dist(t_ray *ray)
+double	calculate_dist(t_ray *ray)
 {
 	if (ray->side_hit == 0)
 		return (ray->side_d_x - ray->delta_d_x);
@@ -10,7 +10,7 @@ double calculate_dist(t_ray *ray)
 
 void	calculate_ray_steps(t_ray *ray, t_cub *cub)
 {
-	if(ray->dir_x < 0)
+	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
 		ray->side_d_x = (cub->player.x - ray->x) * ray->delta_d_x;
@@ -20,7 +20,7 @@ void	calculate_ray_steps(t_ray *ray, t_cub *cub)
 		ray->step_x = 1;
 		ray->side_d_x = ((ray->x + 1) - cub->player.x) * ray->delta_d_x;
 	}
-	if(ray->dir_y < 0)
+	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
 		ray->side_d_y = (cub->player.y - ray->y) * ray->delta_d_y;
@@ -46,16 +46,16 @@ void	calc_delta_distance(t_ray *ray)
 
 double	actual_dda(t_cub *cub, t_ray *ray)
 {
-	int hit;
+	int	hit;
 
 	hit = 0;
 	ray->door_hit = 0;
 	while (!hit)
 	{
-		if(ray->side_d_x < ray->side_d_y)
+		if (ray->side_d_x < ray->side_d_y)
 		{
 			ray->side_d_x += ray->delta_d_x;
-			ray->x +=  ray->step_x;
+			ray->x += ray->step_x;
 			ray->side_hit = NORTHSOUTH;
 		}
 		else
@@ -64,38 +64,10 @@ double	actual_dda(t_cub *cub, t_ray *ray)
 			ray->y += ray->step_y;
 			ray->side_hit = WESTEAST;
 		}
-		if(cub->map.map[ray->y][ray->x] == '2')
+		if (cub->map.map[ray->y][ray->x] == '2')
 			ray->door_hit = 1;
 		if (cub->map.map[ray->y][ray->x] == '1')
 			hit = 1;
-	}
-	ray->dir_wall = get_wall_direction(ray);
-	return calculate_dist(ray);
-}
-
-double	actual_dda_door(t_cub *cub, t_ray *ray)
-{
-	int hit;
-
-	hit = 0;
-	while (!hit)
-	{
-		if(ray->side_d_x < ray->side_d_y)
-		{
-			ray->side_d_x += ray->delta_d_x;
-			ray->x +=  ray->step_x;
-			ray->side_hit = NORTHSOUTH;
-		}
-		else
-		{
-			ray->side_d_y += ray->delta_d_y;
-			ray->y += ray->step_y;
-			ray->side_hit = WESTEAST;
-		}
-		if(cub->map.map[ray->y][ray->x] == '2')
-		{
-			hit = 1;
-		}
 	}
 	ray->dir_wall = get_wall_direction(ray);
 	return (calculate_dist(ray));
