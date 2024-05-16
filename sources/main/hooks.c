@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:39:41 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/16 16:11:17 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:59:57 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	key_press(int keycode, t_cub *cub)
 		cub->player.y_mov++;
 	else if (keycode == RIGHT)
 		cub->player.x_mov++;
-	else if (keycode == 101)
+	else if (keycode == 101 && cub->map.map[(int)(cub->player.y)]\
+	[(int)(cub->player.x)] == '0')
 		refresh_door(cub);
 	return (0);
 }

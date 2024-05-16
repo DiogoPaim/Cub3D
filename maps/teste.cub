@@ -1,5 +1,5 @@
 
-F    255    , 255, 0 
+F    70    , 45, 0 
 NO ./textures/NO.xpm
 
 
@@ -7,7 +7,7 @@ NO ./textures/NO.xpm
 WE textures/WE.xpm
 
 
-C 255,255,255
+C  70    , 35, 0 
 SO ./textures/SO.xpm
 EA ./textures/EA.xpm
 
