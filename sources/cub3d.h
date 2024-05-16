@@ -246,7 +246,7 @@ void	update_player_mouse_angle(t_cub *cub);
 void	init_camera(t_cub *cub, t_camera *camera);
 
 //movement.c
-int		player_movement(t_cub *cub);
+void		player_movement(t_cub *cub);
 
 //draw_sight_line
 void	draw_line_sight_based_on_angle(t_cub *cub);
@@ -281,4 +281,5 @@ unsigned int	get_color(t_image *img, int x, int y);
 void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void			put_transparent_pixel(t_image *img, int x, int y);
 void			image_to_frame(t_cub *cub, t_image image, int x, int y);
+void			image_to_frame_ui(t_cub *cub, t_image image, int x, int y);
 #endif

@@ -12,7 +12,37 @@
 
 #include "../cub3d.h"
 
-int player_movement(t_cub *cub)
+int is_colliding_in_y(t_cub *cub, int old_x)
+{
+	if (cub->map.map[(int)(cub->player.y)][(int)(old_x + FAT)] == '1' \
+		|| cub->map.map[(int)(cub->player.y)][(int)(old_x - FAT)] == '1'\
+		|| cub->map.map[(int)(cub->player.y)][(int)(old_x - FAT)] == '1' \
+		|| cub->map.map[(int)(cub->player.y)][(int)(old_x + FAT)] == '1')
+		return (1);
+	if (cub->map.map[(int)(cub->player.y)][(int)(old_x + FAT)] == '2' \
+		|| cub->map.map[(int)(cub->player.y)][(int)(old_x - FAT)] == '2'\
+		|| cub->map.map[(int)(cub->player.y)][(int)(old_x - FAT)] == '2' \
+		|| cub->map.map[(int)(cub->player.y)][(int)(old_x + FAT)] == '2')
+		return (1);
+	return (0);
+}
+
+int is_colliding_in_x(t_cub *cub, int old_y)
+{
+	if (cub->map.map[(int)(old_y + FAT)][(int)(cub->player.x)] == '1' \
+		|| cub->map.map[(int)(old_y - FAT)][(int)(cub->player.x)] == '1'\
+		|| cub->map.map[(int)(old_y - FAT)][(int)(cub->player.x)] == '1' \
+		|| cub->map.map[(int)(old_y + FAT)][(int)(cub->player.x)] == '1')
+		return (1);
+	if (cub->map.map[(int)(old_y + FAT)][(int)(cub->player.x)] == '2' \
+		|| cub->map.map[(int)(old_y - FAT)][(int)(cub->player.x)] == '2'\
+		|| cub->map.map[(int)(old_y - FAT)][(int)(cub->player.x)] == '2' \
+		|| cub->map.map[(int)(old_y + FAT)][(int)(cub->player.x)] == '2')
+		return (1);
+	return (0);
+}
+
+void player_movement(t_cub *cub)
 {
 	float	old_x;
 	float	old_y;
@@ -34,10 +64,9 @@ int player_movement(t_cub *cub)
 			sin((cub->player.mov_angle * 2 * 3.141592) / 360) * SPEED;	
 		cub->player.x = cub->player.x + \
 			cos((cub->player.mov_angle * 2 * 3.141592) / 360) * SPEED;
-		if (cub->map.map[(int)(cub->player.y + FAT)][(int)old_x] == '1'|| cub->map.map[(int)(cub->player.y - FAT)][(int)old_x] == '1')
+		if (is_colliding_in_y(cub, old_x))
 			cub->player.y = old_y;
-		if (cub->map.map[(int)old_y][(int)(cub->player.x + FAT)] == '1'|| cub->map.map[(int)old_y][(int)(cub->player.x - FAT)] == '1')
+		if (is_colliding_in_x(cub, old_y))
 			cub->player.x = old_x;
 	}
-	return(1);
 }
