@@ -52,6 +52,31 @@ void	put_transparent_pixel(t_image *img, int x, int y)
 	*(unsigned int *)dst = color;
 }
 
+void	image_to_frame_ui(t_cub *cub, t_image image, int x, int y)
+{
+	int		x_pos;
+	int		y_pos;
+	int		scale;
+
+	x_pos = x;
+	y_pos = y;
+	scale = image.scale;
+	if(!scale)
+		scale = 1;
+	while (y < y_pos + (image.h * scale) && y < Y_RES)
+	{
+		x = x_pos;
+		while (x < x_pos + (image.w * scale) && y < X_RES)
+		{
+			my_mlx_pixel_put(&cub->img[FRAME], x, y, \
+			get_color(&image, (x - x_pos) / scale, \
+			(y - y_pos) / scale));
+			x += 1;
+		}
+		y += 1;
+	}
+}
+
 void	image_to_frame(t_cub *cub, t_image image, int x, int y)
 {
 	int		x_pos;
@@ -71,8 +96,8 @@ void	image_to_frame(t_cub *cub, t_image image, int x, int y)
 			my_mlx_pixel_put(&cub->img[FRAME], x, y, \
 			get_color(&image, (x - x_pos) / scale, \
 			(y - y_pos) / scale));
-			x++;
+			x += (1 + PIXEL_SKIP);
 		}
-		y++;
+		y += (1 + PIXEL_SKIP);
 	}
 }

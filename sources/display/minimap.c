@@ -114,5 +114,5 @@ void	render_minimap(t_cub *cub)
 	image_to_minimap(cub, M_MARIO, cub->layout.mario_x, cub->layout.mario_y);
 	create_transparent_frame(cub);
 	image_to_minimap(cub, M_LAYER, 0, 0);
-	image_to_frame(cub, cub->img[M_MAP], cub->layout.map_x, cub->layout.map_y);
+	image_to_frame_ui(cub, cub->img[M_MAP], cub->layout.map_x, cub->layout.map_y);
 }
