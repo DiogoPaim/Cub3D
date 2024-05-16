@@ -18,6 +18,7 @@ int	game_loop(t_cub *cub)
 	if ((cub->time.tv_sec * 1000000 + \
 	cub->time.tv_usec) > cub->last_frame)
 	{
+		//paint_back(cub);
 		player_movement(cub);
 		update_player_mouse_angle(cub);
 		build_frame(cub);

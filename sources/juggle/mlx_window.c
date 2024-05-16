@@ -51,13 +51,13 @@ void paint_back(t_cub *cub)
 	int	x;
 	int	y;
 
-	y = -1;
+	y = 0;
 	while (++y < Y_RES / 2)
 	{
-		x = -1;
+		x = 0;
 		while (++x < X_RES)
 		{
-			my_mlx_pixel_put(&cub->img[FRAME], x, y, 0);
+			my_mlx_pixel_put(&cub->img[FRAME], x ,y, 16777214/255);
 			x += PIXEL_SKIP; 
 		}
 		y += PIXEL_SKIP; 
@@ -65,10 +65,10 @@ void paint_back(t_cub *cub)
 	y--;
 	while (++y < Y_RES)
 	{
-		x = -1;
+		x = 0;
 		while (++x < X_RES)
 		{
-			my_mlx_pixel_put(&cub->img[FRAME], x, y, 16777214);
+			my_mlx_pixel_put(&cub->img[FRAME], x, y, 16777214/255);
 			x += PIXEL_SKIP; 
 		}
 		y += PIXEL_SKIP; 

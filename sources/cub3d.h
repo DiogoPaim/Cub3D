@@ -43,7 +43,7 @@
 # define WALL_HEIGHT 50
 # define FOV 72
 # define MAP_RANGE 4
-# define PIXEL_SKIP 0
+# define PIXEL_SKIP 1
 # define HAND_SIZE 14
 # define FAT 0.25
 
@@ -253,6 +253,7 @@ int				open_window(t_cub *mlx);
 void			draw_map(t_cub *cub);
 void			update_player_mouse_angle(t_cub *cub);
 void			init_camera(t_cub *cub, t_camera *camera);
+void paint_back(t_cub *cub);
 
 //movement.c
 void			player_movement(t_cub *cub);
