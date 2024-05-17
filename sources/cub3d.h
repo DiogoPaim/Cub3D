@@ -229,6 +229,7 @@ int				game_close(t_cub *mlx, int exit_code);
 //PARSER
 //colors.c
 void			*proccess_color(t_cub *cub, char **split, int fd, int i);
+int				get_rgb(t_cub *cub);
 
 //parser.c
 void			*parser(int argc, char **argv, t_cub *cub);
@@ -253,7 +254,7 @@ int				open_window(t_cub *mlx);
 void			draw_map(t_cub *cub);
 void			update_player_mouse_angle(t_cub *cub);
 void			init_camera(t_cub *cub, t_camera *camera);
-void paint_back(t_cub *cub);
+void 			paint_back(t_cub *cub);
 
 //movement.c
 void			player_movement(t_cub *cub);
@@ -279,23 +280,24 @@ double			get_wallx(t_cub *cub, t_ray *ray);
 int				coordinate_x_text(t_cub *cub, t_ray *ray, double wall_x);
 int				get_wall_direction(t_ray *ray);
 
+//DISPLAY
 //drawer.c
 void			render_limits(t_cub *cub, int x, int c_pos, int f_pos);
 void			render_lines(t_ray *ray, t_cub *cub, int ray_n);
 void			render_door(t_ray *ray, t_cub *cub, int ray_n);
 void			draw_textured_line(t_ray *, t_cub *, t_line *, int);
 
-//DISPLAY
 //frame.c
 void			build_frame(t_cub *cub);
+
 //minimap.c
 void			render_minimap(t_cub *cub);
 
 //painting_tools.c
 unsigned int	get_color(t_image *img, int x, int y);
 void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
-void			put_transparent_pixel(t_image *img, int x, int y);
+void			my_mlx_pixel_force(t_image *img, int x, int y, int color);
 void			image_to_frame(t_cub *cub, t_image image, int x, int y);
 void			image_to_frame_ui(t_cub *cub, t_image image, int x, int y);
-void			my_mlx_pixel_force(t_image *img, int x, int y, int color);
+
 #endif

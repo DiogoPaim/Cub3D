@@ -12,6 +12,14 @@
 
 #include "../cub3d.h"
 
+static int is_valid_map_element(char element)
+{
+	if (element == '0' || element == '1' || element == '\n' \
+		|| element == ' ' || element == '2')
+		return (1);
+	return (0);
+}
+
 static void	*find_player_coords(t_cub *cub)
 {
 	int	y;
@@ -44,7 +52,8 @@ static void	*find_player_coords(t_cub *cub)
 static void	*check_for_invalid_neighbour(t_cub *cub, int x, int y)
 {
 	if (x == -1 || y == -1 || !cub->map.map[y] || (cub->map.map[y][x] != -42 \
-	&& cub->map.map[y][x] != '0' && cub->map.map[y][x] != '1'))
+	&& cub->map.map[y][x] != '0' && cub->map.map[y][x] != '1' \
+	&& cub->map.map[y][x] != '2'))
 		return (printf("Error\nMap not closed\n"), free_cub(cub, 2), NULL);
 	return (NULL);
 }
@@ -61,11 +70,10 @@ void	*check_for_invalid_chars(t_cub *cub)
 		x = -1;
 		while (cub->map.map[y][++x])
 		{
-			if (cub->map.map[y][x] != '0' && cub->map.map[y][x] == '1' \
-			&& cub->map.map[y][x] != '\n' && cub->map.map[y][x] == ' ')
+			if (!is_valid_map_element(cub->map.map[y][x]))
 				return (printf("Error\nInvalid characters in the map\n"), \
 						free_cub(cub, 2), NULL);
-			else if (cub->map.map[y][x] == '0')
+			else if (cub->map.map[y][x] == '0' || cub->map.map[y][x] == '2')
 			{
 				check_for_invalid_neighbour(cub, x + 1, y);
 				check_for_invalid_neighbour(cub, x - 1, y);
@@ -83,6 +91,6 @@ void	*cub_map_validator(t_cub *cub)
 	if (!cub->map.player_dir)
 		return (printf("Error\nThere is no player spawn\n"), \
 			free_cub(cub, 2), NULL);
-	//check_for_invalid_chars(cub);
+	check_for_invalid_chars(cub);
 	return (NULL);
 }

@@ -42,7 +42,7 @@ static void	paint_map_background(t_cub *cub, int asset, int width, int height)
 	{
 		x = -1;
 		while (++x < width)
-			put_transparent_pixel(&cub->img[asset], x, y);
+			my_mlx_pixel_force(&cub->img[asset], x, y, 16777215);
 	}
 }
 

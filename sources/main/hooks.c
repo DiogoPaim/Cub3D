@@ -18,10 +18,10 @@ void	refresh_door(t_cub *cub)
 	float	y;
 	int		i;
 
-	i = 0;
+	i = -1;
 	x = cub->player.x;
 	y = cub->player.y;
-	while (i <= 20)
+	while (++i <= 20)
 	{
 		y = y + sin((cub->player.vis_angle * 2 * M_PI) / 360) * 0.1;	
 		x = x + cos((cub->player.vis_angle * 2 * M_PI) / 360) * 0.1;
@@ -37,7 +37,6 @@ void	refresh_door(t_cub *cub)
 			cub->map.map[(int)y][(int)x] = '2';
 			return ;
 		}
-		i++;
 	}
 }
 

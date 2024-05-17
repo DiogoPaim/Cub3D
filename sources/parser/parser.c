@@ -64,31 +64,6 @@ void	print_map(t_cub *cub)
 	printf("\n============================\n\n");
 }
 
-int	get_rgb(t_cub *cub)
-{
-	int	green;
-	int	blue;
-
-	if (!cub->arg[4] || !cub->arg[5] || !cub->arg[6] \
-	|| !cub->arg[7] || !cub->arg[8] || !cub->arg[9])
-		return (0);
-	cub->floor = ft_atoi(cub->arg[4]);
-	green = ft_atoi(cub->arg[5]);
-	blue = ft_atoi(cub->arg[6]);
-	if (cub->floor > 255 || green > 255 || blue > 255)
-		return (0);
-	cub->floor = (cub->floor << 8) + green;
-	cub->floor = (cub->floor << 8) + blue;
-	cub->ceiling = ft_atoi(cub->arg[7]);
-	green = ft_atoi(cub->arg[8]);
-	blue = ft_atoi(cub->arg[9]);
-	if (cub->ceiling > 255 || green > 255 || blue > 255)
-		return (0);
-	cub->ceiling = (cub->ceiling << 8) + green;
-	cub->ceiling = (cub->ceiling << 8) + blue;
-	return (1);
-}
-
 void	*parser(int argc, char **argv, t_cub *cub)
 {
 	int	fd;

@@ -20,7 +20,8 @@ SOURCES_PARSER=	parser.c		\
 SRC_DI= $(addprefix sources/display/, $(SOURCES_DISPLAY))
 SOURCES_DISPLAY=	frame.c				\
 					minimap.c			\
-					painting_tools.c
+					painting_tools.c	\
+					drawer.c
 
 SRC_JU= $(addprefix sources/juggle/, $(SOURCES_JUGGLE))
 SOURCES_JUGGLE=		mlx_window.c		\

@@ -52,7 +52,7 @@ static void	create_transparent_frame(t_cub *cub)
 		while (++x < 128)
 		{
 			if ((x < 6 || x > 122) || (y < 6 || y > 122))
-				put_transparent_pixel(&cub->img[M_MAP], x, y);
+				my_mlx_pixel_force(&cub->img[M_MAP], x, y, 16777215);
 		}
 	}
 }

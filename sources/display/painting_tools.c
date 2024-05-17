@@ -42,16 +42,6 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	put_transparent_pixel(t_image *img, int x, int y)
-{
-	char	*dst;
-	int		color;
-
-	color = 16777215;
-	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
 void	image_to_frame_ui(t_cub *cub, t_image image, int x, int y)
 {
 	int		x_pos;
