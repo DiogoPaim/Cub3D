@@ -28,8 +28,7 @@ SOURCES_JUGGLE=		mlx_window.c		\
 					dda_basic.c			\
 					dda_combo.c			\
 					dda_utils.c			\
-					movement.c			\
-					drawer.c
+					movement.c
 		
 OBJ_DIR= objects
 OBJ=	$(addprefix $(OBJ_DIR)/, $(SRC_MA:sources/main/%.c=%.o)) \

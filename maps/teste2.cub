@@ -1,15 +1,15 @@
 
 F    255    , 255, 0 
-NO ./textures/NO.xpm
+NO ./Assets/pineapple_wall.xpm
 
 
 
-WE textures/WE.xpm
+WE ./Assets/castle_wall.xpm
 
 
 C 255,255,255
-SO ./textures/SO.xpm
-EA ./textures/EA.xpm
+SO ./Assets/snow_wall.xpm
+EA ./Assets/grass_wall.xpm
 
 111111111111111
 1001000010000001

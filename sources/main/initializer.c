@@ -53,7 +53,7 @@ static void	set_layout(t_cub *cub)
 static void	set_asset_paths(t_cub *cub)
 {
 	cub->img[FLOOR_TOP].path = "./Assets/2d_floor.xpm";
-	cub->img[DOOR].path = "./Assets/2d_wall.xpm";
+	cub->img[DOOR].path = "./Assets/door.xpm";
 	cub->img[PLAYER_TOP].path = "./Assets/2d_player.xpm";
 	cub->img[M_BACKGROUND].path = "./Assets/minimap2.xpm";
 	cub->img[M_LAYER].path = "./Assets/mini_layer2.xpm";
