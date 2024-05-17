@@ -1,0 +1,17 @@
+F    255    , 255, 0 
+NO ./Assets/pineapple_wall.xpm
+
+
+
+WE ./Assets/castle_wall.xpm
+
+
+C 255,255,255
+SO ./Assets/snow_wall.xpm
+EA ./Assets/grass_wall.xpm
+
+111111111
+11200001
+12N1111
+11211
+11111

@@ -24,8 +24,6 @@ void	my_mlx_pixel_force(t_image *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if(x < 0 || y < 0 || x > X_RES || y > Y_RES)
-		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
@@ -34,9 +32,17 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if(x < 0 || y < 0 || x > X_RES || y > Y_RES)
-		return ;
 	if (color == TRANSPARENT)
+		return ;
+	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+void	my_mlx_pixel_put_real(t_image *img, int x, int y, int color)
+{
+	char	*dst;
+	
+	if(x < 0 || y < 0 || x > X_RES || y > Y_RES)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;

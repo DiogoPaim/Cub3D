@@ -1,14 +1,14 @@
 
-WE ./Assets/tate_wall2.xpm
-NO ./Assets/milos_wall2.xpm
-SO ./Assets/bale_wall2.xpm
-EA ./Assets/sigma_wall2.xpm
+WE ./Assets/tate_wall_1.xpm
+NO ./Assets/milos_wall_1.xpm
+SO ./Assets/bale_wall_1.xpm
+EA ./Assets/sigma_wall_1.xpm
 
 C  0,0,0
 F  0,0,0
 
 11111
-11211
-12N21
-11211
+11011
+10N01
+11011
 11111

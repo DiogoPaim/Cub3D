@@ -206,6 +206,7 @@ typedef struct s_line
 	double				x_in_texture;
 	double				y_stepper;
 	double				x_coordinate;
+	double				height;
 }	t_line;
 
 //MAIN
@@ -296,6 +297,7 @@ void			render_minimap(t_cub *cub);
 //painting_tools.c
 unsigned int	get_color(t_image *img, int x, int y);
 void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void			my_mlx_pixel_put_real(t_image *img, int x, int y, int color);
 void			my_mlx_pixel_force(t_image *img, int x, int y, int color);
 void			image_to_frame(t_cub *cub, t_image image, int x, int y);
 void			image_to_frame_ui(t_cub *cub, t_image image, int x, int y);
