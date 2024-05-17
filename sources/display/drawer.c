@@ -72,7 +72,7 @@ void	draw_textured_line(t_ray *ray, t_cub *cub, t_line *d_line, \
 	step = 1.0 * cub->img[ray->dir_wall].h / d_line->height;
 	while (normalized + i <= d_line->end)
 	{
-		y_in_tex = (int)d_line->y_stepper & (cub->img[ray->dir_wall].h - 1);
+		y_in_tex = (int)d_line->y_stepper;
         d_line->y_stepper += step;
 		if (i % (PIXEL_SKIP + 1) != 0)
 		{
