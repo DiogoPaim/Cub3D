@@ -62,6 +62,8 @@ void create_mini_map(t_cub *cub)
 		while (++i < cub->img[MAP].w)
 		{
 			i_offset = i / 16;
+			if (cub->map.map[j_offset][i_offset] == '\0')
+				break ;
 			if (cub->map.map[j_offset][i_offset] == '1')
 				my_mlx_pixel_put(&cub->img[MAP], i, j, \
 				get_color(&cub->img[M_WALL], (i - i_offset * 16)\

@@ -12,15 +12,15 @@ double	get_wallx(t_cub *cub, t_ray *ray)
 	return (ans);
 }
 
-int	coordinate_x_text(t_cub *cub, t_ray *ray, double wall_x)
+int	coordinate_x_text(t_cub *cub, t_ray *ray, double wall_x, int asset_n)
 {
 	int	tex_x;
 
-	tex_x = (int)(wall_x * (double) cub->img[ray->dir_wall].w);
+	tex_x = (int)(wall_x * (double) cub->img[asset_n].w);
 	if (ray->side_hit == 0 && ray->dir_x > 0)
-		tex_x = cub->img[ray->dir_wall].w - tex_x - 1;
+		tex_x = cub->img[asset_n].w - tex_x - 1;
 	if (ray->side_hit == 1 && ray->dir_y < 0)
-		tex_x = cub->img[ray->dir_wall].w - tex_x - 1;
+		tex_x = cub->img[asset_n].w - tex_x - 1;
 	return (tex_x);
 }
 

@@ -278,7 +278,7 @@ double			actual_dda_door(t_cub *cub, t_ray *ray);
 //dda_utils.c
 
 double			get_wallx(t_cub *cub, t_ray *ray);
-int				coordinate_x_text(t_cub *cub, t_ray *ray, double wall_x);
+int				coordinate_x_text(t_cub *cub, t_ray *ray, double wall_x, int asset_n);
 int				get_wall_direction(t_ray *ray);
 
 //DISPLAY
@@ -286,7 +286,7 @@ int				get_wall_direction(t_ray *ray);
 void			render_limits(t_cub *cub, int x, int c_pos, int f_pos);
 void			render_lines(t_ray *ray, t_cub *cub, int ray_n);
 void			render_door(t_ray *ray, t_cub *cub, int ray_n);
-void			draw_textured_line(t_ray *, t_cub *, t_line *, int);
+void			draw_textured_line(t_cub *, t_line *, int);
 
 //frame.c
 void			build_frame(t_cub *cub);
