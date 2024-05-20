@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 08:40:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2023/10/24 09:00:10 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:55:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	main()
 	lst3->next = lst4;
 	lst4->next = NULL;
 
-	while(list)
+	while (list)
 	{
 		printf("%s\n", ((char *)(list->content)));
 		list = list->next;
 	}
 	list = head;
 	ft_lstiter(list,(void *)ft_changer);
-	while(list)
+	while (list)
 	{
 		printf("%s\n", ((char *)(list->content)));
 		list = list->next;

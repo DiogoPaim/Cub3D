@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:48:46 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/14 11:44:44 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:40:55 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,6 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	my_mlx_pixel_put_real(t_image *img, int x, int y, int color)
-{
-	char	*dst;
-	
-	if(x < 0 || y < 0 || x > X_RES || y > Y_RES)
-		return ;
-	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
 void	image_to_frame_ui(t_cub *cub, t_image image, int x, int y)
 {
 	int		x_pos;
@@ -57,7 +47,7 @@ void	image_to_frame_ui(t_cub *cub, t_image image, int x, int y)
 	x_pos = x;
 	y_pos = y;
 	scale = image.scale;
-	if(!scale)
+	if (!scale)
 		scale = 1;
 	while (y < y_pos + (image.h * scale) && y < Y_RES)
 	{
@@ -82,7 +72,7 @@ void	image_to_frame(t_cub *cub, t_image image, int x, int y)
 	x_pos = x;
 	y_pos = y;
 	scale = image.scale;
-	if(!scale)
+	if (!scale)
 		scale = 1;
 	while (y < y_pos + (image.h * scale) && y < Y_RES)
 	{

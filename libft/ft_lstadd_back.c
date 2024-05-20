@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 09:05:23 by tjorge-d          #+#    #+#             */
-/*   Updated: 2023/10/23 16:55:21 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:55:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	lst2->next = lst3;
 	lst3->next = NULL;
 	t_list	*lst4 = ft_lstnew(ft_strdup("Listas"));
-	while(list)
+	while (list)
 	{
 		printf("%s\n", ((char *)(list->content)));
 		list = list->next;
@@ -56,7 +56,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	list = lst1;
 	ft_lstadd_back(&list, lst4);
 	list = lst1;
-	while(list)
+	while (list)
 	{
 		printf("%s\n", ((char *)(list->content)));
 		list = list->next;

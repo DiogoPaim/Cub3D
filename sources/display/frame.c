@@ -6,11 +6,11 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 16:19:08 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/14 14:01:19 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:33:13 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub3d.h"
+#include "../cub3d.h"
 
 void	render_weapon(t_cub *cub)
 {
@@ -29,7 +29,8 @@ void	render_weapon(t_cub *cub)
 		cub->player.hand = cub->img[HAND1];
 		cub->player.shooting = 0;
 	}
-	image_to_frame(cub, cub->player.hand, cub->layout.hand_x, cub->layout.hand_y);
+	image_to_frame(cub, cub->player.hand, \
+		cub->layout.hand_x, cub->layout.hand_y);
 }
 
 void	build_frame(t_cub *cub)

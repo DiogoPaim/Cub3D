@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/16 18:34:51 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:00:12 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	print_map(t_cub *cub)
 	{
 		printf("%s\n", cub->map.map[i]);
 	}
-	printf("\nWidth: %i\nLenght: %i\n",cub->map.w, cub->map.h);
+	printf("\nWidth: %i\nLenght: %i\n", cub->map.w, cub->map.h);
 	printf("\n========== PLAYER ==========\n\n");
 	printf("Player x:	%i\n", cub->map.player_x);
 	printf("Player y:	%i\n", cub->map.player_y);

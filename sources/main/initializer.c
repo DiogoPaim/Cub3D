@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/14 17:27:37 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:14:30 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	set_layout(t_cub *cub)
 	cub->layout.map_x = X_RES - cub->layout.border_size \
 		- cub->layout.map_size * UI_SCALE;
 	cub->layout.map_y = cub->layout.border_size;
-	cub->layout.mario_x = (128) / 2 - (16/2);
-	cub->layout.mario_y = (128) / 2 - (16/2);
+	cub->layout.mario_x = (128) / 2 - (16 / 2);
+	cub->layout.mario_y = (128) / 2 - (16 / 2);
 	cub->layout.hand_x = X_RES / 2 - (32 * HAND_SIZE) / 2; 
 	cub->layout.hand_y = Y_RES - (32 * HAND_SIZE);
 	cub->img[M_BACKGROUND].scale = 1;
@@ -66,7 +66,7 @@ static void	set_asset_paths(t_cub *cub)
 	cub->img[HAND3].path = "./Assets/hand3.xpm";
 	cub->img[HAND4].path = "./Assets/hand4.xpm";
 	cub->img[HAND5].path = "./Assets/hand5.xpm";
-    (void)cub;
+	(void)cub;
 }
 
 void	cub_initializer(t_cub *cub)
@@ -75,7 +75,7 @@ void	cub_initializer(t_cub *cub)
 	static t_player			player;
 	static t_map			map;
 	static char				*arg[10];
-	
+
 	cub->img = img;
 	cub->player = player;
 	cub->map = map;
@@ -83,5 +83,5 @@ void	cub_initializer(t_cub *cub)
 	set_mov_tool(cub);
 	set_layout(cub);
 	set_asset_paths(cub);
-    (void)cub;
+	(void)cub;
 }

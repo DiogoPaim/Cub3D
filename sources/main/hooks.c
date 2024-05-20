@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:39:41 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/16 18:22:06 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:13:24 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	refresh_door(t_cub *cub)
 	y = cub->player.y;
 	while (++i <= 20)
 	{
-		y = y + sin((cub->player.vis_angle * 2 * M_PI) / 360) * 0.1;	
+		y = y + sin((cub->player.vis_angle * 2 * M_PI) / 360) * 0.1;
 		x = x + cos((cub->player.vis_angle * 2 * M_PI) / 360) * 0.1;
 		if (cub->map.map[(int)y][(int)x] == '1')
 			return ;
 		else if (cub->map.map[(int)y][(int)x] == '2')
 		{
 			cub->map.map[(int)y][(int)x] = '3';
-			return ;	
+			return ;
 		}
 		else if (cub->map.map[(int)y][(int)x] == '3')
 		{
@@ -50,8 +50,8 @@ int	key_press(int keycode, t_cub *cub)
 		cub->player.y_mov++;
 	else if (keycode == RIGHT)
 		cub->player.x_mov++;
-	else if (keycode == 101 && cub->map.map[(int)(cub->player.y)]\
-	[(int)(cub->player.x)] == '0')
+	else if (keycode == 101 && \
+		cub->map.map[(int)(cub->player.y)][(int)(cub->player.x)] == '0')
 		refresh_door(cub);
 	return (0);
 }
@@ -75,7 +75,7 @@ int	mouse_press(int keycode, int x, int y, t_cub *cub)
 {
 	(void)x;
 	(void)y;
-	if(!cub->player.shooting && keycode == 1)
-			cub->player.shooting = 1;
+	if (!cub->player.shooting && keycode == 1)
+		cub->player.shooting = 1;
 	return (0);
 }

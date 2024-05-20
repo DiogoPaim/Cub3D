@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 10:07:38 by tjorge-d          #+#    #+#             */
-/*   Updated: 2023/10/23 12:06:12 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:55:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	lst1->next = lst2;
 	lst2->next = lst3;
 	lst3->next = NULL;
-	while(lista)
+	while (lista)
 	{
 		printf("%s\n", ((char *)(lista->content)));
 		lista = lista->next;
@@ -41,7 +41,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	ft_lstdelone(lst3, &free);
 	lst2->next = NULL;
 	lista = lst1;
-	while(lista)
+	while (lista)
 	{
 		printf("%s\n", ((char *)(lista->content)));
 		lista = lista->next;

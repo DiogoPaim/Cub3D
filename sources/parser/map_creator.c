@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:35 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/14 15:20:52 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:52:50 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ static void	*create_map(t_cub *cub)
 	return (NULL);
 }
 
-static void *add_map_row(t_cub *cub, char *row, char **split, int fd)
+static void	*add_map_row(t_cub *cub, char *row, char **split, int fd)
 {
 	char	*temp;
 
 	temp = NULL;
 	temp = ft_strjoin(cub->map.pre_map, row);
 	if (!temp)
-		return(printf("Error\nThe function ft_strjoin failed\n"), \
+		return (printf("Error\nThe function ft_strjoin failed\n"), \
 			close(fd), free(row), free_split(split), \
 			free_cub(cub, 2), NULL);
 	free(cub->map.pre_map);
