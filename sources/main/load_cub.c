@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/20 15:18:50 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 17:22:43 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	set_up_cub(t_cub *cub)
 		+ cub->time.tv_usec;
 }
 
-static void	paint_map_background(t_cub *cub, int asset, int width, int height)
+static void	paint_background(t_cub *cub, int asset, int width, int height)
 {
 	int	x;
 	int	y;
@@ -54,7 +54,7 @@ void	create_mini_map(t_cub *cub)
 	int	j_offset;
 
 	j = -1;
-	paint_map_background(cub, MAP, cub->img[MAP].w, cub->img[MAP].h);
+	paint_background(cub, MAP, cub->img[MAP].w, cub->img[MAP].h);
 	while (++j < cub->img[MAP].h)
 	{
 		j_offset = j / 16;
@@ -64,13 +64,14 @@ void	create_mini_map(t_cub *cub)
 			i_offset = i / 16;
 			if (cub->map.map[j_offset][i_offset] == '\0')
 				break ;
-			if (cub->map.map[j_offset][i_offset] == '1')
+			if (cub->map.map[j_offset][i_offset] == '1' \
+			|| cub->map.map[j_offset][i_offset] == '2')
 				my_mlx_pixel_put(&cub->img[MAP], i, j, \
 				get_color(&cub->img[M_WALL], (i - i_offset * 16), \
 				(j - j_offset * 16)));
 		}
 	}
-	paint_map_background(cub, M_MAP, cub->layout.map_size, \
+	paint_background(cub, M_MAP, cub->layout.map_size, \
 		cub->layout.map_size);
 }
 

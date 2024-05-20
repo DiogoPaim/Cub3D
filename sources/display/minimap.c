@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:20:51 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/20 15:39:42 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 17:29:54 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,11 @@ static void	create_transparent_frame(t_cub *cub)
 	}
 }
 
-void	draw_minimap_ray(t_cub *cub, float angle)
+void	draw_minimap_ray(t_cub *cub, float angle, float x, float y)
 {
-	float	x;
-	float	y;
 	float	old_x;
 	float	old_y;
 
-	y = 64;
-	x = 64;
 	while (x > 4 && x < 124 && y > 4 && y < 124)
 	{
 		my_mlx_pixel_put(&cub->img[M_MAP], x - 1, y, 0);
@@ -77,11 +73,15 @@ void	draw_minimap_ray(t_cub *cub, float angle)
 		old_x = x;
 		y = y + sin((angle * 2 * 3.141592) / 360) * 0.5;
 		if (cub->map.map[(int)((cub->player.y + (y - 64) / 16))] \
-		[(int)((cub->player.x + (old_x - 64) / 16))] == '1')
+		[(int)((cub->player.x + (old_x - 64) / 16))] == '1' \
+		|| cub->map.map[(int)((cub->player.y + (y - 64) / 16))] \
+		[(int)((cub->player.x + (old_x - 64) / 16))] == '2')
 			return ;
 		x = x + cos((angle * 2 * 3.141592) / 360) * 0.5;
 		if (cub->map.map[(int)((cub->player.y + (old_y - 64) / 16))] \
-		[(int)((cub->player.x + (x - 64) / 16))] == '1')
+		[(int)((cub->player.x + (x - 64) / 16))] == '1' \
+		|| cub->map.map[(int)((cub->player.y + (old_y - 64) / 16))] \
+		[(int)((cub->player.x + (x - 64) / 16))] == '2')
 			return ;
 	}
 }
@@ -101,7 +101,7 @@ void	minimap_rays(t_cub *cub)
 		ray_range[1] = ray_range[1] + 360;
 	while (i < FOV)
 	{
-		draw_minimap_ray(cub, ray_range[0] + i);
+		draw_minimap_ray(cub, ray_range[0] + i, 64, 64);
 		i++;
 	}
 }

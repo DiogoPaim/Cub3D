@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/20 15:41:10 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:55:21 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
-# include "../mlx/mlx.h"
+# include "../.mlx/mlx_int.h"
+# include "../.mlx/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -27,7 +28,6 @@
 # include <errno.h>
 # include <signal.h>
 # include <limits.h>
-# include <float.h>
 
 # define UI_SCALE 3
 # define TRANSPARENT 16777215
@@ -44,24 +44,19 @@
 # define PIXEL_SKIP 0
 # define HAND_SIZE 14
 # define FAT 0.25
-
-
-# define ASSET_NUMBER 18
+# define ASSET_NUMBER 14
 # define IMG_NUMBER 3
+
 typedef enum assets
 {
 	N,
-    S,
-    W,
-    E,
-	FLOOR_TOP,
-	PLAYER_TOP,
+	S,
+	W,
+	E,
 	M_BACKGROUND,
 	M_LAYER,
 	M_WALL,
 	M_MARIO,
-	M_GOOMBA,
-	M_MUSHROOM,
 	HAND1,
 	HAND2,
 	HAND3,
@@ -73,18 +68,17 @@ typedef enum assets
 	FRAME
 }	t_assets;
 
-
 typedef enum side
 {
 	NORTHSOUTH,
-    WESTEAST
+	WESTEAST
 }	t_side;
 
 typedef enum direction
 {
 	NORTH,
 	SOUTH,
-    WEST,
+	WEST,
 	EAST
 }	t_direction;
 
@@ -192,7 +186,7 @@ typedef struct s_cub
 	struct timeval		time;
 	t_player			player;
 	char				**arg;
-	int 				floor;
+	int					floor;
 	int					ceiling;
 	t_ray				ray;
 }	t_cub;
@@ -244,47 +238,40 @@ void			*get_cub_map(t_cub *cub);
 void			*cub_map_validator(t_cub *cub);
 
 void			print_map(t_cub *cub);
-void    		load_cub(t_cub *cub);
+void			load_cub(t_cub *cub);
 void			create_m_map(t_cub *cub);
 
-//JUGGLE
-//mlx_window
-int				open_window(t_cub *mlx);
-void			draw_map(t_cub *cub);
-void			update_player_mouse_angle(t_cub *cub);
-void			init_camera(t_cub *cub, t_camera *camera);
-void 			paint_back(t_cub *cub);
+//PHYSICS
 
 //movement.c
 void			player_movement(t_cub *cub);
-
-//draw_sight_line
-void			draw_line_sight_based_on_angle(t_cub *cub);
 
 //dda_basic 
 double			actual_dda(t_cub *cub, t_ray *ray);
 void			calc_delta_distance(t_ray *ray);
 void			calculate_ray_steps(t_ray *ray, t_cub *cub);
 double			calculate_dist(t_ray *ray);
-void			initialize_ray(t_cub *cub, t_ray *ray, int ray_n, t_camera *camera);
+void			initialize_ray(t_cub *cub, t_ray *ray, int n, t_camera *cam);
 
 //dda_combo
 void			barrage_of_rays(t_cub *cub);
-int				get_wall_direction(t_ray *ray);
-double			actual_dda_door(t_cub *cub, t_ray *ray);
 
 //dda_utils.c
-
 double			get_wallx(t_cub *cub, t_ray *ray);
-int				coordinate_x_text(t_cub *cub, t_ray *ray, double wall_x, int asset_n);
+int				coordinate_x_text(t_cub *cub, t_ray *ray, double w_x, int a_n);
 int				get_wall_direction(t_ray *ray);
 
 //DISPLAY
+//mlx_window
+int				open_window(t_cub *mlx);
+void			draw_map(t_cub *cub);
+void			update_player_mouse_angle(t_cub *cub);
+void			init_camera(t_cub *cub, t_camera *camera);
+void			paint_back(t_cub *cub);
+
 //drawer.c
-void			render_limits(t_cub *cub, int x, int c_pos, int f_pos);
 void			render_lines(t_ray *ray, t_cub *cub, int ray_n);
 void			render_door(t_ray *ray, t_cub *cub, int ray_n);
-void			draw_textured_line(t_cub *, t_line *, int);
 
 //frame.c
 void			build_frame(t_cub *cub);

@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:20:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/20 15:14:30 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:42:28 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,11 @@ static void	set_layout(t_cub *cub)
 
 static void	set_asset_paths(t_cub *cub)
 {
-	cub->img[FLOOR_TOP].path = "./Assets/2d_floor.xpm";
 	cub->img[DOOR].path = "./Assets/door.xpm";
-	cub->img[PLAYER_TOP].path = "./Assets/2d_player.xpm";
 	cub->img[M_BACKGROUND].path = "./Assets/minimap2.xpm";
 	cub->img[M_LAYER].path = "./Assets/mini_layer2.xpm";
 	cub->img[M_WALL].path = "./Assets/mini_wall.xpm";
 	cub->img[M_MARIO].path = "./Assets/mini_mario.xpm";
-	cub->img[M_GOOMBA].path = "./Assets/mini_goomba.xpm";
-	cub->img[M_MUSHROOM].path = "./Assets/mini_mushroom.xpm";
 	cub->img[HAND1].path = "./Assets/hand1.xpm";
 	cub->img[HAND2].path = "./Assets/hand2.xpm";
 	cub->img[HAND3].path = "./Assets/hand3.xpm";

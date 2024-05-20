@@ -6,13 +6,35 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:39:41 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/20 15:13:24 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 17:33:03 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	refresh_door(t_cub *cub)
+void	refresh_door_asset(t_cub *cub, int mode, int x, int y)
+{
+	int	i;
+	int	j;
+
+	j = -1;
+	x = x * 16;
+	y = y * 16;
+	while (++j < 16)
+	{
+		i = -1;
+		while (++i < 16)
+		{
+			if (mode == 2)
+				my_mlx_pixel_force(&cub->img[MAP], x + i, y + j, \
+					get_color(&cub->img[M_WALL], i, j));
+			else
+				my_mlx_pixel_force(&cub->img[MAP], x + i, y + j, 16777215);
+		}
+	}
+}
+
+void	*refresh_door(t_cub *cub)
 {
 	float	x;
 	float	y;
@@ -26,18 +48,19 @@ void	refresh_door(t_cub *cub)
 		y = y + sin((cub->player.vis_angle * 2 * M_PI) / 360) * 0.1;
 		x = x + cos((cub->player.vis_angle * 2 * M_PI) / 360) * 0.1;
 		if (cub->map.map[(int)y][(int)x] == '1')
-			return ;
+			return (NULL);
 		else if (cub->map.map[(int)y][(int)x] == '2')
 		{
-			cub->map.map[(int)y][(int)x] = '3';
-			return ;
+			return (cub->map.map[(int)y][(int)x] = '3', \
+				refresh_door_asset(cub, 3, (int)x, (int)y), NULL);
 		}
 		else if (cub->map.map[(int)y][(int)x] == '3')
 		{
-			cub->map.map[(int)y][(int)x] = '2';
-			return ;
+			return (cub->map.map[(int)y][(int)x] = '2', \
+				refresh_door_asset(cub, 2, (int)x, (int)y), NULL);
 		}
 	}
+	return (NULL);
 }
 
 int	key_press(int keycode, t_cub *cub)
