@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 16:41:51 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/13 17:08:29 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:56:28 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	*commas_counter(t_cub *cub, char *arg, char **split, int fd)
 {
 	int	i;
 	int	counter;
-	
+
 	counter = 0;
 	i = -1;
 	while (arg[++i])
@@ -32,8 +32,8 @@ static void	*commas_counter(t_cub *cub, char *arg, char **split, int fd)
 
 static void	*get_color_values(t_cub *cub, char *arg, char **split, int fd)
 {
-	char **args;
-	
+	char	**args;
+
 	args = ft_split(arg, ',');
 	free(arg);
 	if (!args)
@@ -41,7 +41,7 @@ static void	*get_color_values(t_cub *cub, char *arg, char **split, int fd)
 		close(fd), free_split(split), free_cub(cub, 2), NULL);
 	if (split[0][0] == 'F')
 	{
-		if(cub->arg[4])
+		if (cub->arg[4])
 			return (printf("Error\nToo many element calls\n"), close(fd), \
 			free_split(args), free_split(split), free_cub(cub, 2), NULL);
 		cub->arg[4] = args[0];
@@ -49,7 +49,7 @@ static void	*get_color_values(t_cub *cub, char *arg, char **split, int fd)
 		cub->arg[6] = args[2];
 		return (free(args), NULL);
 	}
-	if(cub->arg[7])
+	if (cub->arg[7])
 		return (printf("Error\nToo many element calls\n"), close(fd), \
 			free_split(args), free_split(split), free_cub(cub, 2), NULL);
 	cub->arg[7] = args[0];
@@ -61,10 +61,10 @@ static void	*get_color_values(t_cub *cub, char *arg, char **split, int fd)
 static void	*check_color_values(t_cub *cub, char *arg, char **split, int fd)
 {
 	int	i;
-	
+
 	commas_counter(cub, arg, split, fd);
 	i = 0;
-	while(arg[++i])
+	while (arg[++i])
 	{
 		if (arg[i] == -42 && ft_isdigit(arg[i - 1]) && ft_isdigit(arg[i + 1]))
 			return (printf("Error\nInvalid color separation\n"), \
@@ -73,7 +73,7 @@ static void	*check_color_values(t_cub *cub, char *arg, char **split, int fd)
 			arg[i] = ',';
 	}
 	i = -1;
-	while(arg[++i])
+	while (arg[++i])
 	{
 		if (arg[i] != ',' && !ft_isdigit(arg[i]))
 			return (printf("Error\nOnly digits for the colors are allowed\n"), \
@@ -84,10 +84,10 @@ static void	*check_color_values(t_cub *cub, char *arg, char **split, int fd)
 
 void	*proccess_color(t_cub *cub, char **split, int fd, int i)
 {
-	char 		*arg;
-	char 		*temp;
-	static char forthy[2];
-	
+	char		*arg;
+	char		*temp;
+	static char	forthy[2];
+
 	forthy[0] = -42;
 	arg = NULL;
 	while (split[++i])
@@ -135,4 +135,3 @@ int	get_rgb(t_cub *cub)
 	cub->ceiling = (cub->ceiling << 8) + blue;
 	return (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:17:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/13 16:23:00 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:53:35 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static int	get_element(char *argument)
 	return (-1);
 }
 
-static void *process_element_information(t_cub *cub, char **split, int fd)
+static void	*process_element_information(t_cub *cub, char **split, int fd)
 {
 	int	arg_nb;
 
 	if (split[1][0] == '\n' || split[1] == NULL)
 		return (printf("Error\nEmpty element\n"), close (fd), \
 			free_split(split), free_cub(cub, 2), NULL);
-	if (get_element(split[0]) >= 4)	
+	if (get_element(split[0]) >= 4)
 		return (proccess_color(cub, split, fd, 0), NULL);
 	if (split[2] != NULL && split[2][0] != '\n')
 		return (printf("Error\nToo much information in an element\n"), \
@@ -49,7 +49,7 @@ static void *process_element_information(t_cub *cub, char **split, int fd)
 	if (!cub->arg[arg_nb])
 		return (printf("Error\nFailed to allocate memory\n"), \
 			close(fd), free_split(split), free_cub(cub, 2), NULL);
-	if (cub->arg[arg_nb][ft_strlen(cub->arg[arg_nb]) - 1] == '\n')	
+	if (cub->arg[arg_nb][ft_strlen(cub->arg[arg_nb]) - 1] == '\n')
 		cub->arg[arg_nb][ft_strlen(cub->arg[arg_nb]) - 1] = '\0';
 	return (NULL);
 }

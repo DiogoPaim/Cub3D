@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:10 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/14 15:19:39 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:09:54 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	game_loop(t_cub *cub)
 	if ((cub->time.tv_sec * 1000000 + \
 	cub->time.tv_usec) > cub->last_frame)
 	{
-		//paint_back(cub);
 		player_movement(cub);
 		update_player_mouse_angle(cub);
 		build_frame(cub);
@@ -28,12 +27,13 @@ int	game_loop(t_cub *cub)
 	}
 	return (1);
 }
+
 int	main(int argc, char **argv)
 {
-	(void) 			argc;
-	(void) 			argv; 
 	static t_cub	cub;
-	
+
+	(void)argv; 
+	(void)argc;
 	cub_initializer(&cub);
 	parser(argc, argv, &cub);
 	load_cub(&cub);

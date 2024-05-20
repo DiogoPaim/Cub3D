@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:06:29 by tjorge-d          #+#    #+#             */
-/*   Updated: 2023/10/23 18:53:17 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:55:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	lst3->next = lst4;
 	lst4->next = NULL;
 
-	while(list)
+	while (list)
 	{
 		printf("%s\n", ((char *)(list->content)));
 		list = list->next;
@@ -51,7 +51,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	ft_lstclear(&lst3, free);
 //	st2->next = NULL;
 	list = lst1;
-	while(list)
+	while (list)
 	{
 		printf("%s\n", ((char *)(list->content)));
 		list = list->next;

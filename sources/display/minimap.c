@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:20:51 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/14 17:30:21 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:39:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	image_to_minimap(t_cub *cub, int asset, int x, int y)
 		x = b;
 		while (x < x_pos + (cub->img[asset].w) && x < cub->img[M_MAP].w)
 		{
-			if(x >= 0 && y >= 0)
+			if (x >= 0 && y >= 0)
 				my_mlx_pixel_put(&cub->img[M_MAP], x, y, \
 				get_color(&cub->img[asset], (x - x_pos), \
 				(y - y_pos)));
@@ -63,24 +63,24 @@ void	draw_minimap_ray(t_cub *cub, float angle)
 	float	y;
 	float	old_x;
 	float	old_y;
-	
+
 	y = 64;
 	x = 64;
 	while (x > 4 && x < 124 && y > 4 && y < 124)
 	{
 		my_mlx_pixel_put(&cub->img[M_MAP], x - 1, y, 0);
-		my_mlx_pixel_put(&cub->img[M_MAP], x , y - 1, 0);
-		my_mlx_pixel_put(&cub->img[M_MAP], x + 1 , y, 0);
-		my_mlx_pixel_put(&cub->img[M_MAP], x , y + 1, 0);
-		my_mlx_pixel_put(&cub->img[M_MAP], x , y, 0);
+		my_mlx_pixel_put(&cub->img[M_MAP], x, y - 1, 0);
+		my_mlx_pixel_put(&cub->img[M_MAP], x + 1, y, 0);
+		my_mlx_pixel_put(&cub->img[M_MAP], x, y + 1, 0);
+		my_mlx_pixel_put(&cub->img[M_MAP], x, y, 0);
 		old_y = y;
 		old_x = x;
 		y = y + sin((angle * 2 * 3.141592) / 360) * 0.5;
-		if (cub->map.map[(int)((cub->player.y + (y - 64) / 16))]\
+		if (cub->map.map[(int)((cub->player.y + (y - 64) / 16))] \
 		[(int)((cub->player.x + (old_x - 64) / 16))] == '1')
 			return ;
 		x = x + cos((angle * 2 * 3.141592) / 360) * 0.5;
-		if (cub->map.map[(int)((cub->player.y + (old_y - 64) / 16))]\
+		if (cub->map.map[(int)((cub->player.y + (old_y - 64) / 16))] \
 		[(int)((cub->player.x + (x - 64) / 16))] == '1')
 			return ;
 	}
@@ -103,16 +103,18 @@ void	minimap_rays(t_cub *cub)
 	{
 		draw_minimap_ray(cub, ray_range[0] + i);
 		i++;
-	} 
+	}
 }
 
 void	render_minimap(t_cub *cub)
 {
 	image_to_minimap(cub, M_BACKGROUND, 0, 0);
 	minimap_rays(cub);
-	image_to_minimap(cub, MAP, cub->layout.mario_x + 8 - cub->player.x * 16, cub->layout.mario_y + 8 - cub->player.y * 16);
+	image_to_minimap(cub, MAP, cub->layout.mario_x + 8 - cub->player.x * 16, \
+		cub->layout.mario_y + 8 - cub->player.y * 16);
 	image_to_minimap(cub, M_MARIO, cub->layout.mario_x, cub->layout.mario_y);
 	create_transparent_frame(cub);
 	image_to_minimap(cub, M_LAYER, 0, 0);
-	image_to_frame_ui(cub, cub->img[M_MAP], cub->layout.map_x, cub->layout.map_y);
+	image_to_frame_ui(cub, cub->img[M_MAP], \
+		cub->layout.map_x, cub->layout.map_y);
 }

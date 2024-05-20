@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:00:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2023/10/24 09:36:28 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:55:42 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ int	main()
 	t_list	*lst4 = ft_lstnew(ft_strdup("Listas"));
 	lst3->next = lst4;
 	lst4->next = NULL;
-	while(list)
+	while (list)
 	{
 		printf("%s\n", ((char *)(list->content)));
 		list = list->next;
 	}
 	list = lst1;
 	new_list = ft_lstmap(list, (void *)ft_changer, free);
-	while(new_list)
+	while (new_list)
 	{
 		printf("%s\n", ((char *)(new_list->content)));
 		new_list = new_list->next;

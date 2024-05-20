@@ -6,13 +6,13 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:53 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/02 12:16:54 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:57:59 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int is_valid_map_element(char element)
+static int	is_valid_map_element(char element)
 {
 	if (element == '0' || element == '1' || element == '\n' \
 		|| element == ' ' || element == '2')

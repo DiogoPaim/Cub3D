@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/16 18:00:52 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:41:10 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,6 @@ void			render_minimap(t_cub *cub);
 //painting_tools.c
 unsigned int	get_color(t_image *img, int x, int y);
 void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
-void			my_mlx_pixel_put_real(t_image *img, int x, int y, int color);
 void			my_mlx_pixel_force(t_image *img, int x, int y, int color);
 void			image_to_frame(t_cub *cub, t_image image, int x, int y);
 void			image_to_frame_ui(t_cub *cub, t_image image, int x, int y);
