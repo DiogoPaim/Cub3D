@@ -55,7 +55,7 @@ void	draw_textured_line(t_cub *cub, t_line *d_line, \
 	step = 1.0 * cub->img[asset_n].h / d_line->height;
 	while (normalized + i < d_line->end)
 	{
-		y_in_tex = (int)d_line->y_stepper % cub->img[asset_n].h;
+		y_in_tex = (int) d_line->y_stepper % cub->img[asset_n].h;
 		d_line->y_stepper += step;
 		if (i % (PIXEL_SKIP + 1) != 0)
 		{
