@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:51:16 by dcota-pa          #+#    #+#             */
-/*   Updated: 2024/05/20 16:18:39 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:34:07 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,6 @@ int	open_window_4k(t_cub *cub)
 {
 	cub->window = mlx_new_window(cub->mlx, (int)X_RES, (int)Y_RES, "Window");
 	return (1);
-}
-
-void	paint_back(t_cub *cub)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (++y < Y_RES / 2)
-	{
-		x = 0;
-		while (++x < X_RES)
-		{
-			my_mlx_pixel_put(&cub->img[FRAME], x, y, 16777214 / 255);
-			x += PIXEL_SKIP; 
-		}
-		y += PIXEL_SKIP; 
-	}
-	y--;
-	while (++y < Y_RES)
-	{
-		x = 0;
-		while (++x < X_RES)
-		{
-			my_mlx_pixel_put(&cub->img[FRAME], x, y, 16777214 / 255);
-			x += PIXEL_SKIP; 
-		}
-		y += PIXEL_SKIP; 
-	}
 }
 
 void	init_camera(t_cub *cub, t_camera *camera)

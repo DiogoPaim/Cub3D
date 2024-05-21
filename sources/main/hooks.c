@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:39:41 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/20 17:33:03 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:11:45 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ void	refresh_door_asset(t_cub *cub, int mode, int x, int y)
 		{
 			if (mode == 2)
 				my_mlx_pixel_force(&cub->img[MAP], x + i, y + j, \
-					get_color(&cub->img[M_WALL], i, j));
+					get_color(&cub->img[M_DOOR2], i, j));
 			else
-				my_mlx_pixel_force(&cub->img[MAP], x + i, y + j, 16777215);
+				my_mlx_pixel_force(&cub->img[MAP], x + i, y + j, \
+					get_color(&cub->img[M_DOOR3], i, j));
 		}
 	}
 }

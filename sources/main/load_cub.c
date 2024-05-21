@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/20 17:22:43 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:10:09 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,22 @@ void	create_mini_map(t_cub *cub)
 {
 	int	i;
 	int	j;
-	int	i_offset;
-	int	j_offset;
 
 	j = -1;
 	paint_background(cub, MAP, cub->img[MAP].w, cub->img[MAP].h);
 	while (++j < cub->img[MAP].h)
 	{
-		j_offset = j / 16;
 		i = -1;
 		while (++i < cub->img[MAP].w)
 		{
-			i_offset = i / 16;
-			if (cub->map.map[j_offset][i_offset] == '\0')
+			if (cub->map.map[j / 16][i / 16] == '\0')
 				break ;
-			if (cub->map.map[j_offset][i_offset] == '1' \
-			|| cub->map.map[j_offset][i_offset] == '2')
+			if (cub->map.map[j / 16][i / 16] == '1')
 				my_mlx_pixel_put(&cub->img[MAP], i, j, \
-				get_color(&cub->img[M_WALL], (i - i_offset * 16), \
-				(j - j_offset * 16)));
+					get_color(&cub->img[M_WALL], (i % 16), (j % 16)));
+			else if (cub->map.map[j / 16][i / 16] == '2')
+				my_mlx_pixel_put(&cub->img[MAP], i, j, \
+					get_color(&cub->img[M_DOOR2], (i % 16), (j % 16)));
 		}
 	}
 	paint_background(cub, M_MAP, cub->layout.map_size, \
