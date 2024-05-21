@@ -16,6 +16,14 @@ unsigned int	get_color(t_image *img, int x, int y)
 {
 	char	*dst;
 
+	if ( x >= img->w)
+	{
+		x = x % img->w;
+	}
+	if (y >= img->h)
+	{
+		y = y % img->h;
+	}
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	return (*(unsigned int *)dst);
 }
