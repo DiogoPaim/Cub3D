@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/21 11:49:47 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:27:29 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@
 # define UI_SCALE 3
 # define TRANSPARENT 16777215
 # define SIZE 64
-# define X_RES 3820
-# define Y_RES 1900
+# define X_RES 1920
+# define Y_RES 1080
 # define SPEED 0.05
 # define SENSITIVITY 50
 # define M_PI 3.14159265358979323846
-# define FRAME_RATE 120
+# define FRAME_RATE 60
 # define WALL_HEIGHT 50
 # define FOV 72
 # define MAP_RANGE 4
 # define PIXEL_SKIP 0
-# define HAND_SIZE 28
+# define HAND_SIZE 14
 # define FAT 0.25
 # define ASSET_NUMBER 16
 # define IMG_NUMBER 3
@@ -191,8 +191,6 @@ typedef struct s_cub
 	int					floor;
 	int					ceiling;
 	t_ray				ray;
-	int					offset_tool[4][3];
-	int					*offset;
 }	t_cub;
 
 typedef struct s_line

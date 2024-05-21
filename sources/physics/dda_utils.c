@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:51:28 by dcota-pa          #+#    #+#             */
-/*   Updated: 2024/05/20 16:18:39 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:29:01 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	coordinate_x_text(t_cub *cub, t_ray *ray, double wall_x, int asset_n)
 int	get_wall_direction(t_ray *ray)
 {
 	if (ray->dir_y < 0 && ray->side_hit == 1)
-		return (SOUTH);
-	else if (ray->side_hit == 1)
 		return (NORTH);
+	else if (ray->side_hit == 1)
+		return (SOUTH);
 	else if (ray->dir_x > 0)
 		return (EAST);
 	else

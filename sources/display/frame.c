@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 16:19:08 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/21 11:21:09 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:27:07 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,4 @@ void	build_frame(t_cub *cub)
 	render_minimap(cub);
 	render_weapon(cub);
 	mlx_put_image_to_window(cub->mlx, cub->window, cub->img[FRAME].img, 0, 0);
-	cub->offset = cub->offset_tool[cub->offset[0]];
 }
