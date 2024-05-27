@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/21 12:27:29 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:22:50 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # include <signal.h>
 # include <limits.h>
 
+# define LEFTK 65361
+# define RIGHTK 65363
+# define TABK 65289
 # define UI_SCALE 3
 # define TRANSPARENT 16777215
 # define SIZE 64
@@ -90,7 +93,10 @@ typedef enum type
 	LEFT = 97,
 	AFT = 115,
 	RIGHT = 100,
-	ESC = 65307
+	ESC = 65307,
+	TAB = 65289,
+	LEFT_VIEW = 65361,
+	RIGHT_VIEW = 65363
 }	t_type;
 
 typedef struct s_layout
@@ -134,6 +140,7 @@ typedef struct s_player
 	float			angle;
 	float			height;
 	float			dir_v[2];
+	int				changing_view;
 }	t_player;
 
 typedef struct s_map
@@ -191,6 +198,7 @@ typedef struct s_cub
 	int					floor;
 	int					ceiling;
 	t_ray				ray;
+	int					tab;
 }	t_cub;
 
 typedef struct s_line

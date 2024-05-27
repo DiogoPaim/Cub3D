@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:02 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/21 10:35:03 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:17:23 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,5 @@ void	*parser(int argc, char **argv, t_cub *cub)
 			free_cub(cub, 2), NULL);
 	create_map(cub);
 	cub_map_validator(cub);
-	print_map(cub);
 	return (NULL);
 }

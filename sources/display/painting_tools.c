@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:48:46 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/21 12:25:39 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:25:16 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ unsigned int	get_color(t_image *img, int x, int y)
 		x = x % img->w;
 	if (y >= img->h)
 		y = y % img->h;
+	x = abs(x);
+	y = abs(y);
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	return (*(unsigned int *)dst);
 }

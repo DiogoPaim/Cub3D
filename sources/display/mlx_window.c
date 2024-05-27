@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:51:16 by dcota-pa          #+#    #+#             */
-/*   Updated: 2024/05/21 11:34:07 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:36:40 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,19 @@ void	update_player_mouse_angle(t_cub *cub)
 	int	x;
 	int	y;
 
-	mlx_mouse_get_pos(cub->mlx, cub->window, &x, &y);
-	cub->player.vis_angle += (x - X_RES / 2) / SENSITIVITY;
-	mlx_mouse_move(cub->mlx, cub->window, X_RES / 2, Y_RES / 2);
+	if (!cub->player.changing_view && !cub->tab)
+	{
+		mlx_mouse_get_pos(cub->mlx, cub->window, &x, &y);
+		cub->player.vis_angle += (x - X_RES / 2) / SENSITIVITY;
+	}
+	else 
+		cub->player.vis_angle += cub->player.changing_view * 2;
 	if (cub->player.vis_angle >= 360.0)
 		cub->player.vis_angle = cub->player.vis_angle - \
 		(360.0 / cub->player.vis_angle) * 360.0;
 	else if (cub->player.vis_angle < 0.0)
 		cub->player.vis_angle += 360;
 	cub->player.angle = cub->player.vis_angle * (M_PI / 180);
+	if (!cub->tab)
+		mlx_mouse_move(cub->mlx, cub->window, X_RES / 2, Y_RES / 2);
 }

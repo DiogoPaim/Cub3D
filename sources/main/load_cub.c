@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:16:45 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/21 10:10:09 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:17:34 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void	load_cub(t_cub *cub)
 		{
 			cub->img[i].img = mlx_xpm_file_to_image(cub->mlx, \
 				cub->img[i].path, &cub->img[i].w, &cub->img[i].h);
-			if (!cub->img[i].img)
-				game_close(cub, 2);
 		}
+		if (!cub->img[i].img)
+			game_close(cub, 2);
 		cub->img[i].addr = mlx_get_data_addr(cub->img[i].img, \
 			&cub->img[i].bpp, &cub->img[i].line_length, &cub->img[i].endian);
 		cub->img[i].created = 1;

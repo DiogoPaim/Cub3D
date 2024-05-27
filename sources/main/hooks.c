@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:39:41 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/21 10:11:45 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:36:22 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,13 @@ void	*refresh_door(t_cub *cub)
 
 int	key_press(int keycode, t_cub *cub)
 {
-	if (keycode == FORE)
+	if (keycode == TAB)
+		cub->tab++;
+	else if (keycode == LEFT_VIEW)
+		cub->player.changing_view --;
+	else if (keycode == RIGHT_VIEW)
+		cub->player.changing_view ++;
+	else if (keycode == FORE)
 		cub->player.y_mov--;
 	else if (keycode == LEFT)
 		cub->player.x_mov--;
@@ -82,9 +88,18 @@ int	key_press(int keycode, t_cub *cub)
 
 int	key_release(int keycode, t_cub *cub)
 {
-	if (keycode == ESC)
+	if (keycode == TAB)
+	{
+		cub->tab--;
+		mlx_mouse_move(cub->mlx, cub->window, X_RES / 2, Y_RES / 2);
+	}
+	else if (keycode == LEFT_VIEW)
+		cub->player.changing_view ++;
+	else if (keycode == RIGHT_VIEW)
+		cub->player.changing_view --;
+	else if (keycode == ESC)
 		game_close(cub, 2);
-	if (keycode == FORE)
+	else if (keycode == FORE)
 		cub->player.y_mov++;
 	else if (keycode == LEFT)
 		cub->player.x_mov++;
