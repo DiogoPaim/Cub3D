@@ -6,7 +6,7 @@
 /*   By: tjorge-d <tiagoscp2020@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:30:19 by tjorge-d          #+#    #+#             */
-/*   Updated: 2024/05/27 14:22:50 by tjorge-d         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:44:56 by tjorge-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
-
 # include "../.mlx/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
